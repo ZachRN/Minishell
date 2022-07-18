@@ -13,14 +13,28 @@
 #include <main.h>
 #include <ft_strncmp.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 #include <unistd.h>
+#include <signal.h>
 #include <stdio.h>
+#include <lexer.h>
+#include <pwd.h>
+
+void sighandler(int signum, siginfo_t *info, void *more_info)
+{
+	if (signum == SIGINT)
+		write(1,"\nminishell>",11);
+	// rl_on_new_line();
+	signum++;
+}
 
 int	minishell(void)
 {
 	char *input;
 	int difference;
+	struct sigaction catch;
 
+	catch.__sigaction_u.__sa_sigaction = sighandler;
 	while (TRUE)
 	{
 		input = readline("minishell>");
@@ -35,5 +49,6 @@ int	minishell(void)
 	}
 	if (input)
 		free(input);
+	ft_pwd();
 	return (0);
 }
