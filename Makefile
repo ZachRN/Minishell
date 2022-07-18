@@ -1,12 +1,15 @@
 NAME = minishell
 BUILD_DIR = build
-VPATH = srcs/:srcs/utils
-SRCS = $(wildcard srcs/*.c srcs/utils/*.c) 
+VPATH := $(subst $(" "),:,$(shell find srcs -type d))
+SRCS += $(wildcard srcs/*.c srcs/*/*.c) 
 OBJ_FILES = $(addprefix $(BUILD_DIR)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
-HEADER_FILES = -I includes/ -I includes/utils/
+HEADER_FILES := $(addprefix -I,$(shell find includes -type d -print))
 CFLAGS = -Wall -Werror -Wextra #-lreadline #-fsanitize=address
 READLINE = -lreadline
 CC = gcc
+
+NAME_NO_FLAGS = minishell
+BUILD_DIR_NO_FLAGS = build
 
 all: build_dir $(NAME)
 
@@ -18,6 +21,16 @@ $(NAME): $(OBJ_FILES)
 $(BUILD_DIR)/%.o: %.c
 	@$(CC) $(HEADER_FILES) -c $(CFLAGS) -o $@ $<
 
+noflags: build_dir $(NAME_NO_FLAGS)
+
+$(NAME_NO_FLAGS): $(OBJ_FILES)
+	@echo Assembling $(NAME)
+	@$(CC) $(READLINE) -o $@ $^
+	@echo $(NAME_NO_FLAGS) has been made!
+
+$(BUILD_DIR_NO_FLAGS)/%.o: %.c
+	@$(CC) $(HEADER_FILES) -c -o $@ $<
+
 build_dir:
 	clear
 	@if [ -d "./$(BUILD_DIR)" ]; then \
@@ -25,7 +38,6 @@ build_dir:
 	else \
 	mkdir -p $(BUILD_DIR); \
 	fi
-
 clean:
 	clear
 	@echo Cleaning all object files 
