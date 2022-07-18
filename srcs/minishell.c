@@ -14,12 +14,13 @@
 #include <ft_strncmp.h>
 #include <readline/readline.h>
 #include <unistd.h>
+#include <stdio.h>
 
 int	minishell(void)
 {
 	char *input;
 	int difference;
-	
+
 	while (TRUE)
 	{
 		input = readline("minishell>");
@@ -28,6 +29,7 @@ int	minishell(void)
 		difference = ft_strncmp(input, "exit", 5);
 		if (difference == FALSE)
 			break ;
+		add_history(input);
 		if (input)
 			free(input);
 	}
