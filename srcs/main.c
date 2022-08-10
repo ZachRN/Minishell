@@ -13,6 +13,7 @@
 #include <main.h>
 #include <stdlib.h>
 #include <minishell.h>
+#include <structs.h>
 
 static	void	check_leaks(void)
 {
@@ -21,6 +22,9 @@ static	void	check_leaks(void)
 
 int	main(void)
 {
+	t_env *env_vars;
+
+	env_vars = env_initalize();
 	atexit(check_leaks);
 	return (minishell());
 }
