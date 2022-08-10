@@ -1,9 +1,10 @@
 #include <structs.h>
 #include <ft_strncmp.h>
+#include <ft_split.h>
 
 
 /*Set Specific Error Message here*/
-void    *t_env_add_back(t_env *head, t_env *to_add)
+void	*t_env_add_back(t_env *head, t_env *to_add)
 {
     t_env *loop_to_end;
 
