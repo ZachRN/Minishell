@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"unistd.h": "c",
-		"structs.h": "c",
-		"ft_strdup.h": "c"
-	}
-}
