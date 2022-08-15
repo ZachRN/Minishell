@@ -17,38 +17,30 @@
 #include <unistd.h>
 #include <signal.h>
 #include <stdio.h>
-#include <lexer.h>
+#include <parser_start.h>
 #include <pwd.h>
-
-void sighandler(int signum, siginfo_t *info, void *more_info)
-{
-	if (signum == SIGINT)
-		write(1,"\nminishell>",11);
-	// rl_on_new_line();
-	signum++;
-}
-
-int	minishell(void)
+#include <structs.h>
+#include <parse_init.h>
+#include <parse_clear.h>
+int	minishell(t_env *head)
 {
 	char *input;
 	int difference;
-	struct sigaction catch;
+	t_parse *parse_vars;
 
-	catch.__sigaction_u.__sa_sigaction = sighandler;
 	while (TRUE)
 	{
 		input = readline("minishell>");
 		if (!input)
 			break;
-		difference = ft_strncmp(input, "exit", 5);
-		if (difference == FALSE)
-			break ;
 		add_history(input);
-		if (input)
-			free(input);
+		parse_vars = parser(input, head);
+		parse_vars = t_parse_clear_list(parse_vars);
+		if (ft_strncmp(input, "exit", 5) == 0)
+			break ; 
+		free(input);
 	}
 	if (input)
 		free(input);
-	ft_pwd();
 	return (0);
 }

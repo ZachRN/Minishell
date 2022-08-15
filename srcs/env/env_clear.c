@@ -12,39 +12,63 @@
 
 #include <structs.h>
 #include <ft_strncmp.h>
+#include <stdio.h>
 
 
 t_env *rm_one_from_env_list(t_env *to_remove)
 {
 	t_env *to_return;
 
+	to_return = NULL;
 	if (!to_remove)
 		return NULL;
-	to_return = to_remove->next;
+	if (to_remove->next)
+		to_return = to_remove->next;
 	if (to_remove->var_name)
 		free(to_remove->var_name);
+	to_remove->var_name = NULL;
 	if (to_remove->var_content)
 		free(to_remove->var_content);
+	to_remove->var_content = NULL;
 	if (to_remove->var_together)
 		free(to_remove->var_together);
-	free(to_remove);
+	to_remove->var_together = NULL;
+	if (to_remove)
+		free(to_remove);
+	to_remove = NULL;
 	return (to_return);
 }
 
+t_env	*t_env_clear_list(t_env *head)
+{
+	if (!head)
+		return (NULL);
+	while (head)
+		head = rm_one_from_env_list(head);
+	return (head);
+
+}
 t_env	*t_env_remove_oldpwd(t_env *head)
 {
+	t_env *to_search;
 	t_env *temp;
 
 	if (!head)
-		return NULL;
+		return (head);
+	if (ft_strncmp(to_search->var_name, "OLDPWD", 7) == 0)
+		return (rm_one_from_env_list(head));
+	to_search = head;
 	temp = head;
-	while (temp)
+	while (to_search)
 	{
-		if (ft_strncmp(temp->var_name, "OLDPWD", 6))
+		if (ft_strncmp(to_search->var_name, "OLDPWD", 7) == 0)
 		{
-			temp = rm_one_from_env_list(temp);
+			//printf("%s\n", temp->var_name);
+			temp->next = rm_one_from_env_list(to_search);
 			break ;
 		}
-		temp = temp->next;
+		temp = to_search;
+		to_search = to_search->next;
 	}
+	return (head);
 }

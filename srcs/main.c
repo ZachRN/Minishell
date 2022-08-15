@@ -14,6 +14,9 @@
 #include <stdlib.h>
 #include <minishell.h>
 #include <structs.h>
+#include <env_display.h>
+#include <env_init.h>
+#include <env_clear.h>
 
 static	void	check_leaks(void)
 {
@@ -26,5 +29,8 @@ int	main(void)
 
 	env_vars = env_initalize();
 	atexit(check_leaks);
-	return (minishell());
+	env_display(env_vars);
+	minishell(env_vars);
+	t_env_clear_list(env_vars);
+	exit(1);
 }

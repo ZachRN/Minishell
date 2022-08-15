@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#include <structs.h>
 /*This is defining all of our structs which will be used for minishell*/
 
 enum tokens {
@@ -35,6 +36,6 @@ it runs in an infinite loop reading an input from readline
 which is then parsed and given away to the execution part after coming back the
 input is then freed to avoid memory leaks and continues on
 */
-int	minishell(void);
+int	minishell(t_env *vars);
 
 #endif

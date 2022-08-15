@@ -1,18 +1,20 @@
 #include <stdlib.h>
 #include <ft_calloc.h>
 
-static char	**free_my_lines(char **str, int line)
+char **free_my_lines(char **str)
 {
-    int	i;
+    int i;
 
-	i = 0;
-	while (i < line)
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	return (NULL);
+    if (!str)
+        return (NULL);
+    i = 0;
+    while (str[i])
+    {
+        free(str[i]);
+        i++;
+    }
+    free(str);
+    return (NULL);
 }
 
 static int	wordinput(char const *s, int start, char **str, char c)
@@ -52,7 +54,7 @@ static char	**wordfill(char const *s, char c, char **str)
 		{
 			str[line] = (char *)ft_calloc((end - start + 1), sizeof(char));
 			if (!str[line])
-				return (free_my_lines(str, line));
+				return (free_my_lines(str));
 			wordinput(s, start, str, c);
 			while (s[end] == c && s[end])
 				end++;

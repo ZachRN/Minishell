@@ -1,6 +1,8 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-int lexer(void);
+#include <structs.h>
+
+t_parse *lexer(char *input, t_env *head);
 
 #endif
