@@ -6,9 +6,9 @@ enum tokens {
     Double_Greater,
     Lesser,
     Double_Lesser,
+	Pipe,
 	Quote,
 	Double_Quote,
-	Pipe,
 	Expand,
 	Iden
 };
