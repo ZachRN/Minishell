@@ -29,7 +29,7 @@ int	main(void)
 
 	env_vars = env_initalize();
 	atexit(check_leaks);
-	env_display(env_vars);
+	//env_display(env_vars);
 	minishell(env_vars);
 	t_env_clear_list(env_vars);
 	exit(1);

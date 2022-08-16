@@ -18,15 +18,20 @@
 #include <signal.h>
 #include <stdio.h>
 #include <parser_start.h>
-#include <pwd.h>
 #include <structs.h>
 #include <parse_init.h>
 #include <parse_clear.h>
+#include <lexer.h>
+#include <lexer_clear.h>
+#include <lexer_display.h>
+#include <lexer_valid.h>
+
 int	minishell(t_env *head)
 {
 	char *input;
 	int difference;
 	t_parse *parse_vars;
+	t_lexer *lex;
 
 	while (TRUE)
 	{
@@ -34,8 +39,15 @@ int	minishell(t_env *head)
 		if (!input)
 			break;
 		add_history(input);
-		parse_vars = parser(input, head);
-		parse_vars = t_parse_clear_list(parse_vars);
+		lex = lexer(input);
+		// parse_vars = parser(input, head);
+		// parse_vars = t_parse_clear_list(parse_vars);
+		lexer_display(lex);
+		if (lexer_valid(lex))
+			printf("This is a valid lexer!\n");
+		else
+			printf("Error: unepxected something\n");
+		lex = t_lexer_clear_list(lex);
 		if (ft_strncmp(input, "exit", 5) == 0)
 			break ; 
 		free(input);

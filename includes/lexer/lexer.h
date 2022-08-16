@@ -3,6 +3,6 @@
 
 #include <structs.h>
 
-t_parse *lexer(char *input, t_env *head);
+t_lexer *lexer(char *input);
 
 #endif
