@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 14:59:17 by znajda        #+#    #+#                 */
-/*   Updated: 2022/07/15 15:57:57 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/17 14:57:41 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char *argv[], char *env[])
 	//env_vars = env_initalize();
 	env_vars_copy = env_copy(env);
 	atexit(check_leaks);
-	env_vars_copy_display(env_vars_copy);
+	// env_vars_copy_display(env_vars_copy);
 	//env_display(env_vars);
 	minishell(env_vars_copy);
 	free_lines(env_vars_copy);

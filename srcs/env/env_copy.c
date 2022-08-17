@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   env_copy.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/17 14:46:38 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/17 14:47:49 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <ft_strdup.h>
 #include <stdlib.h>
@@ -53,6 +65,7 @@ void	env_vars_copy_display(char **str)
 		str++;
 	}
 }
+
 char	**env_copy(char **env)
 {
 	char	**to_return;

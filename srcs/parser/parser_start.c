@@ -51,9 +51,9 @@ t_parse *parser(char *input, char **env)
         return (head);
 	head->cmd = find_cmd_path(*temp, env);
 	head->args = temp_duplicate(temp + 1);
-	printf("Command Name/Path:%s\n", head->cmd);
-	for (int i = 0; head->args && head->args[i]; i++)
-		printf("Command args [%d]:%s\n", i, head->args[i]);
+	// printf("Command Name/Path:%s\n", head->cmd);
+	// for (int i = 0; head->args && head->args[i]; i++)
+	// 	printf("Command args [%d]:%s\n", i, head->args[i]);
 	free_my_lines(temp);
     return (head);
 }

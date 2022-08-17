@@ -6,23 +6,16 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:39:54 by znajda        #+#    #+#                 */
-/*   Updated: 2022/07/15 15:58:10 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/17 14:56:12 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <structs.h>
+# include <structs.h>
 /*This is defining all of our structs which will be used for minishell*/
 
-/*This contains all of our token type ids, and is a list for when they come
-this will store information so that way it is easier to parse later*/
-typedef struct s_token
-{
-    enum tokens token_id;
-    struct s_token *next;
-}               t_token;
 
 /*
 This is the core part of minishell, launching it from main.c
