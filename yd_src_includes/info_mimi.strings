@@ -1,0 +1,163 @@
+/* 
+  info_mimi.strings
+  minishell_xcd
+
+  Created by Julia Demura on 15/07/2022.
+  
+*/
+
+tutorial on altering scripts// https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
+
+
+'Built-ins
+belong to shell as part of it, does not have path. need to be written manually.
+
+
+ENVIROMENTAL
+//https://pubs.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html = documentation Environment Variables
+//https://man7.org/linux/man-pages/man7/environ.7.html - environ
+
+On many implementations of the C programming language and especially on POSIX, the environment is accessible from the environ global variable. You may need to declare it manually as it's not declared in any standard header file:
+
+extern char **environ;
+environ points to a NULL terminated array of pointers to variable=value strings. For example, if your environment has the variables foo, bar, and baz, the entries in environ might be:
+
+environ[0] = "foo=a";
+environ[1] = "bar=b";
+environ[2] = "baz=c";
+environ[3] = NULL;
+To alter the environment without using the setenv() or putenv() functions, check if the key you want to set already exists. If it does, overwrite the entry for that key. Else you need to copy the content of environ into a new array and add the new entry to its end. You can use malloc() or calloc() and memcpy() for this purpose. Since this is homework, I'm not going to supply further details.
+//https://stackoverflow.com/questions/34300527/how-do-i-program-my-own-setenv
+
+adding a new string at the end will not always produce the expected behavior, the OP should first scan the strings to find a potential match for the environment variable whose value needs to be set and not copy this line into the new environment array.
+
+
+
+
+
+
+'ECHO
+	" echo – write arguments to the standard output "
+
+SYNOPSIS
+	 echo [-n] [string ...]
+
+DESCRIPTION
+	 The echo utility writes any specified operands, separated by single blank
+	 (‘ ’) characters and followed by a newline (‘\n’) character, to the
+	 standard output.
+
+	 The following option is available:
+
+	 -n    Do not print the trailing newline character.  This may also be
+		   achieved by appending ‘\c’ to the end of the string, as is done by
+		   iBCS2 compatible systems.  Note that this option as well as the
+		   effect of ‘\c’ are implementation-defined in IEEE Std 1003.1-2001
+		   (“POSIX.1”) as amended by Cor. 1-2002.  Applications aiming for
+		   maximum portability are strongly encouraged to use printf(1) to
+		   suppress the newline character.
+
+	 Some shells may provide a builtin echo command which is similar or
+	 identical to this utility.  Most notably, the builtin echo in sh(1) does
+	 not accept the -n option.  Consult the builtin(1) manual page.
+
+EXIT STATUS
+	 The echo utility exits 0 on success, and >0 if an error occurs.
+
+
+
+
+Available functns
+
+
+"readline"
+//https://linux.die.net/man/3/readline
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+char *readline (const char *prompt);
+"readline" will read a line from the terminal and return it, using prompt as a prompt. If prompt is NULL or the empty string, no prompt is issued. The line returned is allocated with malloc(3); the caller must free it when finished. The line returned has the final newline removed, so only the text of the line remains.
+
+"rl_clear_history",
+//https://tiswww.case.edu/php/chet/readline/readline.html
+longread, enjoy
+Function: void rl_clear_history (void)
+Clear the history list by deleting all of the entries, in the same manner as the History librarys clear_history() function. This differs from clear_history because it frees private data Readline saves in the history list.
+
+
+"rl_on_new_line"
+
+
+rl_replace_line,
+rl_redisplay,
+add_history,
+printf,
+malloc,
+free,
+write,
+access,
+open,
+read,
+close,
+fork,
+wait,
+waitpid,
+wait3,
+wait4,
+
+//signal group
+signal,
+sigaction
+
+
+
+sigemptyset,
+sigaddset,
+kill,
+exit,
+getcwd,
+chdir,
+stat,
+lstat,
+fstat,
+unlink,
+execve,
+dup,
+dup2,
+pipe,
+opendir,
+readdir,
+closedir,
+strerror,
+perror,
+isatty,
+ttyname,
+ttyslot,
+ioctl,
+getenv,
+
+
+"set of functions for terminal"
+//https://linux.die.net/man/3/tcgetattr#:~:text=tcgetattr()%20gets%20the%20parameters,changed%20by%20a%20foreground%20process.&text=the%20change%20occurs%20immediately.
+
+//https://tiswww.case.edu/php/chet/readline/readline.html#SEC53
+- a lot of info for these functions
+
+"tcsetattr",
+//https://www.ibm.com/docs/en/zos/2.2.0?topic=functions-tcsetattr-set-attributes-terminal
+
+
+"tcgetattr",
+tcgetattr() gets the parameters associated with the object referred by fd and stores them in the termios structure referenced by termios_p. This function may be invoked from a background process; however, the terminal attributes may be subsequently changed by a foreground process.
+
+"tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs - direct curses interface to the terminfo capability database"
+
+tgetent,
+tgetflag,
+tgetnum,
+tgetstr,
+tgoto,
+tputs
+
+
