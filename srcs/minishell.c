@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/03 12:17:51 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/17 14:20:53 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	minishell(char **env_copy)
 			break;
 		add_history(input);
 		lex = lexer(input);
-		lexer_display(lex);
+		// lexer_display(lex);
 		parse_vars = parser(input, env_copy);
+		// if (lexer_valid(lex))
+		// 	printf("This is a valid lexer!\n");
+		// else
+		// 	printf("Error: unepxected something\n");
 		parse_vars = t_parse_clear_list(parse_vars);
-		if (lexer_valid(lex))
-			printf("This is a valid lexer!\n");
-		else
-			printf("Error: unepxected something\n");
 		lex = t_lexer_clear_list(lex);
 		if (ft_strncmp(input, "exit", 5) == 0)
 			break ; 
