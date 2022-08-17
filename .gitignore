@@ -1,0 +1,8 @@
+**/.DS_Store
+**/*.o
+**/*.xcodeproj
+**/*.xcodeproj/
+**/mini_codam/
+**/ymain.c
+**/*.sh
+**/test_inviromental_var_separately.c
