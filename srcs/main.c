@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 14:59:17 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 14:57:41 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/17 18:12:11 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,14 @@ static	void	check_leaks(void)
 
 int	main(int argc, char *argv[], char *env[])
 {
-	t_env *env_vars;
-	char **env_vars_copy;
+	t_together All;
 
 	(void)argc;
 	(void)argv;
-	//env_vars = env_initalize();
-	env_vars_copy = env_copy(env);
+	All.env_array = env_copy(env);
 	atexit(check_leaks);
-	// env_vars_copy_display(env_vars_copy);
-	//env_display(env_vars);
-	minishell(env_vars_copy);
-	free_lines(env_vars_copy);
-	//t_env_clear_list(env_vars);
+	// env_vars_copy_display(All.env_array);
+	minishell(&All);
+	free_lines(All.env_array);
 	exit(1);
 }

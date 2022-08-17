@@ -34,7 +34,7 @@ int	lexer_valid(t_lexer *head)
 	int previous_token;
 
 	if (!head)
-		return (1);
+		return (0);
 	to_search = head;
 	previous_token = to_search->token_type;
 	to_search = to_search->next;

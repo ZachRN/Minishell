@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:46:38 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 14:47:49 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/17 17:49:34 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ft_strdup.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <ft_strncmp.h>
 
 char	**free_lines(char **str)
 {
@@ -50,15 +51,19 @@ char	**copy_env_list(char **to_return, char **env)
 int	get_size_of_env(char **env)
 {
 	int i;
+	int	has_pwd;
 
 	i = 0;
+	has_pwd = 0;
 	while (env[i])
 		i++;
-	return (i);
+	return (i - has_pwd);
 }
 
 void	env_vars_copy_display(char **str)
 {
+	if (!str)
+		return ;
 	while (*str)
 	{
 		printf("%s\n", *str);

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:39:54 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 14:56:12 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/17 17:42:08 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ it runs in an infinite loop reading an input from readline
 which is then parsed and given away to the execution part after coming back the
 input is then freed to avoid memory leaks and continues on
 */
-int	minishell(char **env);
+int	minishell(t_together *All);
 
 #endif

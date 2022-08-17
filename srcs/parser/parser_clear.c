@@ -35,7 +35,6 @@ t_parse	*t_parse_clear_list(t_parse *head)
 {
 	if (!head)
 		return (NULL);
-	//printf("cmd:%s\noutfile:%s\ninfile:%s\nheredoc:%s\n", head->cmd, head->outfile, head->infile, head->heredoc);
 	while (head)
 		head = rm_one_from_parse_list(head);
 	return (NULL);

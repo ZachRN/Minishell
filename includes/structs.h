@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:53:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 14:54:15 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/17 17:32:59 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,11 @@ typedef struct s_lexer
 	char			*content;
 	struct s_lexer	*next;
 }				t_lexer;
+
+typedef struct s_together
+{
+	t_parse		*head;
+	char		**env_array;
+}				t_together;
 
 #endif

@@ -22,10 +22,11 @@ char **temp_duplicate(char **str)
 	i = 0;
 	if (!str)
 		return (NULL);
-	temp = str;
 	while (temp[i])
 		i++;
 	temp = (char **)malloc((i + 1) * sizeof(char *));
+	if (!temp)
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{
