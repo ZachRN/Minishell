@@ -7,7 +7,6 @@ t_parse *rm_one_from_parse_list(t_parse *to_remove)
 {
 	t_parse *to_return;
 
-
 	if (!to_remove)
 		return (NULL);
 	to_return = to_remove->next;
