@@ -92,6 +92,7 @@ t_lexer *lexer(char *input)
 	head = NULL;
 	tail = NULL;
 	token_id = 0;
+	pos = 0;
 	while(input[pos])
 	{
 		while (input[pos] == 32 || (input[pos] >= 9 && input[pos] <= 13))

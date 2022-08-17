@@ -13,7 +13,7 @@
 #include <structs.h>
 #include <ft_strncmp.h>
 #include <stdio.h>
-
+/*Legacy code!*/
 
 t_env *rm_one_from_env_list(t_env *to_remove)
 {

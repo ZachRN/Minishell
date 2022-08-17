@@ -6,17 +6,13 @@
 #include <ft_strjoin.h>
 #include <stdio.h>
 
-static char *check_absolute_path(char *cmd, t_env *env)
+static char *check_absolute_path(char *cmd, char **env)
 {
-	t_env *to_search;
-
-	if (env)
-	{
-		to_search = env;
-		while (ft_strncmp(to_search->var_name, "PWD", 4))
-			to_search = to_search->next;
-		chdir(to_search->var_content);
-	}
+	if (!env)
+		return (NULL);
+	while (ft_strncmp(*env, "PWD=", 4))
+		env++;
+	chdir((*env) + 4);
 	if (access(cmd, F_OK) == 0)
 		return ft_strdup(cmd);
 	return (NULL);
@@ -62,7 +58,7 @@ static char	*check_path_paths(char **paths, char *cmd)
 
 int		is_built_in(char *str)
 {
-	int i; //echo cd pwd export unset env exit
+	int i;
 
 	if (!str)
 		return (0);
@@ -82,21 +78,20 @@ int		is_built_in(char *str)
 		return (1);
 	return (0);
 }
-char    *find_cmd_path(char *cmd, t_env *env)
+char    *find_cmd_path(char *cmd, char **env)
 {
     char **possible_paths;
-	t_env *search;
 	char *to_return;
+
     if (!cmd)
         return (NULL);
     if (is_rel_abs_path(cmd))
         return (check_absolute_path(cmd, env));
 	else if (is_built_in(cmd))
 		return (ft_strdup(cmd));
-	search = env;
-	while (ft_strncmp(search->var_name, "PATH", 5))
-		search = search->next;
-	possible_paths = ft_split(search->var_content, ':');
+	while (ft_strncmp(*env, "PATH=", 5))
+		env++;
+	possible_paths = ft_split(*env + 5, ':');
 	if (!possible_paths)
 		return (NULL);
 	to_return = (check_path_paths(possible_paths, cmd));

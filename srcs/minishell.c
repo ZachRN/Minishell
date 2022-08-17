@@ -26,7 +26,7 @@
 #include <lexer_display.h>
 #include <lexer_valid.h>
 
-int	minishell(t_env *head)
+int	minishell(char **env_copy)
 {
 	char *input;
 	int difference;
@@ -40,9 +40,9 @@ int	minishell(t_env *head)
 			break;
 		add_history(input);
 		lex = lexer(input);
-		// parse_vars = parser(input, head);
-		// parse_vars = t_parse_clear_list(parse_vars);
 		lexer_display(lex);
+		parse_vars = parser(input, env_copy);
+		parse_vars = t_parse_clear_list(parse_vars);
 		if (lexer_valid(lex))
 			printf("This is a valid lexer!\n");
 		else

@@ -4,8 +4,7 @@
 #include <ft_strdup.h>
 #include <stdio.h>
 #include <env_clear.h>
-
-
+/*Legacy code!*/
 /*Set Specific Error Message here*/
 void	t_env_add_back(t_env *head, t_env *to_add)
 {

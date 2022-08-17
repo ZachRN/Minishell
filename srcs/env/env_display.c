@@ -1,6 +1,6 @@
 #include <structs.h>
 #include <stdio.h>
-
+/*Legacy code!*/
 void env_display(t_env *head)
 {
 	t_env	*temp;

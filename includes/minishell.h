@@ -30,6 +30,6 @@ it runs in an infinite loop reading an input from readline
 which is then parsed and given away to the execution part after coming back the
 input is then freed to avoid memory leaks and continues on
 */
-int	minishell(t_env *vars);
+int	minishell(char **env);
 
 #endif

@@ -3,6 +3,6 @@
 
 #include <structs.h>
 
-t_parse *parser(char *input, t_env *head);
+t_parse *parser(char *input, char **env);
 
 #endif
