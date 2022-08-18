@@ -8,6 +8,7 @@
 #include <ft_strncmp.h>
 #include <parser_get_cmd.h>
 #include <parse_clear.h>
+#include <expansion_start.h>
 
 
 //Temp is a temporary input just so that i am able to
@@ -37,20 +38,15 @@ char **temp_duplicate(char **str)
 	return (temp);
 }
 
-t_parse *parser(char *input, char **env)
+t_parse *parser(char *input, t_together *All, t_lexer *lex_head)
 {
     t_parse *head;
     t_parse *tail;
     char    **temp;
 
     head = parse_initalize();
-	if (!head)
+	if (!lex_head)
 		return (NULL);
-    temp = ft_split(input, ' ');
-    if (!temp)
-        return (head);
-	head->cmd = find_cmd_path(*temp, env);
-	head->args = temp_duplicate(temp + 1);
-	free_my_lines(temp);
+	lex_head = expansion_start(All, lex_head);
     return (head);
 }

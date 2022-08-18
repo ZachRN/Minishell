@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 17:56:09 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/18 17:25:28 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ int	minishell(t_together *All)
 		add_history(input);
 		lex = lexer(input);
 		lexer_display(lex);
-		All->head = parser(input, All->env_array);
+		All->head = parser(input, All, lex);
 		if (lexer_valid(lex))
 			printf("This is a valid lexer!\n");
 		else
 			printf("Error: something\n");
+		lexer_display(lex);
 		All->head = t_parse_clear_list(All->head);
 		lex = t_lexer_clear_list(lex);
 		if (ft_strncmp(input, "exit", 5) == 0)

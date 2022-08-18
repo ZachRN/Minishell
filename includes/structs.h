@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:53:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 17:32:59 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/18 15:45:18 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_together
 {
 	t_parse		*head;
 	char		**env_array;
+	int			last_error;
 }				t_together;
 
 #endif
