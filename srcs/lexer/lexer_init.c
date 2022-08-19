@@ -55,8 +55,8 @@ t_lexer *create_new_lexer(char *input, int *pos, int token_id)
 	else
 		end_pos = find_end_of_iden(input, *pos + 1);
 	temp->next = NULL;
-	temp->pos_start = *pos;
-	temp->pos_end = end_pos;
+	temp->start = *pos;
+	temp->end = end_pos;
 	temp->token_type = token;
 	temp->token_id = token_id;
 	temp->content = ft_substr(input, *pos, end_pos - *pos + 1);

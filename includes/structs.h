@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:53:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/18 15:45:18 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/19 19:04:04 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct s_lexer
 {
 	int				token_id;
 	int				token_type;
-	int				pos_start;
-	int				pos_end;
+	int				start;
+	int				end;
 	char			*content;
 	struct s_lexer	*next;
 }				t_lexer;

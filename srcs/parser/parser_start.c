@@ -9,6 +9,7 @@
 #include <parser_get_cmd.h>
 #include <parse_clear.h>
 #include <expansion_start.h>
+#include <handle_heredoc.h>
 
 
 //Temp is a temporary input just so that i am able to
@@ -45,8 +46,9 @@ t_parse *parser(char *input, t_together *All, t_lexer *lex_head)
     char    **temp;
 
     head = parse_initalize();
-	if (!lex_head)
+	if (!head || !lex_head)
 		return (NULL);
+	lex_head = handle_heredoc(All, lex_head, head);
 	lex_head = expansion_start(All, lex_head);
     return (head);
 }

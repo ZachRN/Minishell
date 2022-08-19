@@ -10,7 +10,7 @@ void lexer_display(t_lexer *head)
 	while (temp)
 	{
 		printf("Token #[%d]| Token Type: [%d]| Token Start-End: [%d] - [%d]",
-			temp->token_id, temp->token_type, temp->pos_start, temp->pos_end);
+			temp->token_id, temp->token_type, temp->start, temp->end);
 		printf("| Token Content: [%s]\n", temp->content);
 		temp = temp->next;
 	}

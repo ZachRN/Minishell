@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/18 15:41:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/18 18:43:28 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/19 17:39:00 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_quote
 {
 	int	double_quote;
 	int	single_quote;
+	int	prev_token;
 }	t_quote;
 
 static int	len(const char *str)
@@ -32,11 +33,11 @@ static int	len(const char *str)
 	return (i);
 }
 
-char	*handle_expand(char **env_array, char *str, int single_check)
+char	*handle_expand(char **env_array, char *str, int s_check, int heredoc)
 {
 	char	*temp;
 
-	if (single_check == -1 || !env_array || !str)
+	if (s_check == -1 || !env_array || !str, heredoc == Double_Lesser)
 		return (str);
 	while (*env_array)
 	{
@@ -59,6 +60,23 @@ char	*handle_expand(char **env_array, char *str, int single_check)
 	return (str);
 }
 
+t_lexer	*expansion_loop(t_together *All, t_lexer *tail, t_quote *check)
+{
+	while (tail)
+	{
+		if (tail->token_type != Quote && tail->token_type != Double_Quote)
+			check->prev_token == tail->token_type;
+		if (tail->token_type == Expand)
+			tail->content = handle_expand(All->env_array,
+					tail->content, check->single_quote, check->prev_token);
+		if (tail->token_type == Quote && check->double_quote == 1)
+			check->single_quote *= -1;
+		if (tail->token_type == Double_Quote && check->single_quote == 1)
+			check->double_quote *= -1;
+		tail = tail->next;
+	}
+}
+
 t_lexer	*expansion_start(t_together *All, t_lexer *head)
 {
 	t_lexer	*tail;
@@ -67,22 +85,13 @@ t_lexer	*expansion_start(t_together *All, t_lexer *head)
 	check.double_quote = 1;
 	check.single_quote = 1;
 	tail = head->next;
+	check.prev_token = head->token_type;
 	if (head->token_type == Quote)
 		check.single_quote *= -1;
 	else if (head->token_type == Double_Quote)
 		check.double_quote *= -1;
 	else
 		tail = head;
-	while (tail)
-	{
-		if (tail->token_type == Expand)
-			tail->content = handle_expand(All->env_array,
-					tail->content, check.single_quote);
-		if (tail->token_type == Quote && check.double_quote == 1)
-			check.single_quote *= -1;
-		if (tail->token_type == Double_Quote && check.single_quote == 1)
-			check.double_quote *= -1;
-		tail = tail->next;
-	}
+	expansion_loop(All, tail, &check);
 	return (head);
 }
