@@ -55,6 +55,7 @@ t_lexer *create_new_lexer(char *input, int *pos, int token_id)
 	else
 		end_pos = find_end_of_iden(input, *pos + 1);
 	temp->next = NULL;
+	temp->prev = NULL;
 	temp->start = *pos;
 	temp->end = end_pos;
 	temp->token_type = token;
@@ -67,18 +68,23 @@ t_lexer *create_new_lexer(char *input, int *pos, int token_id)
 void	add_lexer_to_end(t_lexer *head, t_lexer *tail)
 {
 	t_lexer	*temp;
+	t_lexer *temp_prev;
 
 	if (!tail)
 		return ;
-	if (!head)
-	{
-		head = tail;
-		return ;
-	}
 	temp = head;
+	temp_prev = head;
 	while (temp->next)
+	{
 		temp = temp->next;
+		if (!temp->next)
+			break ;
+		temp_prev = temp_prev->next;
+	}
 	temp->next = tail;
+	if (temp == head)
+		return ;
+	temp->prev = temp_prev;
 	return ;
 }
 

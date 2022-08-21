@@ -48,7 +48,7 @@ t_parse *parser(char *input, t_together *All, t_lexer *lex_head)
     head = parse_initalize();
 	if (!head || !lex_head)
 		return (NULL);
-	lex_head = handle_heredoc(All, lex_head, head);
-	lex_head = expansion_start(All, lex_head);
+	head = handle_heredoc(&lex_head, head, input);
+	// lex_head = expansion_start(All, lex_head);
     return (head);
 }

@@ -1,5 +1,21 @@
 #include <structs.h>
 
+t_lexer	*check_change_iden(t_lexer *check, int single_check, int double_check)
+{
+	if (!check)
+		return (check);
+	if (single_check == -1)
+	{
+		if (check->token_type != Quote)
+			check->token_type = Iden;
+	}
+	if (double_check == -1)
+	{
+		if (check->token_type != Double_Quote)
+			check->token_type = Iden;
+	}
+	return (check);
+}
 int lexer_valid_loop(t_lexer *to_search, int previous_token)
 {
 	int single_check;
@@ -13,6 +29,7 @@ int lexer_valid_loop(t_lexer *to_search, int previous_token)
 		double_check *= -1;
 	while (to_search)
 	{
+		check_change_iden(to_search, single_check, double_check);
 		if ((previous_token < 6) && (to_search->token_type < 6))
 			return (0);
 		if (to_search->token_type == Quote && double_check == 1)

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/18 15:41:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/19 17:39:00 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/21 15:40:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*handle_expand(char **env_array, char *str, int s_check, int heredoc)
 {
 	char	*temp;
 
-	if (s_check == -1 || !env_array || !str, heredoc == Double_Lesser)
+	if (s_check == -1 || !env_array || !str || heredoc == Double_Lesser)
 		return (str);
 	while (*env_array)
 	{
@@ -65,7 +65,7 @@ t_lexer	*expansion_loop(t_together *All, t_lexer *tail, t_quote *check)
 	while (tail)
 	{
 		if (tail->token_type != Quote && tail->token_type != Double_Quote)
-			check->prev_token == tail->token_type;
+			check->prev_token = tail->token_type;
 		if (tail->token_type == Expand)
 			tail->content = handle_expand(All->env_array,
 					tail->content, check->single_quote, check->prev_token);
