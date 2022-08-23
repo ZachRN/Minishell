@@ -15,6 +15,8 @@
 #include <ft_strncmp.h>
 #include <ft_strjoin.h>
 #include <ft_strdup.h>
+#include <ft_itoa.h>
+#include <ft_strlen.h>
 
 typedef struct s_quote
 {
@@ -23,52 +25,49 @@ typedef struct s_quote
 	int	prev_token;
 }	t_quote;
 
-static int	len(const char *str)
+char	*handle_dollar_sign(char *str, int last_code)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	free(str);
+	return (ft_itoa(last_code));
 }
 
-char	*handle_expand(char **env_array, char *str, int s_check, int heredoc)
+char	*handle_expand(char **env_array, char *str, int heredoc, int last_code)
 {
 	char	*temp;
 
-	if (s_check == -1 || !env_array || !str || heredoc == Double_Lesser)
+	if (!env_array || !str || heredoc == Double_Lesser)
 		return (str);
+	if (str[1] == '$')
+		return (handle_dollar_sign(str, last_code));
 	while (*env_array)
 	{
 		temp = ft_strjoin(str + 1, "=");
 		if (!temp)
 			return (str);
-		if (ft_strncmp(*env_array, temp, len(temp)) == 0)
+		if (ft_strncmp(*env_array, temp, ft_strlen(temp)) == 0)
 			break ;
 		free(temp);
 		temp = NULL;
 		env_array++;
 	}
-	if (str)
-		free(str);
+	free(str);
 	if (temp)
-		str = ft_strdup(*env_array + (len(temp)));
+		str = ft_strdup(*env_array + (ft_strlen(temp)));
 	else
 		str = ft_strdup("\0");
 	free(temp);
 	return (str);
 }
 
-t_lexer	*expansion_loop(t_together *All, t_lexer *tail, t_quote *check)
+void	expansion_loop(t_together *All, t_lexer *tail, t_quote *check)
 {
 	while (tail)
 	{
 		if (tail->token_type != Quote && tail->token_type != Double_Quote)
 			check->prev_token = tail->token_type;
-		if (tail->token_type == Expand)
+		if (tail->token_type == Expand && check->single_quote != -1)
 			tail->content = handle_expand(All->env_array,
-					tail->content, check->single_quote, check->prev_token);
+					tail->content, check->prev_token, All->last_error);
 		if (tail->token_type == Quote && check->double_quote == 1)
 			check->single_quote *= -1;
 		if (tail->token_type == Double_Quote && check->single_quote == 1)

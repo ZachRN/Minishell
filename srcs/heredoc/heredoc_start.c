@@ -6,17 +6,9 @@
 #include <lexer_clear.h>
 #include <lexer_display.h>
 #include <stdio.h>
+#include <heredoc_line_parse.h>
 
-typedef struct s_heredoc
-{
-	int		has_quote;
-	char	*End;
-	int		pipe_number;
-	int		heredoc_counter;
-}				t_heredoc;
-
-
-void	init_heredoc_struct(t_heredoc *heredoc)
+void	init_heredoc_struct(t_parse *head, t_heredoc *heredoc)
 {
 	heredoc->End = NULL;
 	heredoc->has_quote = 0;
@@ -29,6 +21,7 @@ t_lexer *join_heredoc_quotes(t_lexer *head, t_heredoc *heredoc, char *input)
 	char	*temp_two;
 
 	tail = head->next;
+	heredoc->has_quote = 1;
 	while(tail)
 	{
 		if (tail->token_type == Double_Quote || tail->token_type == Quote)
@@ -53,11 +46,13 @@ t_lexer *remove_heredoc_list(t_lexer *head, t_lexer *tail)
 	head = rm_one_from_lexer_list(head);
 	if (temp)
 	{
+		if (head)
+			head->prev = temp;
 		temp->next = head;
 		return (temp);
 	}
 	else
-		return (tail);
+		return (head);
 		
 }
 t_lexer	*go_handle(t_lexer *lex_head, t_parse *head, t_heredoc *heredoc, char *input)
@@ -81,32 +76,29 @@ t_lexer	*go_handle(t_lexer *lex_head, t_parse *head, t_heredoc *heredoc, char *i
 			break ;
 		tail = tail->next;
 	}
-	printf("heredoc End: %s\n", heredoc->End);
-	free(heredoc->End);
 	lex_head = remove_heredoc_list(lex_head, tail);
 	return (lex_head);
 }
 
-t_parse	*handle_heredoc(t_lexer **lex_head, t_parse *head, char *input)
+t_parse	*handle_heredoc(t_lexer *lex_head, t_parse *head, char *input)
 {
 	t_lexer	*tail;
-	t_lexer *hold;
 	t_heredoc heredoc;
 
-	tail = *lex_head;
-	hold = *lex_head;
-	init_heredoc_struct(&heredoc);
-	heredoc.pipe_number = 0;
-	heredoc.pipe_number = 0;
+	tail = lex_head;
+	init_heredoc_struct(head, &heredoc);
 	while (tail)
 	{
 		if (tail->token_type == Double_Lesser)
+		{
 			tail = go_handle(tail, head, &heredoc, input);
-		else if (tail->token_type == Pipe)
+			head->heredoc_pipe = parse_line_heredoc(head, &heredoc);
+		}
+		if (tail->token_type == Pipe || head->heredoc_pipe == -2)
 			break ;
 		if (tail)
 			tail = tail->next;
+		heredoc.has_quote = 0;
 	}
-	*lex_head = hold;
 	return (head);
 }

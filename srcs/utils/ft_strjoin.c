@@ -1,14 +1,5 @@
 #include <stdlib.h>
-
-static int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
+#include <ft_strlen.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

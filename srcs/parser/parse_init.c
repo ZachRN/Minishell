@@ -25,7 +25,7 @@ t_parse	*parse_initalize(void)
 	head->outfile = NULL;
 	head->append = -1;
 	head->infile = NULL;
-	head->heredoc = NULL;
+	head->heredoc_pipe = -1;
 	head->next = NULL;
 	return (head);
 }

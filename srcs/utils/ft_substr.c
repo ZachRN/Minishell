@@ -1,15 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
-
-static int ft_strlen(const char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+#include <ft_strlen.h>
 
 static void	fill(char const *s, size_t len, char *str, size_t start)
 {

@@ -3,6 +3,6 @@
 
 #include <structs.h>
 
-t_parse	*handle_heredoc(t_lexer **lex_head, t_parse *head, char *input);
+t_parse	*handle_heredoc(t_lexer *lex_head, t_parse *head, char *input);
 
 #endif

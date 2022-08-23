@@ -26,6 +26,12 @@ enum e_tokens
 	Iden
 };
 
+typedef struct s_heredoc
+{
+	int		has_quote;
+	char	*End;
+}				t_heredoc;
+
 typedef struct s_parse
 {
 	char			*cmd;
@@ -33,7 +39,7 @@ typedef struct s_parse
 	char			*outfile;
 	int				append;
 	char			*infile;
-	char			*heredoc;
+	int				heredoc_pipe;
 	struct s_parse	*next;
 }				t_parse;
 

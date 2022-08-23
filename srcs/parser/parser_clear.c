@@ -22,9 +22,8 @@ t_parse *rm_one_from_parse_list(t_parse *to_remove)
 	if (to_remove->infile)
 		free(to_remove->infile);
 	to_remove->infile = NULL;
-	if (to_remove->heredoc)
-		free(to_remove->heredoc);
-	to_remove->heredoc = NULL;
+	if (to_remove->heredoc_pipe > 0)
+		close(to_remove->heredoc_pipe);
 	free(to_remove);
 	to_remove = NULL;
 	return (to_return);
