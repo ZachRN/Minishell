@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <heredoc_line_parse.h>
 
-void	init_heredoc_struct(t_parse *head, t_heredoc *heredoc)
+void	init_heredoc_struct(t_heredoc *heredoc)
 {
 	heredoc->End = NULL;
 	heredoc->has_quote = 0;
@@ -55,7 +55,7 @@ t_lexer *remove_heredoc_list(t_lexer *head, t_lexer *tail)
 		return (head);
 		
 }
-t_lexer	*go_handle(t_lexer *lex_head, t_parse *head, t_heredoc *heredoc, char *input)
+t_lexer	*go_handle(t_lexer *lex_head, t_heredoc *heredoc, char *input)
 {
 	t_lexer *tail;
 	char	*temp;
@@ -86,12 +86,12 @@ t_parse	*handle_heredoc(t_lexer *lex_head, t_parse *head, char *input)
 	t_heredoc heredoc;
 
 	tail = lex_head;
-	init_heredoc_struct(head, &heredoc);
+	init_heredoc_struct(&heredoc);
 	while (tail)
 	{
 		if (tail->token_type == Double_Lesser)
 		{
-			tail = go_handle(tail, head, &heredoc, input);
+			tail = go_handle(tail, &heredoc, input);
 			head->heredoc_pipe = parse_line_heredoc(head, &heredoc);
 		}
 		if (tail->token_type == Pipe || head->heredoc_pipe == -2)

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/10 17:11:05 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/10 18:45:18 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/23 15:38:10 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ t_env	*t_env_remove_oldpwd(t_env *head)
 
 	if (!head)
 		return (head);
+	to_search = head;
 	if (ft_strncmp(to_search->var_name, "OLDPWD", 7) == 0)
 		return (rm_one_from_env_list(head));
-	to_search = head;
 	temp = head;
 	while (to_search)
 	{

@@ -17,35 +17,36 @@
 //send yullia some semi functional code in the way
 //that it will work
 
-char **temp_duplicate(char **str)
-{
-	char **temp;
-	int i;
+// char **temp_duplicate(char **str)
+// {
+// 	char **temp;
+// 	int i;
 
-	i = 0;
-	if (!str)
-		return (NULL);
-	while (temp[i])
-		i++;
-	temp = (char **)malloc((i + 1) * sizeof(char *));
-	if (!temp)
-		return (NULL);
-	i = 0;
-	while (str[i])
-	{
-		temp[i] = ft_strdup(str[i]);
-		i++;
-	}
-	temp[i] = NULL;
-	return (temp);
-}
+// 	i = 0;
+// 	if (!str)
+// 		return (NULL);
+// 	while (temp[i])
+// 		i++;
+// 	temp = (char **)malloc((i + 1) * sizeof(char *));
+// 	if (!temp)
+// 		return (NULL);
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		temp[i] = ft_strdup(str[i]);
+// 		i++;
+// 	}
+// 	temp[i] = NULL;
+// 	return (temp);
+// }
 
 t_parse *parser(char *input, t_together *All, t_lexer *lex_head)
 {
     t_parse *head;
-    t_parse *tail;
-    char    **temp;
+	t_together *bwa;
+    // t_parse *tail;
 
+	bwa = All;
     head = parse_initalize();
 	if (!head || !lex_head)
 		return (NULL);

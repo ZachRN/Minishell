@@ -6,17 +6,17 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/21 17:38:32 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/23 17:22:25 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
 #include <ft_strncmp.h>
+#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
 #include <signal.h>
-#include <stdio.h>
 #include <parser_start.h>
 #include <structs.h>
 #include <parse_init.h>
