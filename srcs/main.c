@@ -22,8 +22,11 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <termios.h>
+#include <unistd.h>
 
 int g_signal_status = 0;
+struct termios saved;
 
 void	signal_handle(int signo)
 {
@@ -34,16 +37,26 @@ void	signal_handle(int signo)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	else if (signo == SIGQUIT)
+	{
+		
+	}
 }
 
 static	void	check_leaks(void)
 {
 	system("leaks -quiet minishell");
+	// tcsetattr(STDIN_FILENO, TCSANOW, &saved);
 }
 
 int	main(int argc, char *argv[], char *env[])
 {
 	t_together All;
+	tcgetattr(STDIN_FILENO, &saved);
+	struct termios attributes;
+	tcgetattr(STDIN_FILENO, &attributes);
+	attributes.c_lflag &= ECHO;
+	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
 
 	(void)argc;
 	(void)argv;
@@ -53,6 +66,8 @@ int	main(int argc, char *argv[], char *env[])
 	atexit(check_leaks);
 	if (signal(SIGINT, signal_handle) == SIG_ERR)
 		printf("Couldn't Catch Sigint Error");
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		printf("Couldn't Catch Sigquit error");
 	env_vars_copy_display(All.env_array);
 	minishell(&All);
 	free_lines(All.env_array);
