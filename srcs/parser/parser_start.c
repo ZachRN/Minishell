@@ -40,18 +40,13 @@
 // 	return (temp);
 // }
 
-t_parse *parser(char *input, t_together *All, t_lexer *lex_head)
+t_together *parser(char *input, t_together *All)
 {
-    t_parse *head;
-	t_together *bwa;
-    // t_parse *tail;
-
-	bwa = All;
-    head = parse_initalize();
-	if (!head || !lex_head)
+    All->head = parse_initalize();
+	if (!All->head || !All->lex_head)
 		return (NULL);
-	head = handle_heredoc(lex_head, head, input);
-	lex_head = expansion_start(All, lex_head);
-	lexer_display(lex_head);
-    return (head);
+	All = handle_heredoc(input, All);
+	// lex_head = expansion_start(All, lex_head);
+	lexer_display(All->lex_head);
+    return (All);
 }

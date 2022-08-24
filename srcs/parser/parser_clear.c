@@ -3,6 +3,7 @@
 #include <ft_split.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 t_parse *rm_one_from_parse_list(t_parse *to_remove)
 {
 	t_parse *to_return;

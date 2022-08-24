@@ -7,12 +7,7 @@
 #include <lexer_display.h>
 #include <stdio.h>
 #include <heredoc_line_parse.h>
-
-void	init_heredoc_struct(t_heredoc *heredoc)
-{
-	heredoc->End = NULL;
-	heredoc->has_quote = 0;
-}
+#include <signal_handles.h>
 
 t_lexer *join_heredoc_quotes(t_lexer *head, t_heredoc *heredoc, char *input)
 {
@@ -52,7 +47,14 @@ t_lexer *remove_heredoc_list(t_lexer *head, t_lexer *tail)
 		return (temp);
 	}
 	else
-		return (head);
+	{
+		if (head)
+		{
+			head->prev = NULL;
+			return (head);
+		}
+		return (NULL);
+	}
 		
 }
 t_lexer	*go_handle(t_lexer *lex_head, t_heredoc *heredoc, char *input)
@@ -72,33 +74,48 @@ t_lexer	*go_handle(t_lexer *lex_head, t_heredoc *heredoc, char *input)
 			heredoc->End = ft_strjoin(heredoc->End, tail->content);
 			free(temp);
 		}
-		if (!tail->next || (tail->next->start - tail->end != 1))
+		if (tail->next && (tail->next->start - tail->end != 1))
 			break ;
 		tail = tail->next;
 	}
-	lex_head = remove_heredoc_list(lex_head, tail);
-	return (lex_head);
+	return (remove_heredoc_list(lex_head, tail));
 }
 
-t_parse	*handle_heredoc(t_lexer *lex_head, t_parse *head, char *input)
+static int quick_fix(int token, t_together *All, t_lexer *tail)
 {
-	t_lexer	*tail;
-	t_heredoc heredoc;
+	if (token == Double_Lesser)
+	{
+		All->lex_head = tail;
+		if (tail)
+			token = tail->token_type;
+	}
+	return (token);
+}
 
-	tail = lex_head;
-	init_heredoc_struct(&heredoc);
+t_together	*handle_heredoc(char *input, t_together *All)
+{
+	t_heredoc heredoc;
+	t_lexer		*tail;
+	int token;
+
+	tail = All->lex_head;
+	token = tail->token_type;
+	heredoc.End = NULL;
+	heredoc.has_quote = 0;
 	while (tail)
 	{
 		if (tail->token_type == Double_Lesser)
 		{
 			tail = go_handle(tail, &heredoc, input);
-			head->heredoc_pipe = parse_line_heredoc(head, &heredoc);
+			All->head->heredoc_pipe = parse_line_heredoc(All, &heredoc);
+			signal_director(MAIN_SIG);
 		}
-		if (tail->token_type == Pipe || head->heredoc_pipe == -2)
+		token = quick_fix(token, All, tail);
+		if ((tail && tail->token_type == Pipe) || All->head->heredoc_pipe == -2)
 			break ;
 		if (tail)
 			tail = tail->next;
 		heredoc.has_quote = 0;
 	}
-	return (head);
+	return (All);
 }

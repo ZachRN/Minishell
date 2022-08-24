@@ -4,7 +4,7 @@ VPATH := $(subst $(" "),:,$(shell find srcs -type d))
 SRCS += $(wildcard srcs/*.c srcs/*/*.c) 
 OBJ_FILES = $(addprefix $(BUILD_DIR)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 HEADER_FILES := $(addprefix -I,$(shell find includes -type d -print))
-CFLAGS = -Wall -Werror -Wextra #-lreadline #-fsanitize=address
+CFLAGS = -Wall -Wextra #-lreadline #-fsanitize=address -Werror
 READLINE = -L$(shell brew --prefix readline)/lib -lreadline
 RL_INCLUDE_FLAGS = -I$(shell brew --prefix readline)/include
 # -I /Users/znajda/.brew/opt/readline/include/readline

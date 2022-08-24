@@ -25,6 +25,6 @@ t_lexer	*t_lexer_clear_list(t_lexer *head)
 		return (NULL);
 	while (head)
 		head = rm_one_from_lexer_list(head);
-	return (head);
+	return (NULL);
 
 }
