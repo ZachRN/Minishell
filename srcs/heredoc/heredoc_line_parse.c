@@ -9,44 +9,56 @@
 #include <ft_substr.h>
 #include <ft_strjoin.h>
 #include <expansion_start.h>
+#include <ft_strdup.h>
 
-int		found_dollar(char *input, int i, t_together *All)
+t_pack	found_dollar(t_pack pack, t_together *All)
 {
 	char *temp;
 	char *temp2;
+	char *temp3;
 	int j;
 
-	j = i;
-	temp = ft_substr(input, 0, i);
-	if (!temp)
-		return (-1);
-	while (input[j] && input[j] != ' ' && input[j] != '$')
+	j = pack.i + 1;
+	if (pack.i == 0)
+		temp = ft_strdup("\0");
+	else
+		temp = ft_substr(pack.str, 0, pack.i);
+	while (pack.str[j] && pack.str[j] != ' ' && pack.str[j] != '$')
 		j++;
-	printf("%s\n", temp);
-	temp2 = ft_substr(input, i, j);
-	printf("%s\n",temp2);
+	temp2 = ft_substr(pack.str, pack.i, j);
+	temp2 = handle_expand(All->env_array, temp2, All->last_error);
+	temp3 = ft_strjoin(temp, temp2);
 	free(temp);
-	free (temp2);
-	return (j);	
+	temp = ft_substr(pack.str, j, ft_strlen(pack.str));
+	pack.i = ft_strlen(temp);
+	free(pack.str);
+	pack.str = ft_strjoin(temp3, temp);
+	free(temp3);
+	free(temp);
+	free(temp2);
+	return (pack);	
 }
+
 char	*check_for_expansion(char *input, int has_quote, t_together *All)
 {
-	int	i;
+	t_pack pack;
 
-	i = 0;
+	pack.i = 0;
+	pack.str = input;
 	if (has_quote == 1)
 		return (input);
-	while (input[i])
+	while (pack.str[pack.i])
 	{
-		if (input[i] == '$')
+		if (pack.str[pack.i] == '$')
 		{
-			i = found_dollar(input, i, All);
-			if (i == -1)
+			pack = found_dollar(pack, All);
+			if (pack.i == -1 || !pack.str ||
+				(pack.str && pack.i >= ft_strlen(pack.str)))
 				break ;
 		}
-		i++;
+		pack.i++;
 	}
-	return (input);
+	return (pack.str);
 }
 
 void	write_input_to_pipe(char *pipe_eof, int has_quote, int pipe_hold[2], t_together *All)
@@ -62,20 +74,30 @@ void	write_input_to_pipe(char *pipe_eof, int has_quote, int pipe_hold[2], t_toge
 		if (ft_strncmp(input, pipe_eof, ft_strlen(input) + 1) == 0)
 			break ;
 		input = check_for_expansion(input, has_quote, All);
-		write(STDOUT_FILENO, input, ft_strlen(input));
+		write(pipe_hold[1], input, ft_strlen(input));
 		free(input);
 	}
 	free(input);
+	close(pipe_hold[1]);
+	close(pipe_hold[0]);
 	exit(EXIT_SUCCESS);
 }
+int	clean_up(int pipe_hold[2])
+{
+	close(pipe_hold[1]);
+	close(pipe_hold[0]);
+	return (-2);
+}
 
-int	parse_line_heredoc(t_together *All, t_heredoc *heredoc)
+int	parse_line_heredoc(t_together *All, t_heredoc *heredoc, t_parse *to_add)
 {
 	int pipe_hold[2];
 	int status;
 	int	p_id;
 	int ex;
 
+	if (to_add->heredoc_pipe >= 0)
+		close(to_add->heredoc_pipe);
 	ex = -2;
 	if (pipe(pipe_hold) == -1)
 		return (-2);
@@ -85,13 +107,12 @@ int	parse_line_heredoc(t_together *All, t_heredoc *heredoc)
 		return (-2);
 	else if (p_id == 0)
 		write_input_to_pipe(heredoc->End, heredoc->has_quote, pipe_hold, All);
-	close(pipe_hold[1]);
 	waitpid(p_id, &status, 0);
-	if (WIFEXITED(status))
-		ex = WEXITSTATUS(status);
-	if (ex == -2)
-		return (-2);
 	free(heredoc->End);
 	heredoc->End = NULL;
-	return (0);
+	if (WIFEXITED(status))
+		ex = WEXITSTATUS(status);
+	if (ex == EXIT_INT)
+		return (clean_up(pipe_hold));
+	return (pipe_hold[0]);
 }

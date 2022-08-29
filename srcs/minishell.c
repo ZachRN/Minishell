@@ -45,8 +45,18 @@ int	minishell(t_together *All)
 		if (lexer_valid(All->lex_head))
 			All = parser(input, All);
 		else
-			printf("Error: something\n");
-		// lexer_display(lex);
+			All->last_error = 258;
+		//YOU CAN PUT YOUR FUNCTION HERE
+		//All is a t_together struct, , where ->head
+		// is the most important one for you, it contains
+		//the struct that holds the cmd name, arguements, outfile
+		//etc etc.. last_Error is also somehting that potentially needs to be updated
+		//from you with the exit code of the last command.
+
+		//Important to know that during execution you need to check for the path
+		//of the command name.
+		//Also check if the infile exists, if it doesnt exist you should void
+		//the entire command basically. I can explain in more detail if you want.
 		All->head = t_parse_clear_list(All->head);
 		All->lex_head = t_lexer_clear_list(All->lex_head);
 		if (ft_strncmp(input, "exit", 5) == 0)

@@ -70,4 +70,23 @@ typedef struct s_together
 	t_lexer		*lex_head;
 }				t_together;
 
+typedef struct s_quote
+{
+	int	double_quote;
+	int	single_quote;
+	int	prev_token;
+}	t_quote;
+
+typedef struct s_pack
+{
+	int i;
+	char *str;
+}				t_pack;
+
+typedef struct s_lex_parse_pack
+{
+	t_parse	*to_add;
+	t_lexer *to_search;
+}				t_l_p_pack;
+
 #endif

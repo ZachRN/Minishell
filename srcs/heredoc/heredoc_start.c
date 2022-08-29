@@ -33,28 +33,29 @@ t_lexer *join_heredoc_quotes(t_lexer *head, t_heredoc *heredoc, char *input)
 
 t_lexer *remove_heredoc_list(t_lexer *head, t_lexer *tail)
 {
-	t_lexer *temp;
+	// t_lexer *temp;
 
-	temp = head->prev;
+	// temp = head->prev;
 	while (head != tail)
 		head = rm_one_from_lexer_list(head);
 	head = rm_one_from_lexer_list(head);
-	if (temp)
-	{
-		if (head)
-			head->prev = temp;
-		temp->next = head;
-		return (temp);
-	}
-	else
-	{
-		if (head)
-		{
-			head->prev = NULL;
-			return (head);
-		}
-		return (NULL);
-	}
+	return (head);
+	// if (temp)
+	// {
+	// 	if (head)
+	// 		head->prev = temp;
+	// 	temp->next = head;
+	// 	return (temp);
+	// }
+	// else
+	// {
+	// 	if (head)
+	// 	{
+	// 		head->prev = NULL;
+	// 		return (head);
+	// 	}
+	// 	return (NULL);
+	// }
 		
 }
 t_lexer	*go_handle(t_lexer *lex_head, t_heredoc *heredoc, char *input)
@@ -74,7 +75,7 @@ t_lexer	*go_handle(t_lexer *lex_head, t_heredoc *heredoc, char *input)
 			heredoc->End = ft_strjoin(heredoc->End, tail->content);
 			free(temp);
 		}
-		if (tail->next && (tail->next->start - tail->end != 1))
+		if (tail->next && ((tail->next->start - tail->end != 1) || tail->next->token_type < Quote))
 			break ;
 		tail = tail->next;
 	}
@@ -92,7 +93,7 @@ static int quick_fix(int token, t_together *All, t_lexer *tail)
 	return (token);
 }
 
-t_together	*handle_heredoc(char *input, t_together *All)
+t_together	*handle_heredoc(char *input, t_together *All, t_l_p_pack *pack)
 {
 	t_heredoc heredoc;
 	t_lexer		*tail;
@@ -107,14 +108,14 @@ t_together	*handle_heredoc(char *input, t_together *All)
 		if (tail->token_type == Double_Lesser)
 		{
 			tail = go_handle(tail, &heredoc, input);
-			All->head->heredoc_pipe = parse_line_heredoc(All, &heredoc);
+			pack->to_add->heredoc_pipe = parse_line_heredoc(All, &heredoc, pack->to_add);
 			signal_director(MAIN_SIG);
 		}
-		token = quick_fix(token, All, tail);
-		if ((tail && tail->token_type == Pipe) || All->head->heredoc_pipe == -2)
-			break ;
-		if (tail)
+		else if (tail)
 			tail = tail->next;
+		token = quick_fix(token, All, tail);
+		if ((tail && tail->token_type == Pipe) || pack->to_add->heredoc_pipe == -2)
+			break ;
 		heredoc.has_quote = 0;
 	}
 	return (All);

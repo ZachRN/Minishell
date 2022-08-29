@@ -43,7 +43,7 @@ int	main(int argc, char *argv[], char *env[])
 	All.lex_head = NULL;
 	signal_director(1);
 	atexit(check_leaks);
-	env_vars_copy_display(All.env_array);
+	// env_vars_copy_display(All.env_array);
 	minishell(&All);
 	free_lines(All.env_array);
 	exit(1);

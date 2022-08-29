@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*str;
 	size_t			x;
 
-	if (!s)
+	if (!s && len > 0)
 		return (NULL);
 	x = ft_strlen(s);
 	if (len > x)

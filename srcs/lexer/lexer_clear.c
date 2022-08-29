@@ -5,10 +5,12 @@
 t_lexer *rm_one_from_lexer_list(t_lexer *to_remove)
 {
 	t_lexer *to_return;
+	t_lexer	*prev;
 
 	to_return = NULL;
 	if (!to_remove)
 		return (NULL);
+	prev = to_remove->prev;
 	to_return = to_remove->next;
 	if (to_remove->content)
 		free(to_remove->content);
@@ -16,6 +18,10 @@ t_lexer *rm_one_from_lexer_list(t_lexer *to_remove)
 	if (to_remove)
 		free(to_remove);
 	to_remove = NULL;
+	if (prev)
+		prev->next = to_return;
+	if (to_return)
+		to_return->prev = prev;
 	return (to_return);
 }
 
