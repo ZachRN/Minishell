@@ -79,6 +79,20 @@ void	add_lexer_to_end(t_lexer *head, t_lexer *tail)
 	return ;
 }
 
+/*Welcome to viewing the lexer, and I will quickly explain what this does 
+Firstly, the lexer tokenizes the entireity of the string for us.
+The important thing it takes note of
+Is it a special character, [<] [<<] [>] [>>] ["] ['] [|] [$] and notes it down
+Then it takes its position in the input string, the start and end of it, the 
+ending being when it runs into a another special character, or a whitespace
+It also duplicates the content of it to a *str so that I am able to freely
+play with its pointer later on and not fear with messing with the original input
+The token ID is also noted, whichever number it is, though it isnt relevant
+other than for when I was displaying for testing purposes
+
+The struct it keeps it information in in a linked list line going forwards and
+backwards, though it is no circular; the ends don't connect.
+*/
 t_lexer *lexer(char *input)
 {
 	int 	pos;

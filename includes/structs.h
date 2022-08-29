@@ -13,6 +13,16 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+/*I'm only going to comment on the enum here as it was designed in a very
+particular manner
+I made it so that, All the Special characters which can error very easily such 
+as < << >> > | came first, whcih allows me to check token_types using < 
+because those will also flag certain conditions. I then set the " and ' next
+as their are times where I only need $ and the regular identifier.
+
+Essentially I made it so taht instead of doing a function is_in I can just do
+a less than x token in an if statement as I found taht a bit nicer.
+*/
 enum e_tokens
 {
 	Greater = 1,
@@ -87,6 +97,7 @@ typedef struct s_lex_parse_pack
 {
 	t_parse	*to_add;
 	t_lexer *to_search;
+	int		no_file;
 }				t_l_p_pack;
 
 #endif

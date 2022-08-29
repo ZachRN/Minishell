@@ -77,7 +77,7 @@ t_lexer	*expansion_loop(t_together *All, t_lexer *tail, t_quote *check, t_lexer 
 	first = 0;
 	if (head->token_type == Expand)
 		first = 1;
-	while (tail)
+	while (tail && tail->token_type != Pipe)
 	{
 		if (tail->token_type != Quote && tail->token_type != Double_Quote)
 			check->prev_token = tail->token_type;
@@ -98,6 +98,23 @@ t_lexer	*expansion_loop(t_together *All, t_lexer *tail, t_quote *check, t_lexer 
 	return (head);
 }
 
+/*Expansion is a bit of a mess due to all the edge cases with it.
+I will state the main issues that I faced while handling the code here.
+Expansion works differently when it is within a "" and when it is outside of
+them, I recommend testing them yourselves if you don't know them already.
+
+Not expanding within '' and also taking into account when a " is within a '
+or vice versa.
+The expansion loop will look for variables with the $ start, and handle
+them accordingly, edge case support for there being nothing after, to return
+a $, $? to return the last error code, and $(STUFF) to account for the env
+varible, returning ft_strdup("\0"); if it finds nothing.
+
+It will change the content of the t_lexer from the $PATH to its new info
+It will only expand until it inds a Pipe Token_Type, this is because we don't 
+want to expand the next set of commands, incase heredoc does something with
+that expansion in the next set. Visit heredoc if you wanna know why
+*/
 t_lexer	*expansion_start(t_together *All, t_lexer *head)
 {
 	t_quote	check;

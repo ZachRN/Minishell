@@ -31,6 +31,19 @@ static void control_d()
 	exit(EXIT_SUCCESS);
 }
 
+/*This is the core loop for our minishell to read an infinite amount
+The step by step process is
+Step 1: Check if the string exists, if it doesnt EOF was thrown and we exit
+Step 2: Take the string and form it into a lexer, 
+view lexer/lexer_init.c for more
+Step 3: Next we make sure the lexer is valid and it can't be a incorrect
+string that will be parsed, saving a headache for later. 
+lexer/lexer_valid.c for more
+Step 4: We then parse the lexer information, 
+go to parser/parser_start.c for info on it
+Step 5: We then execute based on the information that was parsed
+Step 6: We do a basic clean up for the next round of commands.*/
+
 int	minishell(t_together *All)
 {
 	char *input;

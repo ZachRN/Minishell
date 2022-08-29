@@ -33,30 +33,10 @@ t_lexer *join_heredoc_quotes(t_lexer *head, t_heredoc *heredoc, char *input)
 
 t_lexer *remove_heredoc_list(t_lexer *head, t_lexer *tail)
 {
-	// t_lexer *temp;
-
-	// temp = head->prev;
 	while (head != tail)
 		head = rm_one_from_lexer_list(head);
 	head = rm_one_from_lexer_list(head);
 	return (head);
-	// if (temp)
-	// {
-	// 	if (head)
-	// 		head->prev = temp;
-	// 	temp->next = head;
-	// 	return (temp);
-	// }
-	// else
-	// {
-	// 	if (head)
-	// 	{
-	// 		head->prev = NULL;
-	// 		return (head);
-	// 	}
-	// 	return (NULL);
-	// }
-		
 }
 t_lexer	*go_handle(t_lexer *lex_head, t_heredoc *heredoc, char *input)
 {
@@ -92,6 +72,29 @@ static int quick_fix(int token, t_together *All, t_lexer *tail)
 	}
 	return (token);
 }
+
+/*
+Heredoc has code that it pulls from expansion since it ways in the same fashion
+The reason we do heredoc before we actually do anythign else is because
+$PATH for heredoc will not expand to its actual /bin/ whatever the rest is.
+This function will also remove the << and heredoc identifiers from the
+t_lexer linked list.
+
+Therefore I call it first, and handle it before i expand it to stay true
+to the way heredoc works in bash. Also to note when heredoc has "" or '' in it
+to any regard, even when its not within it by joined by it, nothign within 
+Heredoc will expand.
+
+It will grab the EOF(end of file)
+joining the quotes and all the things around it to form
+the string that it needs to create for the EOF. It will then go into a child
+process for one very specific reason, When you use SIG_INT (signal interrupt)
+it acts differently in heredoc. It will cancel the entirety of the command
+no matter what you typed in. Essentially killing it adn also not doing the rest
+of the heredocs. Therefore I put it into a child process so taht I can return
+an Error code that will notify us when it happens so that I can cancel the rest
+of the line verfication and no doing with it.
+*/
 
 t_together	*handle_heredoc(char *input, t_together *All, t_l_p_pack *pack)
 {

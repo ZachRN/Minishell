@@ -55,6 +55,7 @@ t_l_p_pack	input_redirect(t_l_p_pack pack)
 	{
 		while (search && search->token_type != Pipe)
 			search = rm_one_from_lexer_list(search);
+		pack.no_file = 1;
 	}
 	pack.to_search = search;
 	return (pack);
@@ -74,6 +75,18 @@ t_lexer	*find_first_none_direct(t_lexer *head)
 	return (head);
 }
 
+/*Handling redirections isnt that much of an issue 
+It checks for < > >> symbols and then takes the content of the token
+following that one as the input for the name, this token as already been
+expanded and joiend to form the correct information.
+
+If the file does not exist for < it will mimic bash and scrap the rest
+of the tokens for the command, as it does not execute the command at all
+if the infile does not exist, and for > >> it will choose which is the
+correct append mode for the command, and open them once to verify that they
+exist and if not create them, only storing the most recent one. As that
+is the only that bash writes to Though it will overwrite and delete
+non append outfiles if they come earlier..*/
 t_l_p_pack	handle_Redirections(t_l_p_pack pack)
 {
 	t_lexer	*search;
@@ -94,6 +107,7 @@ t_l_p_pack	handle_Redirections(t_l_p_pack pack)
 		else if (pack.to_search)
 			pack.to_search = pack.to_search->next;
 	}
-	pack.to_search = search;
+	if (pack.no_file == 0)
+		pack.to_search = search;
 	return (pack);
 }

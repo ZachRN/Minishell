@@ -73,18 +73,36 @@ void	add_to_back(t_together *All, t_parse *to_add)
 	return ;
 }
 
+/*Welcome to the Parser, Here is the simple step by step of how it works 
+These steps work in a loop until the lexer is empty
+Step 1: Initalize the parser struct, parser/parser_init.c for more
+Step 2: Handle Heredoc is the first thing we do for this set of commands
+visit heredoc/heredoc_start.c for more info
+Step 3: Expand the $ variables into their proper form!
+visit expand/expansion_start.c for more info
+Step 4: Join all the quotes and expanded variables together
+visit expand/expand_lex_quotes.c for more info
+Step 5: We then are going to handle all the redirections < << > >> next
+visit parser/parser_redirections.c for mroe info
+Step 6: Now all we have left is get the command name and arguements
+Visit parser/parse_cmd_args.c for more info
+Then we take all this information and pass it back to the main program for
+the execution process*/
+
 t_together *parser(char *input, t_together *All)
 {
 	t_l_p_pack pack;
 	
-	All->lex_head = expansion_start(All, All->lex_head);
-	All->lex_head = expand_lex_quotes(All->lex_head, input);
+	// lexer_display(All->lex_head);
 	while (All->lex_head)
 	{
+		pack.no_file = 0;
 		pack.to_add	= parse_initalize();
 		All = handle_heredoc(input, All, &pack);
 		if (pack.to_add->heredoc_pipe == -2)
 			return (error_heredoc_clean(All, pack.to_add));
+		All->lex_head = expansion_start(All, All->lex_head);
+		All->lex_head = expand_lex_quotes(All->lex_head, input);
 		pack.to_search = All->lex_head;
 		pack = handle_Redirections(pack);
 		pack = cmd_args(pack);

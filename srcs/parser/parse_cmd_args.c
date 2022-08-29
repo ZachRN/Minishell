@@ -29,6 +29,10 @@ char	**make_arg_list(t_l_p_pack pack, int i)
 	return (temp);
 }
 
+/*The last step of the parser is to grab the command name and arguements
+the first command in the list at this point must be the command
+after that we set args to equal to a **str with each element set to the
+remaining tokens left in the list until its done or until a pipe token.*/
 t_l_p_pack cmd_args(t_l_p_pack pack)
 {
 	t_lexer *search;

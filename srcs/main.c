@@ -31,6 +31,14 @@ static	void	check_leaks(void)
 	// tcsetattr(STDIN_FILENO, TCSANOW, &saved);
 }
 
+/* We start the project by making a copy of the environmental variables passed
+to us, as well as a set up for the primary of storing information with our
+struct called a t_together which just holds different variables.
+Minishell.c holds our infinite while loop and the post set up information. 
+
+This also sets up the start of our signals to ingore SIG_INT and SIG_QUIT
+Control + C && Control + \ */
+
 int	main(int argc, char *argv[], char *env[])
 {
 	t_together All;
@@ -38,7 +46,7 @@ int	main(int argc, char *argv[], char *env[])
 	(void)argc;
 	(void)argv;
 	All.env_array = env_copy(env);
-	All.last_error = -1;
+	All.last_error = 0;
 	All.head = NULL;
 	All.lex_head = NULL;
 	signal_director(1);
