@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:24:21 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/31 15:14:03 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	minishell(t_together *all)
 			all->last_error = 258;
 		all->head = t_parse_clear_list(all->head);
 		all->lex_head = t_lexer_clear_list(all->lex_head);
-		//YOU CAN PUT YOUR FUNCTION HERE
+		//YOU CAN PUT YOUR FUNCTION HERE.
 		//all is a t_together struct, , where ->head
 		// is the most important one for you, it contains
 		//the struct that holds the cmd name, arguements, outfile
