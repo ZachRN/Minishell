@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:46:38 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:51:35 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/31 15:45:03 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ft_strncmp.h>
+#include <env_shlvl.h>
 
 char	**free_lines(char **str)
 {
@@ -35,16 +36,24 @@ char	**free_lines(char **str)
 char	**copy_env_list(char **to_return, char **env)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (env[i])
 	{
-		to_return[i] = ft_strdup(env[i]);
-		if (!to_return[i])
+		if (ft_strncmp(env[i], "OLDPWD=", 7) == 0)
+			i++;
+		if (ft_strncmp(env[i], "SHLVL=", 6))
+			to_return[j] = ft_strdup(env[i]);
+		else
+			to_return[j] = handle_shlvl(env[i]);
+		if (!to_return[j])
 			return (free_lines(to_return));
 		i++;
+		j++;
 	}
-	to_return[i] = NULL;
+	to_return[j] = NULL;
 	return (to_return);
 }
 
@@ -56,7 +65,11 @@ int	get_size_of_env(char **env)
 	i = 0;
 	has_pwd = 0;
 	while (env[i])
+	{
+		if (ft_strncmp(env[i], "OLDPWD=", 7) == 0)
+			has_pwd = 1;
 		i++;
+	}
 	return (i - has_pwd);
 }
 
