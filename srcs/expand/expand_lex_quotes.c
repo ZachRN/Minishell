@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   expand_lex_quotes.c                                :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:50:11 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:50:17 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <ft_strjoin.h>
 #include <lexer_clear.h>
@@ -5,14 +17,14 @@
 #include <ft_strdup.h>
 #include <ft_substr.h>
 
-static char 	*quote_str_join(t_lexer *tail, char *input, char *str)
+static char	*quote_str_join(t_lexer *tail, char *input, char *str)
 {
 	char	*temp;
 	char	*temp2;
 
 	temp = str;
 	temp2 = ft_substr(input, tail->prev->end + 1,
-					tail->start - tail->prev->end - 1);
+			tail->start - tail->prev->end - 1);
 	str = ft_strjoin(temp, temp2);
 	free(temp);
 	free(temp2);
@@ -21,7 +33,7 @@ static char 	*quote_str_join(t_lexer *tail, char *input, char *str)
 
 t_lexer	*rm_lex_quote_join(t_lexer *search, t_lexer *tail, char *str)
 {
-	t_lexer *temp;
+	t_lexer	*temp;
 
 	temp = search->next;
 	while (temp != tail)
@@ -32,12 +44,12 @@ t_lexer	*rm_lex_quote_join(t_lexer *search, t_lexer *tail, char *str)
 	search->content = str;
 	search->next = temp;
 	search->token_type = Expand;
-	return(search);
+	return (search);
 }
 
 t_lexer	*handle_lex_quotes(t_lexer *search, char *input)
 {
-	t_lexer *tail;
+	t_lexer	*tail;
 	char	*str;
 	char	*temp;
 	int		quote_type;
@@ -61,8 +73,8 @@ t_lexer	*handle_lex_quotes(t_lexer *search, char *input)
 
 t_lexer	*handle_non_quote_join(t_lexer *search)
 {
-	t_lexer *temp;
-	char *str_temp;
+	t_lexer	*temp;
+	char	*str_temp;
 
 	temp = search->next;
 	if (temp->token_type < Expand || search->token_type < Expand)
@@ -73,7 +85,7 @@ t_lexer	*handle_non_quote_join(t_lexer *search)
 	search->end = temp->end;
 	temp = rm_one_from_lexer_list(temp);
 	search->next = temp;
-	return(search);
+	return (search);
 }
 
 /* The joing of quotes is a bit of a hassle Though the way it basically boils
@@ -98,7 +110,7 @@ t_lexer	*expand_lex_quotes(t_lexer *head, char *input)
 	search = head;
 	while (search && search->next && search->next->token_type != Pipe)
 	{
-		if (search->token_type == Double_Quote || search->token_type == Quote)
+		if (search->token_type == D_Quote || search->token_type == Quote)
 			search = handle_lex_quotes(search, input);
 		search = search->next;
 	}

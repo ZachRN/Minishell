@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parser_clear.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:29:59 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:47:16 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <unistd.h>
 #include <ft_split.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-t_parse *rm_one_from_parse_list(t_parse *to_remove)
+t_parse	*rm_one_from_parse_list(t_parse *to_remove)
 {
-	t_parse *to_return;
+	t_parse	*to_return;
 
 	if (!to_remove)
 		return (NULL);
@@ -23,8 +35,8 @@ t_parse *rm_one_from_parse_list(t_parse *to_remove)
 	if (to_remove->infile)
 		free(to_remove->infile);
 	to_remove->infile = NULL;
-	if (to_remove->heredoc_pipe > 0)
-		close(to_remove->heredoc_pipe);
+	if (to_remove->hd_pipe > 0)
+		close(to_remove->hd_pipe);
 	free(to_remove);
 	to_remove = NULL;
 	return (to_return);

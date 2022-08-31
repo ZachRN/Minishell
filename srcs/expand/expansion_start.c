@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/18 15:41:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/24 17:15:58 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/31 13:48:15 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,21 @@ t_lexer	*handle_first(t_lexer *head, t_lexer *tail, int first)
 	return (tail);
 }
 
-t_lexer	*expansion_loop(t_together *All, t_lexer *tail, t_quote *check, t_lexer *head)
+t_lexer	*expansion_loop(t_together *all, t_lexer *tail,
+			t_quote *check, t_lexer *head)
 {
-	int first;
+	int	first;
 
 	first = 0;
 	if (head->token_type == Expand)
 		first = 1;
 	while (tail && tail->token_type != Pipe)
 	{
-		if (tail->token_type != Quote && tail->token_type != Double_Quote)
+		if (tail->token_type != Quote && tail->token_type != D_Quote)
 			check->prev_token = tail->token_type;
 		if (tail->token_type == Expand && check->single_quote != -1)
-			tail->content = handle_expand(All->env_array,
-					tail->content, All->last_error);
+			tail->content = handle_expand(all->env_array,
+					tail->content, all->last_error);
 		tail = expand_add_lex(tail, check);
 		if (first == 1)
 			head = handle_first(head, tail, first);
@@ -91,7 +92,7 @@ t_lexer	*expansion_loop(t_together *All, t_lexer *tail, t_quote *check, t_lexer 
 			first = 2;
 		if (tail->token_type == Quote && check->double_quote == 1)
 			check->single_quote *= -1;
-		if (tail->token_type == Double_Quote && check->single_quote == 1)
+		if (tail->token_type == D_Quote && check->single_quote == 1)
 			check->double_quote *= -1;
 		tail = tail->next;
 	}
@@ -115,7 +116,7 @@ It will only expand until it inds a Pipe Token_Type, this is because we don't
 want to expand the next set of commands, incase heredoc does something with
 that expansion in the next set. Visit heredoc if you wanna know why
 */
-t_lexer	*expansion_start(t_together *All, t_lexer *head)
+t_lexer	*expansion_start(t_together *all, t_lexer *head)
 {
 	t_quote	check;
 	t_lexer	*tail;
@@ -125,13 +126,13 @@ t_lexer	*expansion_start(t_together *All, t_lexer *head)
 	check.double_quote = 1;
 	check.single_quote = 1;
 	check.prev_token = head->token_type;
-	tail = head->next;;
+	tail = head->next;
 	if (head->token_type == Quote)
 		check.single_quote *= -1;
-	else if (head->token_type == Double_Quote)
+	else if (head->token_type == D_Quote)
 		check.double_quote *= -1;
 	else
 		tail = head;
-	head = expansion_loop(All, tail, &check, head);
+	head = expansion_loop(all, tail, &check, head);
 	return (head);
 }

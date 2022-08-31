@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:46:38 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 17:49:34 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/31 13:51:35 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 char	**free_lines(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -34,7 +34,7 @@ char	**free_lines(char **str)
 
 char	**copy_env_list(char **to_return, char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -50,7 +50,7 @@ char	**copy_env_list(char **to_return, char **env)
 
 int	get_size_of_env(char **env)
 {
-	int i;
+	int	i;
 	int	has_pwd;
 
 	i = 0;

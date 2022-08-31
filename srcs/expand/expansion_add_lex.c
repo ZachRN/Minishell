@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   expansion_add_lex.c                                :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:49:09 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:49:16 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <ft_split.h>
 #include <stdlib.h>
@@ -7,7 +19,7 @@
 
 static t_lexer	*new_lex(t_lexer *head, char *str)
 {
-	t_lexer *to_add;
+	t_lexer	*to_add;
 
 	to_add = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!to_add)
@@ -24,7 +36,7 @@ static t_lexer	*new_lex(t_lexer *head, char *str)
 	return (to_add);
 }
 
-static t_lexer *add_lexer_after_one(t_lexer *head, t_lexer *new)
+static t_lexer	*add_lexer_after_one(t_lexer *head, t_lexer *new)
 {
 	if (!head)
 		return (new);
@@ -40,10 +52,10 @@ static t_lexer *add_lexer_after_one(t_lexer *head, t_lexer *new)
 
 static t_lexer	*split_content(t_lexer *head)
 {
-	t_lexer *save;
-	t_lexer *new;
-	char **content;
-	int i;
+	t_lexer	*save;
+	t_lexer	*new;
+	char	**content;
+	int		i;
 
 	content = ft_split(head->content, ' ');
 	if (!content)
@@ -68,8 +80,8 @@ static t_lexer	*split_content(t_lexer *head)
 
 t_lexer	*expand_add_lex(t_lexer *head, t_quote *check)
 {
-	t_lexer *tail;
-	int first;
+	t_lexer	*tail;
+	int		first;
 
 	if (!head)
 		return (head);
@@ -83,6 +95,5 @@ t_lexer	*expand_add_lex(t_lexer *head, t_quote *check)
 		first = 1;
 	tail = split_content(tail);
 	tail->token_type = Expand;
-	// printf("Content of Prev:%s\nLocation of :%p || First :%d\n", tail->content, tail->prev, first);
-	return(tail);
+	return (tail);
 }

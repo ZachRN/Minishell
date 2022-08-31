@@ -1,16 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse_cmd_args.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:27:25 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:27:56 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <ft_strdup.h>
 #include <stdlib.h>
 #include <ft_split.h>
 #include <lexer_clear.h>
 
-#include <stdio.h>
-#include <lexer_display.h>
-
 char	**make_arg_list(t_l_p_pack pack, int i)
 {
-	char **temp;
-	t_lexer *search;
+	char	**temp;
+	t_lexer	*search;
 
 	temp = (char **)malloc((i + 1) * sizeof(char *));
 	if (!temp)
@@ -33,11 +42,11 @@ char	**make_arg_list(t_l_p_pack pack, int i)
 the first command in the list at this point must be the command
 after that we set args to equal to a **str with each element set to the
 remaining tokens left in the list until its done or until a pipe token.*/
-t_l_p_pack cmd_args(t_l_p_pack pack)
+t_l_p_pack	cmd_args(t_l_p_pack pack)
 {
-	t_lexer *search;
-	char **temp;
-	int	i;
+	t_lexer	*search;
+	char	**temp;
+	int		i;
 
 	if (!pack.to_search)
 		return (pack);

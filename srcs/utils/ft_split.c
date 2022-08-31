@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_split.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:24:49 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:25:28 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <ft_calloc.h>
 
-char **free_my_lines(char **str)
+char	**free_my_lines(char **str)
 {
-    int i;
+	int	i;
 
-    if (!str)
-        return (NULL);
-    i = 0;
-    while (str[i])
-    {
-        free(str[i]);
-        i++;
-    }
-    free(str);
-    return (NULL);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
 }
 
 static int	wordinput(char const *s, int start, char **str, char c)

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   lexer_clear.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:35:28 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:35:28 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-t_lexer *rm_one_from_lexer_list(t_lexer *to_remove)
+t_lexer	*rm_one_from_lexer_list(t_lexer *to_remove)
 {
-	t_lexer *to_return;
+	t_lexer	*to_return;
 	t_lexer	*prev;
 
 	to_return = NULL;
@@ -32,5 +44,4 @@ t_lexer	*t_lexer_clear_list(t_lexer *head)
 	while (head)
 		head = rm_one_from_lexer_list(head);
 	return (NULL);
-
 }
