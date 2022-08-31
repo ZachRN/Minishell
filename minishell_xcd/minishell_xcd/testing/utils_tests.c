@@ -11,49 +11,56 @@
 
 int	test_builtin_utils(void)
 {
-	char *s1;
-	char *s2;
+	char *name;
+	char *argument;
 	char c;
 	
-	s1 = "HEY=hehehe";
-	s2 = "HEY=lalala";
+	name = "HEY=hehehe";
+	argument = "HEY=lalala";
 	c = '=';
-	assert(compare_str_till_char(s1, s2, c) == TRU);
+	assert(compare_str_till_char(name, argument, c) == TRU);
 	
-	s1 = "HE=hehehe";
-	s2 = "HEY=lalala";
+	name = "HE=hehehe";
+	argument = "HEY=lalala";
 	c = 'E';
-	assert(compare_str_till_char(s1, s2, c) == TRU);
+	assert(compare_str_till_char(name, argument, c) == TRU);
 	
-	s1 = "HE=hehehe";
-	s2 = "HEY=lalala";
+	name = "HE=hehehe";
+	argument = "HEY=lalala";
 	c = '=';
-	assert(compare_str_till_char(s1, s2, c) == FLS);
+	assert(compare_str_till_char(name, argument, c) == FLS);
 	
-	s1 = "HE145=lalala";
-	s2 = "HE451=lalala";
+	name = "HE145=lalala";
+	argument = "HE451=lalala";
 	c = 'l';
-	assert(compare_str_till_char(s1, s2, c) == FLS);
+	assert(compare_str_till_char(name, argument, c) == FLS);
 	
-	s1 = "VAR=one_value";
-	s2 = "VARIABLE";
+	name = "VAR=one_value";
+	argument = "VARIABLE";
 	c = '=';
-	assert(compare_str_till_char(s1, s2, c) == FLS);
+	assert(compare_str_till_char(name, argument, c) == FLS);
 	
-	s1 = "";
-	s2 = "VARIABLE=";
+	name = "";
+	argument = "VARIABLE=";
 	c = '=';
-	assert(compare_str_till_char(s1, s2, c) == FLS);
+	assert(compare_str_till_char(name, argument, c) == FLS);
 	
-	s1 = NULL;
-	s2 = "VARIABLE=";
+	name = NULL;
+	argument = "VARIABLE=";
 	c = '=';
-	assert(compare_str_till_char(s1, s2, c) == FLS);
+	assert(compare_str_till_char(name, argument, c) == FLS);
 	
-	s1 = "VARIABLE";
-	s2 = "VARIABLE";
+	name = "VARIABLE";
+	argument = "VARIABLE";
 	c = '=';
-	assert(compare_str_till_char(s1, s2, c) == FLS);
+	assert(compare_str_till_char(name, argument, c) == FLS);
+	
+	name = "VARIABLE=lalalala";
+	argument = "VARIABLE";
+	c = '=';
+	assert(compare_str_till_char(name, argument, c) == TRU);
+	
+
 	
 	
 	return 0;

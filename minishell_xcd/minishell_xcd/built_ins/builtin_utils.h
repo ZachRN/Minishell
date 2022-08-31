@@ -42,6 +42,7 @@ typedef struct	s_env_data
 	int envvar_repeat;
 }				t_env_data;
 
+int is_valid_envp_name(char *name);
 char **allocate_env_array_without_str(char **envp, int len, char *str);
 char	*ft_strdup(const char *s1);
 void free_array_of_str(char **array);

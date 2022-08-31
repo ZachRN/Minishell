@@ -28,6 +28,7 @@ int	initiate_data_struct(char *command, char **envp, t_env_data *data)
 	}
 	data->num_var = find_arr_len(data->envp);
 	data->envvar_repeat = 0;
+	data->new_envp = NULL;
 	return (0);
 }
 
@@ -49,7 +50,7 @@ char **built_in_commands(t_env_data *data)
 	else if (data->comm_n == CD)
 		cd_builtin(data);
 	if (data->envp != NULL)
-		free(data->envp);
+		free_array_of_str(data->envp);
 	return (data->new_envp);
 }
 
