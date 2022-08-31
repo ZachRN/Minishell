@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parser_start.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:35:00 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:47:16 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <parse_init.h>
 #include <unistd.h>
@@ -18,19 +30,19 @@
 #include <parse_redirections.h>
 #include <parse_cmd_args.h>
 
-t_together *error_heredoc_clean(t_together *All, t_parse *to_add)
+t_together	*error_heredoc_clean(t_together *all, t_parse *to_add)
 {
-	All->last_error = 1;
-	All->head = t_parse_clear_list(All->head);
-	All->lex_head = t_lexer_clear_list(All->lex_head);
+	all->last_error = 1;
+	all->head = t_parse_clear_list(all->head);
+	all->lex_head = t_lexer_clear_list(all->lex_head);
 	t_parse_clear_list(to_add);
-	return(All);
+	return (all);
 }
 
 void	parse_display(t_parse *head)
 {
-	t_parse *to_display;
-	char **temp;
+	t_parse	*to_display;
+	char	**temp;
 
 	if (!head)
 		return ;
@@ -38,7 +50,6 @@ void	parse_display(t_parse *head)
 	while (to_display)
 	{
 		temp = to_display->args;
-		printf("-------------------------------------\n");
 		printf("Command Name: [%s]\n", to_display->cmd);
 		printf("Command Arguements: ");
 		if (temp)
@@ -46,27 +57,27 @@ void	parse_display(t_parse *head)
 			while (*temp)
 			{
 				printf("[%s] ", *temp);
-				temp++;	
+				temp++;
 			}
 		}
 		printf("\nOutfile: [%s]\nAppend: [%d]\nInfile: [%s]\n",
 			to_display->outfile, to_display->append, to_display->infile);
-		printf("Heredoc Pipe FD: [%d]\n", to_display->heredoc_pipe);
+		printf("Heredoc Pipe FD: [%d]\n", to_display->hd_pipe);
 		printf("Address of Next: [%p]\n", to_display->next);
 		to_display = to_display->next;
 	}
 }
 
-void	add_to_back(t_together *All, t_parse *to_add)
+void	add_to_back(t_together *all, t_parse *to_add)
 {
 	t_parse	*temp;
 
-	if (!All->head)
+	if (!all->head)
 	{
-		All->head = to_add;
+		all->head = to_add;
 		return ;
 	}
-	temp = All->head;
+	temp = all->head;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = to_add;
@@ -89,29 +100,28 @@ Visit parser/parse_cmd_args.c for more info
 Then we take all this information and pass it back to the main program for
 the execution process*/
 
-t_together *parser(char *input, t_together *All)
+t_together	*parser(char *input, t_together *all)
 {
-	t_l_p_pack pack;
-	
-	// lexer_display(All->lex_head);
-	while (All->lex_head)
+	t_l_p_pack	pack;
+
+	while (all->lex_head)
 	{
 		pack.no_file = 0;
-		pack.to_add	= parse_initalize();
-		All = handle_heredoc(input, All, &pack);
-		if (pack.to_add->heredoc_pipe == -2)
-			return (error_heredoc_clean(All, pack.to_add));
-		All->lex_head = expansion_start(All, All->lex_head);
-		All->lex_head = expand_lex_quotes(All->lex_head, input);
-		pack.to_search = All->lex_head;
-		pack = handle_Redirections(pack);
+		pack.to_add = parse_initalize();
+		all = handle_heredoc(input, all, &pack);
+		if (pack.to_add->hd_pipe == -2)
+			return (error_heredoc_clean(all, pack.to_add));
+		all->lex_head = expansion_start(all, all->lex_head);
+		all->lex_head = expand_lex_quotes(all->lex_head, input);
+		pack.to_search = all->lex_head;
+		pack = handle_redirections(pack);
 		pack = cmd_args(pack);
-		add_to_back(All, pack.to_add);
+		add_to_back(all, pack.to_add);
 		if (pack.to_search)
-			All->lex_head = pack.to_search;
+			all->lex_head = pack.to_search;
 		else
-			All->lex_head = NULL;
+			all->lex_head = NULL;
 	}
-	parse_display(All->head);
-    return (All);
+	parse_display(all->head);
+	return (all);
 }

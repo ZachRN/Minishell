@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parser_get_cmd.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:32:33 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:32:33 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <ft_strdup.h>
 #include <ft_strncmp.h>
@@ -6,7 +18,7 @@
 #include <ft_strjoin.h>
 #include <stdio.h>
 
-static char *check_absolute_path(char *cmd, char **env)
+static char	*check_absolute_path(char *cmd, char **env)
 {
 	if (!env)
 		return (NULL);
@@ -14,11 +26,11 @@ static char *check_absolute_path(char *cmd, char **env)
 		env++;
 	chdir((*env) + 4);
 	if (access(cmd, F_OK) == 0)
-		return ft_strdup(cmd);
+		return (ft_strdup(cmd));
 	return (NULL);
 }
 
-static int is_rel_abs_path(char *cmd)
+static int	is_rel_abs_path(char *cmd)
 {
 	if (ft_strncmp(cmd, "./", 2) == 0)
 		return (1);
@@ -56,9 +68,9 @@ static char	*check_path_paths(char **paths, char *cmd)
 	return (possible_env_path);
 }
 
-int		is_built_in(char *str)
+int	is_built_in(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -69,25 +81,26 @@ int		is_built_in(char *str)
 			str[i] += 32;
 		i++;
 	}
-	if ((ft_strncmp(str, "echo", 5) == 0) || 
-		(ft_strncmp(str, "cd", 3) == 0) ||
-		(ft_strncmp(str, "pwd", 4) == 0) || 
-		(ft_strncmp(str, "export", 7) == 0) ||
-		(ft_strncmp(str, "unset", 6) == 0) || 
-		(ft_strncmp(str, "env", 3) == 0) ||
-		(ft_strncmp(str, "exit", 5) == 0))
+	if ((ft_strncmp(str, "echo", 5) == 0)
+		|| (ft_strncmp(str, "cd", 3) == 0)
+		|| (ft_strncmp(str, "pwd", 4) == 0)
+		|| (ft_strncmp(str, "export", 7) == 0)
+		|| (ft_strncmp(str, "unset", 6) == 0)
+		|| (ft_strncmp(str, "env", 3) == 0)
+		|| (ft_strncmp(str, "exit", 5) == 0))
 		return (1);
 	return (0);
 }
-char    *find_cmd_path(char *cmd, char **env)
-{
-    char **possible_paths;
-	char *to_return;
 
-    if (!cmd)
-        return (NULL);
-    if (is_rel_abs_path(cmd))
-        return (check_absolute_path(cmd, env));
+char	*find_cmd_path(char *cmd, char **env)
+{
+	char	**possible_paths;
+	char	*to_return;
+
+	if (!cmd)
+		return (NULL);
+	if (is_rel_abs_path(cmd))
+		return (check_absolute_path(cmd, env));
 	else if (is_built_in(cmd))
 		return (ft_strdup(cmd));
 	while (ft_strncmp(*env, "PATH=", 5))

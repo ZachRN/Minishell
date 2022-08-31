@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_strncmp.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:26:21 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:52:07 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t len)
@@ -5,7 +17,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t len)
 	unsigned int	i;
 	unsigned char	*a;
 	unsigned char	*b;
-
 
 	if (!s1 || !s2)
 		return (0);

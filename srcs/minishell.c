@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/24 16:40:10 by znajda        ########   odam.nl         */
+/*   Updated: 2022/08/31 13:24:21 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include <lexer_clear.h>
 #include <lexer_valid.h>
 
-static void control_d()
+static void	control_d(void)
 {
 	printf("exit");
 	exit(EXIT_SUCCESS);
@@ -44,9 +44,9 @@ go to parser/parser_start.c for info on it
 Step 5: We then execute based on the information that was parsed
 Step 6: We do a basic clean up for the next round of commands.*/
 
-int	minishell(t_together *All)
+int	minishell(t_together *all)
 {
-	char *input;
+	char	*input;
 
 	while (TRUE)
 	{
@@ -54,13 +54,15 @@ int	minishell(t_together *All)
 		if (!input)
 			control_d();
 		add_history(input);
-		All->lex_head = lexer(input);
-		if (lexer_valid(All->lex_head))
-			All = parser(input, All);
+		all->lex_head = lexer(input);
+		if (lexer_valid(all->lex_head))
+			all = parser(input, all);
 		else
-			All->last_error = 258;
+			all->last_error = 258;
+		all->head = t_parse_clear_list(all->head);
+		all->lex_head = t_lexer_clear_list(all->lex_head);
 		//YOU CAN PUT YOUR FUNCTION HERE
-		//All is a t_together struct, , where ->head
+		//all is a t_together struct, , where ->head
 		// is the most important one for you, it contains
 		//the struct that holds the cmd name, arguements, outfile
 		//etc etc.. last_Error is also somehting that potentially needs to be updated
@@ -70,13 +72,11 @@ int	minishell(t_together *All)
 		//of the command name.
 		//Also check if the infile exists, if it doesnt exist you should void
 		//the entire command basically. I can explain in more detail if you want.
-		All->head = t_parse_clear_list(All->head);
-		All->lex_head = t_lexer_clear_list(All->lex_head);
 		if (ft_strncmp(input, "exit", 5) == 0)
-			break ; 
+			break ;
 		free(input);
 	}
 	if (input)
 		free(input);
-	return (0);	
+	return (0);
 }

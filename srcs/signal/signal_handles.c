@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   signal_handles.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:26:47 by znajda        #+#    #+#                 */
+/*   Updated: 2022/08/31 13:27:02 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <termios.h>
 #include <signal.h>
 #include <unistd.h>
@@ -26,7 +38,7 @@ void	heredoc_handle(int signo)
 
 void	signal_director(int relocation)
 {
-	struct termios attributes;
+	struct termios	attributes;
 
 	tcgetattr(STDIN_FILENO, &attributes);
 	attributes.c_lflag &= ECHO;
