@@ -21,7 +21,7 @@ int new_env_array_size(t_env_data *data)
 	while (i < data->n_arguments)
 	{
 		equal_sign_index = find_char_in_str('=', data->arguments[i]);
-		if (equal_sign_index == 0 || is_number(data->arguments[i][0]) == TRU || data->arguments[i][0] == '?')
+		if (equal_sign_index == 0 || is_valid_envp_name(data->arguments[i]) == FLS)
 			minus_malloc_size++; ///so I know no = sign in variable and it wont make it in list
 		if (number_var_in_list(data->envp, data->arguments[i]) > 0)
 			minus_malloc_size++;
@@ -47,7 +47,12 @@ int	alter_envp_new_list(t_env_data *data, int i) /// here I need to check if var
 	if (find_char_in_str('=', data->arguments[i]) > 0)
 	{
 		n = number_var_in_list(data->envp, data->arguments[i]); /// not index but number
-		if (is_number(data->arguments[i][0]) == TRU || data->arguments[i][0] == '?')
+///		if (is_number(data->arguments[i][0]) == TRU || data->arguments[i][0] == '?')
+///		{
+///			printf("\n Minishell : %s : '%s' : not a valid identifier", data->command, data->arguments[i]);
+///			return (0);
+///		}
+		if (is_valid_envp_name(data->arguments[i]) == FLS)
 		{
 			printf("\n Minishell : %s : '%s' : not a valid identifier", data->command, data->arguments[i]);
 			return (0);
@@ -61,18 +66,6 @@ int	alter_envp_new_list(t_env_data *data, int i) /// here I need to check if var
 		}
 	}
 	return (0);
-}
-
-void	print_test_arr(char **arr, char *name)
-{
-	int j = 0;
-	printf("\n%s START\n\n", name);
-	while (arr[j] != NULL)
-	{
-		printf("%s\n", arr[j]);
-		j++;
-	}
-	printf("\n%s END\n", name);
 }
 
 char	**export_builtin(t_env_data *data)

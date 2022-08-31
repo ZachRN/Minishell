@@ -7,6 +7,15 @@
 
 #include "builtin_utils.h"
 
+int is_valid_envp_name(char *name)
+{
+	if (is_number(name[0]) == TRU)
+		return (FLS);
+	else if (is_char(name[0]) == FLS && name[0] != '_')
+		return (FLS);
+	return (TRU);
+}
+
 char	*ft_strdup(const char *s1)
 {
 	int		len;
@@ -87,7 +96,7 @@ int	number_var_in_list(char **envp, char *str) /// will ret 0 only in case of no
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		if (compare_str_till_char(str, envp[i], '=') == TRU)
+		if (compare_str_till_char(envp[i], str, '=') == TRU)
 			return (i + 1);
 		else
 			i++;
@@ -159,21 +168,21 @@ int	compare_str(char *str1, char *str2)
 	return (TRU); //true, eqial str
 }
 
-int	compare_str_till_char(char *str1, char *str2, char c)
+int	compare_str_till_char(char *env_name, char *argument, char c)
 {
-	if (str1 == NULL || str2 == NULL)
+	if (env_name == NULL || argument == NULL)
 		return (0);
-	while ((*str1 || *str2) && *str1 != c)
+	while ((*env_name || *argument) && *env_name != c)
 	{
-		if (*str1 == *str2)
+		if (*env_name == *argument)
 		{
-			str1++;
-			str2++;
+			env_name++;
+			argument++;
 		}
 		else
 			return (FLS); //false, not eqial str
 	}
-	if (*str1 == c && (*str2 == c || *str2 == '\0'))
+	if (*env_name == c && (*argument == c || *argument == '\0'))
 		return (TRU);
 	else
 		return (FLS); //true, eqial str

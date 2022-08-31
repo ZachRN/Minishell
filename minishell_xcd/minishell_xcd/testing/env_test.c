@@ -11,6 +11,18 @@
 #include "string.h"
 
 
+void	print_test_arr(char **arr, char *name)
+{
+	int j = 0;
+	printf("\n%s START\n\n", name);
+	while (arr[j] != NULL)
+	{
+		printf("%s\n", arr[j]);
+		j++;
+	}
+	printf("\n%s END\n", name);
+}
+
 void test_env_series(char **env)
 {
 	env_builtin(env);
@@ -102,8 +114,9 @@ void	correct_input(char *command)
 	else if (strcmp(command, "unset") == 0)
 	{
 		arguments[0] = "CLASSIC_VAR";
-		arguments[1] = "CLASSIC_VAR2";
-		arguments[2] = NULL;
+		arguments[1] = "nope";
+		arguments[2] = "PWD";
+		arguments[3] = NULL;
 	}
 	
 	new_envp = enviromental_variable_function(envp, command, arguments); //test it
@@ -127,9 +140,9 @@ void	correct_input(char *command)
 		assert(strcmp(new_envp[0], "HOME=/Users/yuliia") == 0);
 		assert(strcmp(new_envp[1], "PATH=/opt/homebrew/bin:/opt/homebrew/sbin:") == 0);
 		assert(strcmp(new_envp[2], "SHLVL=1") == 0);
-		assert(strcmp(new_envp[3], "PWD=julia/my_lolder_with_dream") == 0);
-		if (new_envp[4] != NULL)
-			printf("nope, there is smth instead of NULL:\n%s\n", new_envp[4]);
+//		assert(strcmp(new_envp[3], "PWD=julia/my_lolder_with_dream") == 0);
+		if (new_envp[3] != NULL)
+			printf("nope, there is smth instead of NULL:\n%s\n", new_envp[3]);
 	}
 	printf("\n");
 }
@@ -191,6 +204,8 @@ void test_no_arg(void)
 	declare -x SHLVL="1"
 }
 
+
+
 int	test_change_variable(void)
 {
 	char *command;
@@ -203,7 +218,7 @@ int	test_change_variable(void)
 
 	command = "unset";
 	correct_input(command);
-//	incorrect_inp1(command);
+	incorrect_inp1(command);
 //
 //	test_cd();
 
