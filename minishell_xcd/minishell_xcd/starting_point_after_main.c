@@ -24,12 +24,11 @@ char **enviromental_variable_function(char **envp, char *command, char **argumen
 int	starting_point(void)
 {
 	// insert code here...
-		printf("				start\n\n****************************************\n\n");
+	printf("				start\n\n****************************************\n\n");
 
-		test_builtin_utils();
+	test_builtin_utils();
 	//	test_echo();
 	//	test_env_series(envp);
 	test_change_variable();
-	
 	return (0);
 }
