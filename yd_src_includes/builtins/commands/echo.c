@@ -39,7 +39,7 @@ int	echo_builtin(int synopsis, char **str)
 		i++;
 	while (str[i] != NULL)
 	{
-		print_till_n(str[i], string_len(str[i]));
+		write_str_fd(str[i], 1);
 		if (str[i + 1] != NULL)
 			write_one_char_fd(1, ' ');
 		i++;

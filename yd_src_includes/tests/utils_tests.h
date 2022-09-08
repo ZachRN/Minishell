@@ -11,6 +11,6 @@
 #include "built_in_set.h"
 #include <assert.h>
 
-int	test_build_checker(void);
+int	test_builtin_utils(void);
 
 #endif /* utils_tests_h */

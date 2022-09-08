@@ -9,7 +9,8 @@
 #define export_h
 
 #include "utils_tests.h"
+#include "array_sort.h"
 
-char**	export_builtin(char **env_arg, char **arguments);
+char**	export_builtin(t_env_struct *data);
 
 #endif /* export_h */
