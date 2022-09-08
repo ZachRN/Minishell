@@ -10,4 +10,6 @@
 
 #include "utils_tests.h"
 
+char**	unset_builtin(t_env_struct *data);
+
 #endif /* unset_h */

@@ -8,8 +8,9 @@
 #ifndef env_test_h
 #define env_test_h
 
-#include "env.h"
+#include "built_in_set.h"
 
 void test_env_series(char **env);
+int	test_change_variable(void);
 
 #endif /* env_test_h */
