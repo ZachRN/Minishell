@@ -27,6 +27,8 @@ char	*strdup_till_char(char *str, char c)
 	return (s2);
 }
 
+//test change
+
 void free_array_of_str(char **array)
 {
 	int i;
