@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <structs.h>
+# include "structs.h"
 /*This is defining all of our structs which will be used for minishell*/
 
 /*

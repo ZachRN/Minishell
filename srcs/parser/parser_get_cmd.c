@@ -48,6 +48,7 @@ static char	*check_path_paths(char **paths, char *cmd)
 	int		i;
 
 	i = 0;
+	possible_env_path = NULL;
 	store_command = ft_strjoin("/", cmd);
 	while (*(paths + i))
 	{

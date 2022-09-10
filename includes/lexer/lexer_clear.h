@@ -13,7 +13,7 @@
 #ifndef LEXER_CLEAR_H
 # define LEXER_CLEAR_H
 
-# include <structs.h>
+# include "structs.h"
 
 t_lexer	*t_lexer_clear_list(t_lexer *head);
 t_lexer	*rm_one_from_lexer_list(t_lexer *to_remove);

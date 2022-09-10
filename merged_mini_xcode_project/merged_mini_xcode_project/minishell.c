@@ -26,7 +26,7 @@
 #include "lexer_valid.h"
 #include "lexer_display.h"
 
-#include <lexer_display.h>
+#include "lexer_display.h"
 static void	control_d(void)
 {
 	printf("exit");
