@@ -7,7 +7,7 @@
 
 #include "path_search.h"
 #include "built_in_set.h" //should incl data with envp
-#include "split.h"
+#include "utils.h"
 #include <stdlib.h>
 #include <unistd.h>
 
