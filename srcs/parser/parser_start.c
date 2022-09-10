@@ -6,29 +6,29 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:35:00 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:47:16 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:00:37 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
-#include <parse_init.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <ft_split.h>
 #include <stdio.h>
-#include <ft_strdup.h>
-#include <ft_strncmp.h>
-#include <parser_get_cmd.h>
-#include <parse_clear.h>
-#include <expansion_start.h>
-#include <handle_heredoc.h>
-#include <lexer_display.h>
-#include <expansion_add_lex.h>
-#include <expand_lex_quotes.h>
-#include <lexer_clear.h>
-#include <parse_clear.h>
-#include <parse_redirections.h>
-#include <parse_cmd_args.h>
+#include "structs.h"
+#include "parse_init.h"
+#include "parser_get_cmd.h"
+#include "parse_clear.h"
+#include "handle_heredoc.h"
+#include "expansion_start.h"
+#include "lexer_display.h"
+#include "lexer_clear.h"
+#include "expansion_add_lex.h"
+#include "expand_lex_quotes.h"
+#include "parse_clear.h"
+#include "parse_redirections.h"
+#include "parse_cmd_args.h"
+#include "ft_split.h"
+#include "ft_strdup.h"
+#include "ft_strncmp.h"
 
 t_together	*error_heredoc_clean(t_together *all, t_parse *to_add)
 {
@@ -54,15 +54,13 @@ void	parse_display(t_parse *head)
 		printf("Command Arguements: ");
 		if (temp)
 		{
-			while (*temp)
-			{
+			while (*temp++)
 				printf("[%s] ", *temp);
-				temp++;
-			}
 		}
 		printf("\nOutfile: [%s]\nAppend: [%d]\nInfile: [%s]\n",
 			to_display->outfile, to_display->append, to_display->infile);
 		printf("Heredoc Pipe FD: [%d]\n", to_display->hd_pipe);
+		printf("Type of Redirect: [%d]\n", to_display->rd_in);
 		printf("Address of Next: [%p]\n", to_display->next);
 		to_display = to_display->next;
 	}
@@ -82,6 +80,26 @@ void	add_to_back(t_together *all, t_parse *to_add)
 		temp = temp->next;
 	temp->next = to_add;
 	return ;
+}
+
+int	find_last_in(t_lexer *head)
+{
+	t_lexer	*search;
+	int		hold;
+
+	search = head;
+	hold = No_Infile;
+	while (search && search->token_type != Pipe)
+	{
+		if (search->token_type == Lesser || search->token_type == Double_Lesser)
+			hold = search->token_type;
+		search = search->next;
+	}
+	if (hold == Double_Lesser)
+		return (Heredoc);
+	else if (hold == Lesser)
+		return (Infile);
+	return (No_Infile);
 }
 
 /*Welcome to the Parser, Here is the simple step by step of how it works 
@@ -108,6 +126,7 @@ t_together	*parser(char *input, t_together *all)
 	{
 		pack.no_file = 0;
 		pack.to_add = parse_initalize();
+		pack.to_add->rd_in = find_last_in(all->lex_head);
 		all = handle_heredoc(input, all, &pack);
 		if (pack.to_add->hd_pipe == -2)
 			return (error_heredoc_clean(all, pack.to_add));
@@ -122,6 +141,5 @@ t_together	*parser(char *input, t_together *all)
 		else
 			all->lex_head = NULL;
 	}
-	parse_display(all->head);
 	return (all);
 }

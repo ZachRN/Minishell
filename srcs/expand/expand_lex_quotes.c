@@ -6,16 +6,16 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:50:11 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:50:17 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:32:02 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
-#include <ft_strjoin.h>
-#include <lexer_clear.h>
-#include <ft_strncmp.h>
-#include <ft_strdup.h>
-#include <ft_substr.h>
+#include "structs.h"
+#include "ft_strjoin.h"
+#include "lexer_clear.h"
+#include "ft_strncmp.h"
+#include "ft_strdup.h"
+#include "ft_substr.h"
 
 static char	*quote_str_join(t_lexer *tail, char *input, char *str)
 {

@@ -6,25 +6,27 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 15:14:03 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/07 14:06:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <main.h>
-#include <ft_strncmp.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
 #include <signal.h>
-#include <parser_start.h>
-#include <structs.h>
-#include <parse_init.h>
-#include <parse_clear.h>
-#include <lexer.h>
-#include <lexer_clear.h>
-#include <lexer_valid.h>
+#include "main.h"
+#include "ft_strncmp.h"
+#include "parser_start.h"
+#include "structs.h"
+#include "parse_init.h"
+#include "parse_clear.h"
+#include "lexer.h"
+#include "lexer_clear.h"
+#include "lexer_valid.h"
+#include "lexer_display.h"
 
+#include <lexer_display.h>
 static void	control_d(void)
 {
 	printf("exit");
@@ -55,6 +57,7 @@ int	minishell(t_together *all)
 			control_d();
 		add_history(input);
 		all->lex_head = lexer(input);
+		// lexer_display(all->lex_head);
 		if (lexer_valid(all->lex_head))
 			all = parser(input, all);
 		else

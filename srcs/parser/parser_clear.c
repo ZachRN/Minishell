@@ -6,15 +6,15 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:29:59 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:47:16 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:29:01 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
 #include <unistd.h>
-#include <ft_split.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include "ft_split.h"
+#include "structs.h"
 
 t_parse	*rm_one_from_parse_list(t_parse *to_remove)
 {

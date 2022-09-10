@@ -6,20 +6,20 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:45:09 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:47:16 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 13:50:04 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
-#include <ft_strncmp.h>
-#include <ft_strdup.h>
-#include <ft_substr.h>
-#include <ft_strjoin.h>
-#include <lexer_clear.h>
-#include <lexer_display.h>
 #include <stdio.h>
-#include <heredoc_line_parse.h>
-#include <signal_handles.h>
+#include "structs.h"
+#include "ft_strncmp.h"
+#include "ft_strdup.h"
+#include "ft_substr.h"
+#include "ft_strjoin.h"
+#include "lexer_clear.h"
+#include "lexer_display.h"
+#include "heredoc_line_parse.h"
+#include "signal_handles.h"
 
 t_lexer	*join_heredoc_quotes(t_lexer *head, t_heredoc *heredoc, char *input)
 {

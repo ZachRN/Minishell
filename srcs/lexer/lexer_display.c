@@ -6,12 +6,12 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:35:43 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:35:44 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:29:51 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
 #include <stdio.h>
+#include "structs.h"
 
 void	lexer_display(t_lexer *head)
 {

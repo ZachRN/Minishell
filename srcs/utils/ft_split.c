@@ -6,12 +6,12 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:24:49 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:25:28 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:24:19 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <ft_calloc.h>
+#include "ft_calloc.h"
 
 char	**free_my_lines(char **str)
 {

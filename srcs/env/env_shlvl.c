@@ -6,15 +6,15 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 15:32:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 15:44:55 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:32:12 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <ft_atoi.h>
-#include <ft_itoa.h>
-#include <ft_strjoin.h>
 #include <stdlib.h>
+#include "ft_atoi.h"
+#include "ft_itoa.h"
+#include "ft_strjoin.h"
 
 char	*handle_shlvl(char *str)
 {

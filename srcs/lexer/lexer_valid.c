@@ -6,12 +6,12 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:42:52 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:42:52 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:30:30 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
 #include <stdio.h>
+#include "structs.h"
 
 static int	print_error_message(char *str)
 {
