@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:32:55 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/07 14:06:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include "lexer_valid.h"
 #include "lexer_display.h"
 
+#include <lexer_display.h>
 static void	control_d(void)
 {
 	printf("exit");
