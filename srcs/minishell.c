@@ -10,20 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <main.h>
-#include <ft_strncmp.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
 #include <signal.h>
-#include <parser_start.h>
-#include <structs.h>
-#include <parse_init.h>
-#include <parse_clear.h>
-#include <lexer.h>
-#include <lexer_clear.h>
-#include <lexer_valid.h>
+#include "main.h"
+#include "ft_strncmp.h"
+#include "parser_start.h"
+#include "structs.h"
+#include "parse_init.h"
+#include "parse_clear.h"
+#include "lexer.h"
+#include "lexer_clear.h"
+#include "lexer_valid.h"
+#include "lexer_display.h"
 
 #include <lexer_display.h>
 static void	control_d(void)

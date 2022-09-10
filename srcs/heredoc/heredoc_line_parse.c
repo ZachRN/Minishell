@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
 #include <stdio.h>
-#include <ft_itoa.h>
 #include <unistd.h>
-#include <ft_strncmp.h>
-#include <ft_strlen.h>
 #include <readline/readline.h>
-#include <signal_handles.h>
-#include <ft_substr.h>
-#include <ft_strjoin.h>
-#include <expansion_start.h>
-#include <ft_strdup.h>
+#include "structs.h"
+#include "ft_itoa.h"
+#include "ft_strncmp.h"
+#include "ft_strlen.h"
+#include "signal_handles.h"
+#include "ft_substr.h"
+#include "ft_strjoin.h"
+#include "expansion_start.h"
+#include "ft_strdup.h"
 
 t_pack	found_dollar(t_pack pack, t_together *all)
 {

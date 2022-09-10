@@ -6,16 +6,16 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:49:09 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:49:16 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:31:51 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
-#include <ft_split.h>
 #include <stdlib.h>
-#include <lexer_clear.h>
-#include <lexer_display.h>
 #include <stdio.h>
+#include "structs.h"
+#include "ft_split.h"
+#include "lexer_clear.h"
+#include "lexer_display.h"
 
 static t_lexer	*new_lex(t_lexer *head, char *str)
 {

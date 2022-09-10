@@ -10,25 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
-#include <parse_init.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <ft_split.h>
 #include <stdio.h>
-#include <ft_strdup.h>
-#include <ft_strncmp.h>
-#include <parser_get_cmd.h>
-#include <parse_clear.h>
-#include <expansion_start.h>
-#include <handle_heredoc.h>
-#include <lexer_display.h>
-#include <expansion_add_lex.h>
-#include <expand_lex_quotes.h>
-#include <lexer_clear.h>
-#include <parse_clear.h>
-#include <parse_redirections.h>
-#include <parse_cmd_args.h>
+#include "structs.h"
+#include "parse_init.h"
+#include "parser_get_cmd.h"
+#include "parse_clear.h"
+#include "handle_heredoc.h"
+#include "expansion_start.h"
+#include "lexer_display.h"
+#include "lexer_clear.h"
+#include "expansion_add_lex.h"
+#include "expand_lex_quotes.h"
+#include "parse_clear.h"
+#include "parse_redirections.h"
+#include "parse_cmd_args.h"
+#include "ft_split.h"
+#include "ft_strdup.h"
+#include "ft_strncmp.h"
 
 t_together	*error_heredoc_clean(t_together *all, t_parse *to_add)
 {

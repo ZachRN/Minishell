@@ -6,16 +6,16 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:46:38 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 15:45:03 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:32:25 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <ft_strdup.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <ft_strncmp.h>
-#include <env_shlvl.h>
+#include "ft_strdup.h"
+#include "ft_strncmp.h"
+#include "env_shlvl.h"
 
 char	**free_lines(char **str)
 {

@@ -6,12 +6,12 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:26:08 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:26:09 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:24:06 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <ft_strlen.h>
+#include "ft_strlen.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

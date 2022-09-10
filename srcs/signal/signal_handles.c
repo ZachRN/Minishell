@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:26:47 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:27:02 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:24:35 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <signal_handles.h>
+#include "signal_handles.h"
 
 void	signal_handle(int signo)
 {
