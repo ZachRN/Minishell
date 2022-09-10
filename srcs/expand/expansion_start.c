@@ -6,20 +6,20 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/18 15:41:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:48:15 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:31:34 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
 #include <unistd.h>
-#include <ft_strncmp.h>
-#include <ft_strjoin.h>
-#include <ft_strdup.h>
-#include <ft_itoa.h>
-#include <ft_strlen.h>
-#include <expansion_add_lex.h>
 #include <stdio.h>
-#include <lexer_display.h>
+#include "structs.h"
+#include "ft_strncmp.h"
+#include "ft_strjoin.h"
+#include "ft_strdup.h"
+#include "ft_itoa.h"
+#include "ft_strlen.h"
+#include "expansion_add_lex.h"
+#include "lexer_display.h"
 
 char	*handle_dollar_sign(char *str, int last_code)
 {

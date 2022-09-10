@@ -6,12 +6,12 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 17:55:24 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:47:16 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:27:51 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
 #include <stdlib.h>
+#include "structs.h"
 
 /*
 The Parser is a one way linked list

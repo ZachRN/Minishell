@@ -6,13 +6,13 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:26:30 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:26:30 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:23:58 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <ft_strlen.h>
+#include "ft_strlen.h"
 
 static void	fill(char const *s, size_t len, char *str, size_t start)
 {

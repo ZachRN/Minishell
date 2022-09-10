@@ -6,19 +6,19 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 14:59:17 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 15:49:05 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:23:51 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <main.h>
+#include "main.h"
 #include <stdlib.h>
-#include <minishell.h>
-#include <structs.h>
-#include <env_copy.h>
+#include "minishell.h"
+#include "structs.h"
+#include "env_copy.h"
 #include <signal.h>
 #include <termios.h>
 #include <unistd.h>
-#include <signal_handles.h>
+#include "signal_handles.h"
 
 /* We start the project by making a copy of the environmental variables passed
 to us, as well as a set up for the primary of storing information with our

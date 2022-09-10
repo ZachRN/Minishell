@@ -6,17 +6,17 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:32:33 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:32:33 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:28:55 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <ft_strdup.h>
-#include <ft_strncmp.h>
-#include <structs.h>
-#include <ft_split.h>
-#include <ft_strjoin.h>
 #include <stdio.h>
+#include "ft_strdup.h"
+#include "ft_strncmp.h"
+#include "structs.h"
+#include "ft_split.h"
+#include "ft_strjoin.h"
 
 static char	*check_absolute_path(char *cmd, char **env)
 {

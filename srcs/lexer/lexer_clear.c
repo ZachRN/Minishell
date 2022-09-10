@@ -6,13 +6,13 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:35:28 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:35:28 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 15:29:45 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <structs.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "structs.h"
 
 t_lexer	*rm_one_from_lexer_list(t_lexer *to_remove)
 {
