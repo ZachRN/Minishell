@@ -6,6 +6,10 @@
 //
 
 #include "export.h"
+#include "builtin_utils.h"
+#include "array_sort.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 //arguments have parameters https://man7.org/linux/man-pages/man1/export.1p.html
 

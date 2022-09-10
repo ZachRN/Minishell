@@ -6,6 +6,8 @@
 //
 
 #include "exit.h"
+#include "builtin_utils.h"
+#include <stdlib.h>
 
 //noreturn void exit(int status); \
 The exit() function causes normal process termination and the least significant byte of status (i.e., status & 0xFF) is returned to the parent (see wait(2)).

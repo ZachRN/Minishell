@@ -6,6 +6,9 @@
 //
 
 #include "split.h"
+#include "builtin_utils.h"
+# include <unistd.h>
+#include <stdlib.h> 
 
 static int	ft_substr_number(char const *s, char c)
 {

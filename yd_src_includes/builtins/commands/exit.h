@@ -8,7 +8,8 @@
 #ifndef exit_h
 #define exit_h
 
-#include "utils_tests.h"
+#include "builtin_utils.h"
+
 void	exit_builtin(t_env_struct *data, int status);
 
 #endif /* exit_h */

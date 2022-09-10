@@ -6,6 +6,8 @@
 //
 
 #include "unset.h"
+#include "builtin_utils.h"
+#include <stdio.h>
 
 //unsetting bullshit is giving next bash line, same with no arg
 

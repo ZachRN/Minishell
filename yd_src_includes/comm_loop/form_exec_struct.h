@@ -10,6 +10,15 @@
 #define form_exec_struct_h
 
 #include "path_search.h"
+#include <sys/types.h>
+#include <unistd.h>
+
+enum    e_redirect_in
+{
+	No_Infile = 0,
+	Infile,
+	Heredoc
+};
 
 typedef struct s_lexer
 {
@@ -31,6 +40,7 @@ typedef struct s_parse
 	char			*infile;
 	int				hd_pipe;
 	struct s_parse	*next;
+	int				rd_in;
 }				t_parse;
 
 typedef struct s_together
@@ -45,9 +55,11 @@ typedef struct s_fd
 {
 	int	infile;
 	int	outfile;
-	int heredoc; ///new thing, will come from parsing
+	int heredoc;
 	int	temp_file;
 	int	pipe[2];
+	int rdr_infile;
+	int rdr_outfile;
 }	t_fd;
 
 typedef struct t_cmd
@@ -67,6 +79,8 @@ typedef struct	s_param
 	char	*path_infile;
 	char	*path_outfile;
 	int		param_index;
+	int		append;
+	int		inlile_heredoc_flag;
 }				t_param;
 
 typedef struct	s_exec

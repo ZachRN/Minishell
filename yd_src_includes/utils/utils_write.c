@@ -6,7 +6,8 @@
 //
 
 #include "utils_write.h"
-
+#include "utils_basics.h"
+#include <unistd.h>
 
 int	write_one_char_fd(int fd, char c)
 {

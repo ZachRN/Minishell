@@ -6,6 +6,12 @@
 //
 
 #include "starting_point_after_main.h"
+#include "builtin_utils.h"
+#include "built_in_set.h"
+#include <stdio.h>
+//#include "utils_tests.h"
+//#include "echo_test.h"
+//#include "env_test.h"
 
 char **enviromental_variable_function(char **envp, char *command, char **arguments)
 {

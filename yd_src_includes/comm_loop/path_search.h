@@ -8,9 +8,6 @@
 #ifndef path_search_h
 #define path_search_h
 
-#include "built_in_set.h" //should incl data with envp
-#include "split.h"
-
 char	**find_possible_path_options_from_envp(char **env);
 char	*find_path(char *command, char **possibl_paths);
 

@@ -6,6 +6,9 @@
 //
 
 #include "cmd_loop.h"
+#include "form_exec_struct.h"
+# include <unistd.h>
+#include <stdlib.h>
 
 
 ///all exit 1 maybe need to be transfered into something more speaking
@@ -19,15 +22,12 @@ void	handle_one_param_set(t_param *param, int index, char **envp)
 		exit(1);
 	if (param->child_pid == 0) ///child was created, we enter its process
 	{
-		//pick_id_for_child_function
-		//yea function here
+		//pick_fd_for_child_function
 		
 		execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
-		exit(1); //if kid fails and I need to update it in order to give err number
+		exit(1); ///if kid fails and I need to update it in order to give err number
 	}
-	
-	//pick_id_for_parent_function
-	//yea function here
+	//pick_fd_for_parent_function
 }
 
 void	go_through_commands(t_exec *exec)

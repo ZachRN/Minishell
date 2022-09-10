@@ -6,6 +6,8 @@
 //
 
 #include "cd.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 int go_to_other_folder(const char *argument, const char *home_var, int fd)
 {

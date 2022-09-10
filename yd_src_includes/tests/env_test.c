@@ -9,7 +9,9 @@
 #include <stdlib.h>
 #include "starting_point_after_main.h"
 #include "string.h"
-
+#include "commands.h"
+#include <assert.h>
+#include <stdio.h>
 
 void	print_test_arr(char **arr, char *name)
 {

@@ -6,6 +6,7 @@
 //
 
 #include "builtin_utils.h"
+#include <stdlib.h>
 
 int is_valid_envp_name(const char *name)
 {

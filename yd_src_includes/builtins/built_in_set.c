@@ -6,6 +6,8 @@
 //
 
 #include "built_in_set.h"
+#include "commands.h"
+#include <stdlib.h>
 
 int	initiate_data_struct(char *command, char **envp, t_env_struct *data)
 {

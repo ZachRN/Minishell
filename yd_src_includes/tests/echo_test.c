@@ -6,6 +6,15 @@
 //
 
 #include "echo_test.h"
+#include "echo.h"
+#include "pwd.h"
+#include "env.h"
+#include "export.h"
+#include "unset.h"
+#include "cd.h"
+#include "exit.h"
+
+#include <stdio.h>
 
 
 void	test_echo(void)

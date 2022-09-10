@@ -8,8 +8,6 @@
 #ifndef utils_strings_h
 #define utils_strings_h
 
-#include "utils_basics.h"
-
 int	compare_str(char *str1, char *str2);
 int	check_word(const char *word, int word_len, const char *str);
 int	compare_str_till_char(const char *env_name, const char *argument, char c);
