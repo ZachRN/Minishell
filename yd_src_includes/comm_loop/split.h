@@ -8,8 +8,6 @@
 #ifndef split_h
 #define split_h
 
-#include "builtin_utils.h"
-
 char	**ft_split(char const *s, char c);
 
 #endif /* split_h */

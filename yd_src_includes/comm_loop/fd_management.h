@@ -9,8 +9,8 @@
 #define fd_management_h
 
 #include "form_exec_struct.h"
-# include <sys/types.h>
-# include <fcntl.h>
-# include <sys/wait.h>
+
+void	pick_fd_for_child(t_param *param, int index, int comm_number);
+void	manage_parent_fd(int index, int comm_numb, t_fd *fd);
 
 #endif /* fd_management_h */

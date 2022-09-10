@@ -8,11 +8,6 @@
 #ifndef starting_point_after_main_h
 #define starting_point_after_main_h
 
-#include <stdio.h>
-#include "utils_tests.h"
-#include "echo_test.h"
-#include "env_test.h"
-
 int	starting_point(void);
 char **	enviromental_variable_function(char **envp, char *command, char **arguments);
 

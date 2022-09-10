@@ -6,6 +6,7 @@
 //
 
 #include "env.h"
+#include <stdio.h>
 
 //https://www.geeksforgeeks.org/c-program-print-environment-variables/
 //char * envp[]

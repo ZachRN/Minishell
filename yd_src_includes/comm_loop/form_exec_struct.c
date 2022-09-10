@@ -7,6 +7,7 @@
 //
 
 #include "form_exec_struct.h"
+#include <stdlib.h>
 
 t_cmd initiate_cmd_struct(char **args, char *comm_name, char **envp)
 {
@@ -47,6 +48,8 @@ t_fd	initiate_fd_struct(int heredoc)
 	fd.pipe[0] = -1;
 	fd.pipe[1] = -1;
 	fd.heredoc = heredoc;
+	fd.rdr_infile = -1;
+	fd.rdr_outfile = -1;
 	return (fd);
 }
 
@@ -60,6 +63,8 @@ int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
 	par->path_infile = current->infile;
 	par->path_outfile = current->outfile;
 	par->param_index = i;
+	par->append = current->append;
+	par->inlile_heredoc_flag = current->rd_in;
 	if (current->next == NULL)
 		return (0);
 	return (1);

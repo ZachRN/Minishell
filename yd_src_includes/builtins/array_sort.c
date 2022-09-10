@@ -6,6 +6,8 @@
 //
 
 #include "array_sort.h"
+#include "utils.h"
+#include <stdio.h>
 
 void	printtest_arr(char **arr, char *name)
 {

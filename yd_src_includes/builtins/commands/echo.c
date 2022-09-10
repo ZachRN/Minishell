@@ -6,6 +6,8 @@
 //
 
 #include "echo.h"
+#include "builtin_utils.h"
+#include <stdlib.h>
 
 //echo $ENV_VAR - gives the value of this var
 // - echo env

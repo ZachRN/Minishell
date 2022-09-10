@@ -6,6 +6,9 @@
 //
 
 #include "pwd.h"
+#include "builtin_utils.h"
+#include <stdio.h>
+#include <unistd.h>
 
 //getcwd():
 //The getcwd() function places an absolute pathname of the current working directory in the array pointed to by buf, and returns buf. The size argument is the size in bytes of the character array pointed to by the buf argument. If buf is a null pointer, the behaviour of getcwd() is undefined.The return value represent our current working directory.

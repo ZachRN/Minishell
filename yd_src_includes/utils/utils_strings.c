@@ -6,6 +6,8 @@
 //
 
 #include "utils_strings.h"
+#include "utils_basics.h"
+#include <stdlib.h>
 
 int	compare_str(char *str1, char *str2)
 {

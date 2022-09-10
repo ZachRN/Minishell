@@ -8,6 +8,161 @@
 
 tutorial on altering scripts// https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 
+bubble sort //https://pencilprogrammer.com/algorithms/bubble-sort/ - bubble alg
+
+
+"exit"
+
+
+After exit(), the exit status must be transmitted to the parent
+	   process.  There are three cases:
+
+	   •  If the parent has set SA_NOCLDWAIT, or has set the SIGCHLD
+		  handler to SIG_IGN, the status is discarded and the child dies
+		  immediately.
+
+	   •  If the parent was waiting on the child, it is notified of the
+		  exit status and the child dies immediately.
+
+	   •  Otherwise, the child becomes a "zombie" process: most of the
+		  process resources are recycled, but a slot containing minimal
+		  information about the child process (termination status,
+		  resource usage statistics) is retained in process table.  This
+		  allows the parent to subsequently use waitpid(2) (or similar)
+		  to learn the termination status of the child; at that point
+		  the zombie process slot is released.
+
+	   If the implementation supports the SIGCHLD signal, this signal is
+	   sent to the parent.  If the parent has set SA_NOCLDWAIT, it is
+	   undefined whether a SIGCHLD signal is sent.
+
+
+
+
+CD exploration
+
+//change folder - cd [absolute/relative path]
+// with change of directory also variable
+
+//https://www.ibm.com/docs/en/zos/2.3.0?topic=descriptions-cd-change-working-directory
+// env_var to change \
+OLDPWD=/Users/ydemura \
+\
+Calling cd without arguments sets the working directory to the value of the HOME environment variable, if the variable exists. If there is no HOME variable, cd does not change the working directory. \
+\
+
+//int chdir(const char *path); On success, zero is returned.  On error, -1 is returned, and errno is set to indicate the error.
+
+"start"
+'env:
+OLDPWD - none
+PWD=/Users/ydemura
+HOME=/Users/ydemura
+
+
+
+'cd Desktop/ + env
+OLDPWD=/Users/ydemura
+PWD=/Users/ydemura/Desktop
+HOME=/Users/ydemura
+
+
+HOME - remains same, unchanged
+
+
+
+CD with no arguments
+goto -> HOME_value
+PWD -> HOME_value
+
+OLDPWD
+if existed - change to folder before goto
+if not existed - now existed
+
+CD
+
+
+
+if (no arguments && HOME exists)
+{
+	if (OLDPWD existed)
+		change value to one stored in PWD
+	else
+		create OLDPWD (try not to malloc) with value of pwd before change pwd
+	PWD = HOME
+	'activate chdir'(VALUE_OF_HOME) ->> changes the current working directory of the calling process to the directory specified in path.
+	VALUE_OF_HOME = HOME string + int number_before=sign+1_for=sign
+}
+
+else if (arguments are)
+{
+	if (OLDPWD existed)
+		change value to one stored in PWD
+	else if (OLDPWD not existed)
+		create OLDPWD (try not to malloc) with value of pwd before change pwd
+	'activate chdir'(ARGUMENT) ->> changes the current working directory of the calling process to the directory specified in path.
+	anyway I need only 1 arg as the rest is ignored by cd
+}
+
+
+
+
+
+
+'CD more
+The command cd directory changes the working directory of the current shell execution environment (see sh) to directory.
+
+In the shell, the command cd - is a special case that changes the current working directory to the previous working directory by exchanging the values of the variables PWD and OLDPWD.
+
+Calling cd without arguments sets the working directory to the value of the HOME environment variable, if the variable exists. If there is no HOME variable, cd does not change the working directory.
+
+The form cd old new is an extension to the POSIX standard and optionally to the Korn shell. The shell keeps the name of the working directory in the variable PWD.
+
+//https://www.ibm.com/docs/en/zos/2.3.0?topic=descriptions-cd-change-working-directory
+
+Absolute and Relative Path Names #
+When specifying a directory to change to, you can use either absolute or relative path names. The absolute or full path starts from the system root /, and the relative path starts from your current directory.
+
+By default, when you log into your Linux system, your current working directory is set to your home directory. Assuming that the Downloads directory exists in your home directory, you can navigate to it by using the relative path to the directory:
+"cd Downloads"
+You can also navigate to the same directory by using its absolute path:
+
+"cd /home/username/Downloads"
+In short, if the path starts with a slash (/), it is the absolute path to the directory.
+
+On Unix-like operating systems, the current working directory is represented by a single dot (.). Two dots (..), one after the other, represent the parent directory or the directory immediately above the current one.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 'Built-ins
 belong to shell as part of it, does not have path. need to be written manually.
@@ -17,7 +172,7 @@ ENVIROMENTAL
 //https://pubs.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html = documentation Environment Variables
 //https://man7.org/linux/man-pages/man7/environ.7.html - environ
 
-On many implementations of the C programming language and especially on POSIX, the environment is accessible from the environ global variable. You may need to declare it manually as it's not declared in any standard header file:
+On many implementations of the C programming language and especially on POSIX, the environment is accessible from the environ global variable. You may need to declare it manually as its not declared in any standard header file:
 
 extern char **environ;
 environ points to a NULL terminated array of pointers to variable=value strings. For example, if your environment has the variables foo, bar, and baz, the entries in environ might be:

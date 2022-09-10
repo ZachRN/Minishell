@@ -6,7 +6,9 @@
 //
 
 #include "utils_tests.h"
-
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 
 int	test_builtin_utils(void)

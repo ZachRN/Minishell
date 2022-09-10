@@ -8,8 +8,6 @@
 #ifndef echo_h
 #define echo_h
 
-#include "builtin_utils.h"
-
 int	echo_builtin(int synopsis, char **str);
 
 #endif /* echo_h */

@@ -6,6 +6,7 @@
 //
 
 #include "utils_basics.h"
+#include <stdlib.h>
 
 int	string_len(const char *str)
 {
@@ -20,7 +21,6 @@ int	string_len(const char *str)
 	}
 	return (res);
 }
-//
 
 int	strlen_till_char(char *str, char c)
 {
@@ -34,7 +34,7 @@ int	strlen_till_char(char *str, char c)
 	return (i);
 }
 
-int	find_arr_len(char **arr) /// please all custom made arrays - null terminated and strings \0 terminated
+int	find_arr_len(char **arr)
 {
 	int res;
 

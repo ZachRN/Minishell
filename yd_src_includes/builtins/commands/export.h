@@ -8,8 +8,7 @@
 #ifndef export_h
 #define export_h
 
-#include "utils_tests.h"
-#include "array_sort.h"
+#include "builtin_utils.h"
 
 char**	export_builtin(t_env_struct *data);
 

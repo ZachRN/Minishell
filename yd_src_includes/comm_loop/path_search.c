@@ -6,6 +6,10 @@
 //
 
 #include "path_search.h"
+#include "built_in_set.h" //should incl data with envp
+#include "split.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 char **find_possible_path_options_from_envp(char **env)
 {

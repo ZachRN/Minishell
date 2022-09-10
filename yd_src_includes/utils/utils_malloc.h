@@ -8,9 +8,9 @@
 #ifndef utils_malloc_h
 #define utils_malloc_h
 
-#include "utils_basics.h"
-
+char	*ft_strdup(const char *s1);
 char	*strdup_till_char(char *str, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
 void	free_array_of_str(char **array);
 
 

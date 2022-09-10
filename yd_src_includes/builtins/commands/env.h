@@ -8,8 +8,6 @@
 #ifndef env_h
 #define env_h
 
-#include "utils_tests.h"
-
 int	env_builtin(char **env_arg);
 
 #endif /* env_h */

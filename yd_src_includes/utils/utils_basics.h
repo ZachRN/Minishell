@@ -8,10 +8,6 @@
 #ifndef utils_basics_h
 #define utils_basics_h
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef enum e_status
 {
 	FLS = 0,
