@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/15 15:37:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 15:14:03 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/07 14:06:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <lexer_clear.h>
 #include <lexer_valid.h>
 
+#include <lexer_display.h>
 static void	control_d(void)
 {
 	printf("exit");
@@ -55,6 +56,7 @@ int	minishell(t_together *all)
 			control_d();
 		add_history(input);
 		all->lex_head = lexer(input);
+		// lexer_display(all->lex_head);
 		if (lexer_valid(all->lex_head))
 			all = parser(input, all);
 		else

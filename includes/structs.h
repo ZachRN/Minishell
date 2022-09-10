@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:53:42 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:47:16 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:59:13 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ enum e_tokens
 	Iden
 };
 
+enum	e_redirect_in
+{
+	No_Infile = 0,
+	Infile,
+	Heredoc
+};
+
 typedef struct s_heredoc
 {
 	int		has_quote;
@@ -51,6 +58,7 @@ typedef struct s_parse
 	int				append;
 	char			*infile;
 	int				hd_pipe;
+	int				rd_in;
 	struct s_parse	*next;
 }				t_parse;
 
