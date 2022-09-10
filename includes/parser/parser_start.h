@@ -13,7 +13,7 @@
 #ifndef PARSER_START_H
 # define PARSER_START_H
 
-# include <structs.h>
+# include "structs.h"
 
 t_together	*parser(char *input, t_together *all);
 

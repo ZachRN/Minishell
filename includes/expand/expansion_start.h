@@ -13,7 +13,7 @@
 #ifndef EXPANSION_START_H
 # define EXPANSION_START_H
 
-# include <structs.h>
+# include "structs.h"
 
 t_lexer	*expansion_start(t_together *all, t_lexer *head);
 char	*handle_expand(char **env_array, char *str, int last_code);
