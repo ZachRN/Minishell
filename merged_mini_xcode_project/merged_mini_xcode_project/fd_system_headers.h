@@ -9,5 +9,10 @@
 #ifndef fd_system_headers_h
 #define fd_system_headers_h
 
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 #endif /* fd_system_headers_h */

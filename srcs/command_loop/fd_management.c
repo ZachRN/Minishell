@@ -7,11 +7,7 @@
 
 #include "fd_management.h"
 #include "fd_handl_utils.h"
-#include <sys/types.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "fd_system_headers.h"
 
 ///Ok, the file desciprtors for redirections
 ///Every single node, has their indirect and out direct or any form of redirection initalized to some basic basic

@@ -177,6 +177,7 @@
 		0DED0BAB28CCD50A00DEFE27 /* export.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = export.c; path = ../../srcs/builtins/export.c; sourceTree = "<group>"; };
 		0DED0BAC28CCD50A00DEFE27 /* built_in_set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = built_in_set.c; path = ../../srcs/builtins/built_in_set.c; sourceTree = "<group>"; };
 		328F246C28CE31660089D776 /* libreadline.8.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libreadline.8.1.dylib; path = ../../../../../opt/homebrew/Cellar/readline/8.1.2/lib/libreadline.8.1.dylib; sourceTree = "<group>"; };
+		328F247528CF6A660089D776 /* fd_system_headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fd_system_headers.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,16 +327,14 @@
 		0DED0B2028CCD3F100DEFE27 /* comm_loop */ = {
 			isa = PBXGroup;
 			children = (
+				328F247428CF6A070089D776 /* exec_struct_creation */,
+				328F247528CF6A660089D776 /* fd_system_headers.h */,
 				0DED0B4928CCD49D00DEFE27 /* cmd_loop.h */,
 				0DED0B9728CCD50100DEFE27 /* cmd_loop.c */,
 				0DED0B4628CCD49D00DEFE27 /* fd_handl_utils.h */,
 				0DED0B9928CCD50100DEFE27 /* fd_handl_utils.c */,
 				0DED0B4B28CCD49D00DEFE27 /* fd_management.h */,
 				0DED0B9A28CCD50100DEFE27 /* fd_management.c */,
-				0DED0B4728CCD49D00DEFE27 /* form_exec_struct.h */,
-				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
-				0DED0B4828CCD49D00DEFE27 /* path_search.h */,
-				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
 			);
 			name = comm_loop;
 			sourceTree = "<group>";
@@ -363,6 +362,17 @@
 				328F246C28CE31660089D776 /* libreadline.8.1.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		328F247428CF6A070089D776 /* exec_struct_creation */ = {
+			isa = PBXGroup;
+			children = (
+				0DED0B4828CCD49D00DEFE27 /* path_search.h */,
+				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
+				0DED0B4728CCD49D00DEFE27 /* form_exec_struct.h */,
+				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
+			);
+			name = exec_struct_creation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
