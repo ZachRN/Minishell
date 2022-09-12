@@ -20,6 +20,13 @@ enum    e_redirect_in
 	Heredoc
 };
 
+typedef enum	e_infile_src
+{
+	STDIN = 0,
+	INFILE = 1,
+	HEREDOC = 2
+}				t_infile_src;
+
 typedef struct s_lexer
 {
 	int				token_id;
@@ -81,6 +88,7 @@ typedef struct	s_param
 	int		param_index;
 	int		append;
 	int		inlile_heredoc_flag;
+	t_infile_src in_flag;
 }				t_param;
 
 typedef struct	s_exec
