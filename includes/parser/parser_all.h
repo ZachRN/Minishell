@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env_shlvl.c                                        :+:    :+:            */
+/*   parser_all.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/08/31 15:32:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:06:16 by znajda        ########   odam.nl         */
+/*   Created: 2022/09/12 15:07:56 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/12 15:09:40 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "utils.h"
+#ifndef PARSER_ALL_H
+# define PARSER_ALL_H
 
-char	*handle_shlvl(char *str)
-{
-	char	*temp;
-	char	*str_hold;
-	int		number;
-	int		i;
+# include "parse_clear.h"
+# include "parse_cmd_args.h"
+# include "parse_init.h"
+# include "parse_redirections.h"
+# include "parser_get_cmd.h"
+# include "parser_start.h"
 
-	str_hold = str;
-	if (!str_hold)
-		return (NULL);
-	i = 0;
-	while (str_hold[i] != '=')
-		i++;
-	i++;
-	number = ft_atoi(&str_hold[i]);
-	str_hold[i] = '\0';
-	number++;
-	temp = ft_itoa(number);
-	str_hold = ft_strjoin(str_hold, temp);
-	free(temp);
-	return (str_hold);
-}
+#endif

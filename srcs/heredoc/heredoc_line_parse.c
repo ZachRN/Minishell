@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:45:02 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 13:50:03 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:18:38 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 #include <unistd.h>
 #include <readline/readline.h>
 #include "structs.h"
-#include "ft_itoa.h"
-#include "ft_strncmp.h"
-#include "ft_strlen.h"
+#include "utils.h"
 #include "signal_handles.h"
-#include "ft_substr.h"
-#include "ft_strjoin.h"
-#include "expansion_start.h"
-#include "ft_strdup.h"
+#include "expand_all.h"
 
 t_pack	found_dollar(t_pack pack, t_together *all)
 {
