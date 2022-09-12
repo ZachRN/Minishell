@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:35:00 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:00:37 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:18:26 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "structs.h"
-#include "parse_init.h"
-#include "parser_get_cmd.h"
-#include "parse_clear.h"
 #include "handle_heredoc.h"
-#include "expansion_start.h"
-#include "lexer_display.h"
-#include "lexer_clear.h"
-#include "expansion_add_lex.h"
-#include "expand_lex_quotes.h"
-#include "parse_clear.h"
-#include "parse_redirections.h"
-#include "parse_cmd_args.h"
-#include "ft_split.h"
-#include "ft_strdup.h"
-#include "ft_strncmp.h"
+#include "expand_all.h"
+#include "lexer_all.h"
+#include "parser_all.h"
+#include "utils.h"
 
 t_together	*error_heredoc_clean(t_together *all, t_parse *to_add)
 {
