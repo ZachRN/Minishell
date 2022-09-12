@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:28:15 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:28:00 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:16:33 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "structs.h"
-#include "lexer_clear.h"
-#include "ft_strdup.h"
+#include "lexer_all.h"
+#include "utils.h"
 
 t_l_p_pack	output_redirect(t_l_p_pack pack, int append)
 {

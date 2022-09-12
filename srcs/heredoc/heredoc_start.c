@@ -6,18 +6,14 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:45:09 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 13:50:04 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:16:41 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "structs.h"
-#include "ft_strncmp.h"
-#include "ft_strdup.h"
-#include "ft_substr.h"
-#include "ft_strjoin.h"
-#include "lexer_clear.h"
-#include "lexer_display.h"
+#include "utils.h"
+#include "lexer_all.h"
 #include "heredoc_line_parse.h"
 #include "signal_handles.h"
 

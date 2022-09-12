@@ -6,14 +6,14 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:37:13 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:30:21 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:06:55 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include "structs.h"
-#include "ft_substr.h"
+#include "utils.h"
 
 int	determine_token(char *input, int pos)
 {

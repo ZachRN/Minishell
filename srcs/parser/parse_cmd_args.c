@@ -6,15 +6,14 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:27:25 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:27:49 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:16:32 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "structs.h"
-#include "ft_strdup.h"
-#include "ft_split.h"
-#include "lexer_clear.h"
+#include "utils.h"
+#include "lexer_all.h"
 
 char	**make_arg_list(t_l_p_pack pack, int i)
 {

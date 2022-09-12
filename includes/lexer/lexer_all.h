@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env_shlvl.c                                        :+:    :+:            */
+/*   lexer_all.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/08/31 15:32:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:06:16 by znajda        ########   odam.nl         */
+/*   Created: 2022/09/12 15:15:29 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/12 15:16:02 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "utils.h"
+#ifndef LEXER_ALL_H
+# define LEXER_ALL_H
 
-char	*handle_shlvl(char *str)
-{
-	char	*temp;
-	char	*str_hold;
-	int		number;
-	int		i;
+# include "lexer_clear.h"
+# include "lexer_display.h"
+# include "lexer_valid.h"
+# include "lexer.h"
 
-	str_hold = str;
-	if (!str_hold)
-		return (NULL);
-	i = 0;
-	while (str_hold[i] != '=')
-		i++;
-	i++;
-	number = ft_atoi(&str_hold[i]);
-	str_hold[i] = '\0';
-	number++;
-	temp = ft_itoa(number);
-	str_hold = ft_strjoin(str_hold, temp);
-	free(temp);
-	return (str_hold);
-}
+#endif
