@@ -326,16 +326,16 @@
 		0DED0B2028CCD3F100DEFE27 /* comm_loop */ = {
 			isa = PBXGroup;
 			children = (
-				0DED0B9728CCD50100DEFE27 /* cmd_loop.c */,
-				0DED0B9928CCD50100DEFE27 /* fd_handl_utils.c */,
-				0DED0B9A28CCD50100DEFE27 /* fd_management.c */,
-				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
-				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
 				0DED0B4928CCD49D00DEFE27 /* cmd_loop.h */,
+				0DED0B9728CCD50100DEFE27 /* cmd_loop.c */,
 				0DED0B4628CCD49D00DEFE27 /* fd_handl_utils.h */,
+				0DED0B9928CCD50100DEFE27 /* fd_handl_utils.c */,
 				0DED0B4B28CCD49D00DEFE27 /* fd_management.h */,
+				0DED0B9A28CCD50100DEFE27 /* fd_management.c */,
 				0DED0B4728CCD49D00DEFE27 /* form_exec_struct.h */,
+				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
 				0DED0B4828CCD49D00DEFE27 /* path_search.h */,
+				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
 			);
 			name = comm_loop;
 			sourceTree = "<group>";
