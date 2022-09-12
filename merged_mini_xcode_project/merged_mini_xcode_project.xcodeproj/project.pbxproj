@@ -59,6 +59,7 @@
 		328F248228CF96FE0089D776 /* minishell.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248028CF96FE0089D776 /* minishell.c */; };
 		328F248328CF96FE0089D776 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248128CF96FE0089D776 /* main.c */; };
 		328F248528CF979B0089D776 /* starting_point_after_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248428CF979B0089D776 /* starting_point_after_main.c */; };
+		328F248A28CFA9510089D776 /* fd_first_child.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248928CFA9510089D776 /* fd_first_child.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -185,6 +186,8 @@
 		328F248128CF96FE0089D776 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../srcs/main.c; sourceTree = "<group>"; };
 		328F248428CF979B0089D776 /* starting_point_after_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = starting_point_after_main.c; path = ../../srcs/starting_point_after_main.c; sourceTree = "<group>"; };
 		328F248628CF97BC0089D776 /* lexer_display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lexer_display.h; path = ../../includes/lexer/lexer_display.h; sourceTree = "<group>"; };
+		328F248828CFA9140089D776 /* fd_first_child.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fd_first_child.h; path = ../../includes/command_loop/fd_first_child.h; sourceTree = "<group>"; };
+		328F248928CFA9510089D776 /* fd_first_child.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fd_first_child.c; path = ../../srcs/command_loop/fd_first_child.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,10 +341,9 @@
 		0DED0B2028CCD3F100DEFE27 /* comm_loop */ = {
 			isa = PBXGroup;
 			children = (
+				328F248728CFA8D20089D776 /* fd_children */,
 				328F247428CF6A070089D776 /* exec_struct_creation */,
 				328F247C28CF96520089D776 /* fd_system_headers.h */,
-				328F247D28CF96970089D776 /* fd_only_child.h */,
-				328F247E28CF96B60089D776 /* fd_only_child.c */,
 				0DED0B4628CCD49D00DEFE27 /* fd_handl_utils.h */,
 				0DED0B9928CCD50100DEFE27 /* fd_handl_utils.c */,
 				0DED0B4B28CCD49D00DEFE27 /* fd_management.h */,
@@ -386,6 +388,17 @@
 				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
 			);
 			name = exec_struct_creation;
+			sourceTree = "<group>";
+		};
+		328F248728CFA8D20089D776 /* fd_children */ = {
+			isa = PBXGroup;
+			children = (
+				328F247D28CF96970089D776 /* fd_only_child.h */,
+				328F247E28CF96B60089D776 /* fd_only_child.c */,
+				328F248828CFA9140089D776 /* fd_first_child.h */,
+				328F248928CFA9510089D776 /* fd_first_child.c */,
+			);
+			name = fd_children;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,6 +491,7 @@
 				0DED0B9528CCD4F900DEFE27 /* env_copy.c in Sources */,
 				0DED0BAE28CCD50B00DEFE27 /* pwd.c in Sources */,
 				0DED0B6D28CCD4CA00DEFE27 /* ft_strncmp.c in Sources */,
+				328F248A28CFA9510089D776 /* fd_first_child.c in Sources */,
 				0DED0B9F28CCD50100DEFE27 /* fd_handl_utils.c in Sources */,
 				0DED0B6B28CCD4CA00DEFE27 /* ft_strlen.c in Sources */,
 				0DED0B9628CCD4F900DEFE27 /* env_shlvl.c in Sources */,
