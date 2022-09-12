@@ -64,7 +64,7 @@ int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
 	par->path_outfile = current->outfile;
 	par->param_index = i;
 	par->append = current->append;
-	par->inlile_heredoc_flag = current->rd_in;
+	par->in_flag = current->rd_in;
 	if (current->next == NULL)
 		return (0);
 	return (1);

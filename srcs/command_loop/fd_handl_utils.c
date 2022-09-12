@@ -6,9 +6,7 @@
 //
 
 #include "fd_handl_utils.h"
-#include <sys/types.h>
-#include <fcntl.h>
-#include <stdlib.h>
+#include "system_headers_for_fd_management.h"
 
 void	direct_open_dup_infile(const char *infile, t_fd *fd)
 {
