@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0DED0B1B28CCD3BB00DEFE27 /* minishell.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B1928CCD3BB00DEFE27 /* minishell.c */; };
-		0DED0B1C28CCD3BB00DEFE27 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B1A28CCD3BB00DEFE27 /* main.c */; };
-		0DED0B1E28CCD3C000DEFE27 /* starting_point_after_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B1D28CCD3C000DEFE27 /* starting_point_after_main.c */; };
 		0DED0B5C28CCD4BA00DEFE27 /* utils_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5728CCD4BA00DEFE27 /* utils_write.c */; };
 		0DED0B5D28CCD4BA00DEFE27 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5828CCD4BA00DEFE27 /* utils.c */; };
 		0DED0B5E28CCD4BA00DEFE27 /* utils_strings.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5928CCD4BA00DEFE27 /* utils_strings.c */; };
@@ -58,6 +55,10 @@
 		0DED0BB528CCD50B00DEFE27 /* export.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0BAB28CCD50A00DEFE27 /* export.c */; };
 		0DED0BB628CCD50B00DEFE27 /* built_in_set.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0BAC28CCD50A00DEFE27 /* built_in_set.c */; };
 		328F246D28CE31660089D776 /* libreadline.8.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 328F246C28CE31660089D776 /* libreadline.8.1.dylib */; };
+		328F247F28CF96B60089D776 /* fd_only_child.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F247E28CF96B60089D776 /* fd_only_child.c */; };
+		328F248228CF96FE0089D776 /* minishell.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248028CF96FE0089D776 /* minishell.c */; };
+		328F248328CF96FE0089D776 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248128CF96FE0089D776 /* main.c */; };
+		328F248528CF979B0089D776 /* starting_point_after_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248428CF979B0089D776 /* starting_point_after_main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,9 +75,6 @@
 
 /* Begin PBXFileReference section */
 		0DED0B0C28CCCBD700DEFE27 /* merged_mini_xcode_project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = merged_mini_xcode_project; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DED0B1928CCD3BB00DEFE27 /* minishell.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minishell.c; sourceTree = "<group>"; };
-		0DED0B1A28CCD3BB00DEFE27 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		0DED0B1D28CCD3C000DEFE27 /* starting_point_after_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = starting_point_after_main.c; sourceTree = "<group>"; };
 		0DED0B2228CCD41E00DEFE27 /* starting_point_after_main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = starting_point_after_main.h; path = ../../includes/starting_point_after_main.h; sourceTree = "<group>"; };
 		0DED0B2328CCD43100DEFE27 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../../includes/main.h; sourceTree = "<group>"; };
 		0DED0B2428CCD43100DEFE27 /* minishell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = minishell.h; path = ../../includes/minishell.h; sourceTree = "<group>"; };
@@ -177,10 +175,16 @@
 		0DED0BAB28CCD50A00DEFE27 /* export.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = export.c; path = ../../srcs/builtins/export.c; sourceTree = "<group>"; };
 		0DED0BAC28CCD50A00DEFE27 /* built_in_set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = built_in_set.c; path = ../../srcs/builtins/built_in_set.c; sourceTree = "<group>"; };
 		328F246C28CE31660089D776 /* libreadline.8.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libreadline.8.1.dylib; path = ../../../../../opt/homebrew/Cellar/readline/8.1.2/lib/libreadline.8.1.dylib; sourceTree = "<group>"; };
-		328F247528CF6A660089D776 /* fd_system_headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fd_system_headers.h; sourceTree = "<group>"; };
 		328F247628CF6DFF0089D776 /* expand_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = expand_all.h; path = ../../includes/expand/expand_all.h; sourceTree = "<group>"; };
 		328F247728CF6E140089D776 /* parser_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = parser_all.h; path = ../../includes/parser/parser_all.h; sourceTree = "<group>"; };
 		328F247828CF6E1D0089D776 /* lexer_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lexer_all.h; path = ../../includes/lexer/lexer_all.h; sourceTree = "<group>"; };
+		328F247C28CF96520089D776 /* fd_system_headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fd_system_headers.h; path = ../../includes/command_loop/fd_system_headers.h; sourceTree = "<group>"; };
+		328F247D28CF96970089D776 /* fd_only_child.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fd_only_child.h; path = ../../includes/command_loop/fd_only_child.h; sourceTree = "<group>"; };
+		328F247E28CF96B60089D776 /* fd_only_child.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fd_only_child.c; path = ../../srcs/command_loop/fd_only_child.c; sourceTree = "<group>"; };
+		328F248028CF96FE0089D776 /* minishell.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = minishell.c; path = ../../srcs/minishell.c; sourceTree = "<group>"; };
+		328F248128CF96FE0089D776 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../srcs/main.c; sourceTree = "<group>"; };
+		328F248428CF979B0089D776 /* starting_point_after_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = starting_point_after_main.c; path = ../../srcs/starting_point_after_main.c; sourceTree = "<group>"; };
+		328F248628CF97BC0089D776 /* lexer_display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lexer_display.h; path = ../../includes/lexer/lexer_display.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,9 +220,9 @@
 			isa = PBXGroup;
 			children = (
 				0DED0B2228CCD41E00DEFE27 /* starting_point_after_main.h */,
-				0DED0B1D28CCD3C000DEFE27 /* starting_point_after_main.c */,
-				0DED0B1928CCD3BB00DEFE27 /* minishell.c */,
-				0DED0B1A28CCD3BB00DEFE27 /* main.c */,
+				328F248428CF979B0089D776 /* starting_point_after_main.c */,
+				328F248028CF96FE0089D776 /* minishell.c */,
+				328F248128CF96FE0089D776 /* main.c */,
 				0DED0B2128CCD3F800DEFE27 /* utils */,
 				0DED0B2028CCD3F100DEFE27 /* comm_loop */,
 				0DED0B1F28CCD3DC00DEFE27 /* builtins */,
@@ -265,6 +269,7 @@
 		0DED0B1828CCD39200DEFE27 /* includs_zak */ = {
 			isa = PBXGroup;
 			children = (
+				328F248628CF97BC0089D776 /* lexer_display.h */,
 				0DED0B4528CCD48A00DEFE27 /* env_copy.h */,
 				0DED0B4428CCD48900DEFE27 /* env_shlvl.h */,
 				0DED0B4328CCD48300DEFE27 /* expand_lex_quotes.h */,
@@ -334,13 +339,15 @@
 			isa = PBXGroup;
 			children = (
 				328F247428CF6A070089D776 /* exec_struct_creation */,
-				328F247528CF6A660089D776 /* fd_system_headers.h */,
+				328F247C28CF96520089D776 /* fd_system_headers.h */,
 				0DED0B4928CCD49D00DEFE27 /* cmd_loop.h */,
 				0DED0B9728CCD50100DEFE27 /* cmd_loop.c */,
 				0DED0B4628CCD49D00DEFE27 /* fd_handl_utils.h */,
 				0DED0B9928CCD50100DEFE27 /* fd_handl_utils.c */,
 				0DED0B4B28CCD49D00DEFE27 /* fd_management.h */,
 				0DED0B9A28CCD50100DEFE27 /* fd_management.c */,
+				328F247D28CF96970089D776 /* fd_only_child.h */,
+				328F247E28CF96B60089D776 /* fd_only_child.c */,
 			);
 			name = comm_loop;
 			sourceTree = "<group>";
@@ -445,11 +452,9 @@
 				0DED0BB128CCD50B00DEFE27 /* echo.c in Sources */,
 				0DED0B7F28CCD4D800DEFE27 /* parse_init.c in Sources */,
 				0DED0BA028CCD50100DEFE27 /* fd_management.c in Sources */,
-				0DED0B1C28CCD3BB00DEFE27 /* main.c in Sources */,
 				0DED0B9228CCD4F300DEFE27 /* expand_lex_quotes.c in Sources */,
 				0DED0BA228CCD50100DEFE27 /* path_search.c in Sources */,
 				0DED0B5C28CCD4BA00DEFE27 /* utils_write.c in Sources */,
-				0DED0B1E28CCD3C000DEFE27 /* starting_point_after_main.c in Sources */,
 				0DED0BB328CCD50B00DEFE27 /* cd.c in Sources */,
 				0DED0BAF28CCD50B00DEFE27 /* env.c in Sources */,
 				0DED0B6C28CCD4CA00DEFE27 /* ft_substr.c in Sources */,
@@ -461,6 +466,7 @@
 				0DED0B6A28CCD4CA00DEFE27 /* ft_strdup.c in Sources */,
 				0DED0BB428CCD50B00DEFE27 /* exit.c in Sources */,
 				0DED0B7B28CCD4D800DEFE27 /* parser_get_cmd.c in Sources */,
+				328F248328CF96FE0089D776 /* main.c in Sources */,
 				0DED0B8628CCD4DD00DEFE27 /* lexer_init.c in Sources */,
 				0DED0B8828CCD4DD00DEFE27 /* lexer_display.c in Sources */,
 				0DED0B6028CCD4BA00DEFE27 /* utils_basics.c in Sources */,
@@ -473,10 +479,10 @@
 				0DED0BAE28CCD50B00DEFE27 /* pwd.c in Sources */,
 				0DED0B6D28CCD4CA00DEFE27 /* ft_strncmp.c in Sources */,
 				0DED0B9F28CCD50100DEFE27 /* fd_handl_utils.c in Sources */,
-				0DED0B1B28CCD3BB00DEFE27 /* minishell.c in Sources */,
 				0DED0B6B28CCD4CA00DEFE27 /* ft_strlen.c in Sources */,
 				0DED0B9628CCD4F900DEFE27 /* env_shlvl.c in Sources */,
 				0DED0BAD28CCD50B00DEFE27 /* array_sort.c in Sources */,
+				328F248528CF979B0089D776 /* starting_point_after_main.c in Sources */,
 				0DED0B7E28CCD4D800DEFE27 /* parse_cmd_args.c in Sources */,
 				0DED0BA128CCD50100DEFE27 /* form_exec_struct.c in Sources */,
 				0DED0B6E28CCD4CA00DEFE27 /* ft_itoa.c in Sources */,
@@ -487,6 +493,8 @@
 				0DED0B8B28CCD4E300DEFE27 /* heredoc_start.c in Sources */,
 				0DED0BB528CCD50B00DEFE27 /* export.c in Sources */,
 				0DED0B7128CCD4CA00DEFE27 /* ft_strjoin.c in Sources */,
+				328F248228CF96FE0089D776 /* minishell.c in Sources */,
+				328F247F28CF96B60089D776 /* fd_only_child.c in Sources */,
 				0DED0B7428CCD4D100DEFE27 /* signal_handles.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

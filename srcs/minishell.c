@@ -21,7 +21,7 @@
 #include "parser_all.h"
 #include "lexer_all.h"
 
-#include <lexer_display.h>
+//#include <lexer_display.h>
 static void	control_d(void)
 {
 	printf("exit");
