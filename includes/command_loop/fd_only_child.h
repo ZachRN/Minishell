@@ -9,6 +9,6 @@
 #ifndef fd_only_child_h
 #define fd_only_child_h
 
-#include <stdio.h>
+#include "form_exec_struct.h"
 
 #endif /* fd_only_child_h */

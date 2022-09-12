@@ -13,6 +13,11 @@
 
 ///all exit 1 maybe need to be transfered into something more speaking
 
+void	check_assess_to_file(const char *path)
+{
+	
+}
+
 void	handle_one_param_set(t_param *param, int index, char **envp)
 {
 	if (pipe(param->fd.pipe) < 0)
@@ -22,6 +27,7 @@ void	handle_one_param_set(t_param *param, int index, char **envp)
 		exit(1);
 	if (param->child_pid == 0) ///child was created, we enter its process
 	{
+		//	!!!	check for file access for infile and in case of failure skip to next command
 		//pick_fd_for_child_function
 		
 		execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
