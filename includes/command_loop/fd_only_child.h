@@ -11,4 +11,6 @@
 
 #include "form_exec_struct.h"
 
+void fd_only_child(t_param *param);
+
 #endif /* fd_only_child_h */

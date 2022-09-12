@@ -18,8 +18,10 @@ void	check_assess_to_file(const char *path)
 	
 }
 
-void	handle_one_param_set(t_param *param, int index, char **envp)
+void	handle_one_param_set(int index, int comm_number, char **envp, t_param *param)
 {
+	//check if command is built-in
+	
 	if (pipe(param->fd.pipe) < 0)
 		exit(1);
 	param->child_pid = fork();
@@ -27,7 +29,13 @@ void	handle_one_param_set(t_param *param, int index, char **envp)
 		exit(1);
 	if (param->child_pid == 0) ///child was created, we enter its process
 	{
+		
+		
 		//	!!!	check for file access for infile and in case of failure skip to next command
+		///	maybe I also skip command if its builtin but not the first one?
+		
+		
+		
 		//pick_fd_for_child_function
 		
 		execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
@@ -40,7 +48,7 @@ void	go_through_commands(t_exec *exec)
 {
 	while (exec->index < exec->comm_number)
 	{
-		handle_one_param_set(exec[exec->index].params, exec->index, exec->envp);
+		handle_one_param_set(exec->index, exec->comm_number, exec->envp, exec[exec->index].params);
 		exec->index++;
 	}
 	
