@@ -7,3 +7,4 @@
 minishell
 build/
 UserInterfaceState.xcuserstate
+*.xcuserstate
