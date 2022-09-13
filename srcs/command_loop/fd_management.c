@@ -13,8 +13,25 @@
 #include "fd_middle_child.h"
 #include "fd_last_child.h"
 
+void	cleaning_heredocs_if_open(int current_index, int comm_number, t_fd *fd)
+{
+	int next_command_index;
+
+	if (current_index == comm_number - 1)  ///last command, I will close heredoc further during closure management in child
+		return ;
+	next_command_index = current_index + 1;
+	while (next_command_index != comm_number - 1)
+	{
+		if (fd[next_command_index].heredoc >= 0) ///if heredoc in next commands is open, I want to make sure they are all closed in current child, next child will inherit it all again from the parent
+			if (close(fd[next_command_index].heredoc) < 0)
+				exit(1);
+		next_command_index++;
+	}
+}
+
 void	pick_a_child(int index, int comm_number, t_param *param)
 {
+	cleaning_heredocs_if_open(index, comm_number, &param->fd);
 	if (comm_number == 1)
 		fd_only_child(param);
 	else
