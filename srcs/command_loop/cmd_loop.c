@@ -7,7 +7,7 @@
 
 #include "cmd_loop.h"
 #include "form_exec_struct.h"
-#include "fd_only_child.h"
+#include "fd_management.h"
 # include <unistd.h>
 #include <stdlib.h>
 
@@ -17,12 +17,6 @@
 int	check_assess_to_file(const char *path)
 {
 	return (0);
-}
-
-void	pick_a_child(int index, int comm_number, t_param *param)
-{
-	if (comm_number == 1)
-		fd_only_child(param);
 }
 
 void	handle_one_param_set(int i, int comm_number, char **envp, t_param *param)
