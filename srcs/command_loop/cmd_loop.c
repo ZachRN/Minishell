@@ -28,6 +28,7 @@ void	pick_a_child(int index, int comm_number, t_param *param)
 void	handle_one_param_set(int i, int comm_number, char **envp, t_param *param)
 {
 	//TODO check if command is built-in
+	//TODO check if I need to close all heredocs I receive in every child
 	
 	if (i == comm_number - 1) ///last command I do not pipe
 	{
