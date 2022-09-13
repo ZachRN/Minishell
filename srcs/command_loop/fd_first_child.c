@@ -38,5 +38,4 @@ void	fd_first_child(t_param *param)
 		if (dup2(param->fd.outfile, STDOUT_FILENO) < 0)
 			exit(1);
 	}
-	
 }
