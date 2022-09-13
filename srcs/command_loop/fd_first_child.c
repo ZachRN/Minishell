@@ -19,8 +19,7 @@ void	close_for_first_child(t_fd *fd)
 		exit(1);
 }
 
-
-void fd_first_child(t_param *param)
+void	fd_first_child(t_param *param)
 {
 	if (param->in_flag == STDIN)/// if I even need this maybe it remains default and I am good
 		param->fd.infile = STDIN_FILENO;
