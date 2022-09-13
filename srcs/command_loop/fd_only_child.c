@@ -10,8 +10,6 @@
 #include "fd_system_headers.h"
 #include "fd_handl_utils.h"
 
-
-
 void	close_for_only_child(t_fd *fd)
 {
 	if (close(fd->pipe[0]) < 0)
