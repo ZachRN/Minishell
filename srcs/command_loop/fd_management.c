@@ -17,6 +17,15 @@ void	pick_a_child(int index, int comm_number, t_param *param)
 {
 	if (comm_number == 1)
 		fd_only_child(param);
+	else
+	{
+		if (index == 0)
+			fd_first_child(param);
+		else if (index == comm_number - 1)
+			fd_last_child(param);
+		else
+			fd_middle_child(param);
+	}
 }
 
 void	manage_parent_fd(int index, int comm_numb, t_fd *fd)
