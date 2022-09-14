@@ -10,7 +10,7 @@
 
 #include "form_exec_struct.h"
 
-void	creat_exec_loop_commands(t_together *input, char **envp);
+t_exec	creat_exec_loop_commands(t_together *input, char **envp);
 
 
 #endif /* cmd_loop_h */

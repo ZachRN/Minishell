@@ -11,32 +11,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char **find_possible_path_options_from_envp(char **env)
-{
-	int	i;
-	char **possible_pathes;
-
-	i = 0;
-	possible_pathes = NULL;
-	while (env[i] != NULL)
-	{
-		if (check_word("PATH=/", 6, env[i]) == 1)
-		{
-			while (*env[i] != ':' && *env[i] != '\0')
-				env[i]++;
-			break ;
-		}
-		i++;
-	}
-	if (env[i] != NULL)
-	{
-		possible_pathes = ft_split(env[i], ':');
-		if (possible_pathes == NULL)
-			exit(1);
-	}
-	return (possible_pathes);
-}
-
 char	*check_correct_path(char *command, char *possible_path)
 {
 	char	*new_path;
@@ -80,4 +54,20 @@ char	*find_path(char *command, char **possibl_paths)
 	}
 	free(joined_command);
 	return (correct_path);
+}
+
+char **find_possible_path_options_from_envp(char **env)
+{
+	int	i;
+	char **possible_pathes;
+
+	i = 0;
+	possible_pathes = NULL;
+	while (*env && !possible_pathes)
+	{
+		if (!ft_strncmp(*env, "PATH=", 5))
+			possible_pathes = ft_split(*env + 5, ':');
+		env++;
+	}
+	return (possible_pathes);
 }
