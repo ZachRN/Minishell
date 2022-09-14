@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:46:38 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:08:09 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:37:24 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**env_copy(char **env)
 	size = get_size_of_env(env);
 	to_return = (char **)malloc((size + 1) * sizeof(char *));
 	if (!to_return)
-		return (NULL);
+		exit(1);
 	to_return = copy_env_list(to_return, env);
 	return (to_return);
 }

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:26:30 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:23:58 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:36:24 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = x;
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
-		return (NULL);
+		exit(1);
 	if (start >= x)
 	{
 		str[0] = '\0';

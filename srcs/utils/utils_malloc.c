@@ -20,7 +20,7 @@ char	*strdup_till_char(char *str, char c)
 	i = 0;
 	s2 = (char *)malloc((len + 1) * sizeof(char));
 	if (s2 == NULL)
-		return (NULL);
+		exit(1);
 	while (i < len)
 	{
 		s2[i] = str[i];
