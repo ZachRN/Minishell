@@ -29,7 +29,7 @@ int	not_exeption_do_pipe(int i, int comm_n, t_type type)
 {
 	if (type == BUILTIN && comm_n == 1) ///first and builtin - I do not pipe
 		return (FLS);
-	else if (i == comm_n - 1)///last - I do not pipe
+	else if (i > 0 && i == comm_n - 1)///last - I do not pipe
 		return (FLS);
 	
 	return (TRU);

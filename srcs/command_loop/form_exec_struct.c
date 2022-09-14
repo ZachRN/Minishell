@@ -85,14 +85,14 @@ int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
 {
 	if (current == NULL)
 		return (0);
-	par->cmd = initiate_cmd_struct(current->args, current->cmd, envp);
-	par->fd	= initiate_fd_struct(current->hd_pipe);
-	par->child_pid = -1;
-	par->path_infile = current->infile;
-	par->path_outfile = current->outfile;
-	par->param_index = i;
-	par->append = current->append;
-	par->in_flag = current->rd_in;
+	par[i].cmd = initiate_cmd_struct(current->args, current->cmd, envp);
+	par[i].fd = initiate_fd_struct(current->hd_pipe);
+	par[i].child_pid = -1;
+	par[i].path_infile = current->infile;
+	par[i].path_outfile = current->outfile;
+	par[i].param_index = i;
+	par[i].append = current->append;
+	par[i].in_flag = current->rd_in;
 	if (current->next == NULL)
 		return (0);
 	return (1);
