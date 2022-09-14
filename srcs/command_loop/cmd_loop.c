@@ -56,11 +56,10 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 		pick_a_child(i, comm_number, param); ///pick_fd_for_child_function
 		if (param->cmd.type == BUILTIN)
 		{
-			new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args);
+			new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args); //TODO give them FDn to write into
 		}
 		else
 		{
-			printf("child number: %i", i);
 			execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
 			exit(1); ///if kid fails and I need to update it in order to give err number
 		}
@@ -77,7 +76,11 @@ void	go_through_commands(t_exec *exec)
 	i = 0;
 	while (exec->index < exec->comm_number)
 	{
-		exec->upd_envp = handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params); ///make sure comm number is NUMBER of commands I receive
+		printf("PARAM SET: \n");
+		printf("CMD 0, 1: %s, %s", exec[0].params->cmd.command, exec[1].params->cmd.command);
+		
+		
+		exec->upd_envp = handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params);
 		if (exec->upd_envp != NULL)
 		{
 			free_array_of_str(exec->envp);
@@ -89,6 +92,24 @@ void	go_through_commands(t_exec *exec)
 	}
 }
 ///	at the end I expect to receive sequence of pod_t in every t_param
+///
+
+void	loop_through_waitpid(int comm_num, t_param *params)
+{
+	int i;
+	int wait_status;
+	int res_of_wait_status;
+	
+	i = 0;
+	wait_status = -1;
+	res_of_wait_status = -1;
+	while (i < comm_num)
+	{
+		waitpid(params[i].child_pid, &wait_status, 0);
+		res_of_wait_status = WEXITSTATUS(wait_status); //not sure what this gives me
+		i++;
+	}
+}
 
 void	creat_exec_loop_commands(t_together *input, char **envp)
 {
@@ -96,4 +117,5 @@ void	creat_exec_loop_commands(t_together *input, char **envp)
 
 	exec = form_input_for_execution(envp, input);
 	go_through_commands(&exec);
+	loop_through_waitpid(exec.comm_number, exec.params);
 }

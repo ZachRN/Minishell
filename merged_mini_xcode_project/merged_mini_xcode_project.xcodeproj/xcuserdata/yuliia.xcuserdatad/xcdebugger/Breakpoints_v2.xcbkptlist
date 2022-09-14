@@ -71,16 +71,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EA10E017-4DAE-49F0-AEF9-C9B75ECE8EEF"
+            uuid = "62769CAB-4044-4F7F-965E-DDF25494592D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../srcs/command_loop/fd_management.c"
+            filePath = "../srcs/command_loop/cmd_loop.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "pick_a_child(index, comm_number, param)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "go_through_commands(exec)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

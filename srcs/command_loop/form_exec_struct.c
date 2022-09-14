@@ -111,8 +111,9 @@ t_param	*fill_exec_struct(t_parse *head, int size, char **envp)
 	i = 0;
 	while (i < size && temp_head != NULL)
 	{
-		if (initiate_each_param(params, temp_head, i, envp) == 0)
-			break ;
+//		if (initiate_each_param(params, temp_head, i, envp) == 0)
+//			break ;
+		
 		temp_head = temp_head->next;
 		i++;
 	}
