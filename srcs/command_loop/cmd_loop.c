@@ -6,8 +6,8 @@
 //
 
 #include "cmd_loop.h"
-#include "form_exec_struct.h"
 #include "fd_management.h"
+#include "built_in_set.h"
 # include <unistd.h>
 #include <stdlib.h>
 
@@ -16,22 +16,28 @@
 
 int	check_assess_to_file(const char *path)
 {
-	///	R_OK, W_OK, and X_OK test whether the file exists and grants read, write, and execute permissions, respectively.
-	if (access(path, R_OK) < 0)
+	if (access(path, R_OK) < 0) ///	R_OK, W_OK, and X_OK test whether the file exists and grants read, write, and execute permissions, respectively.
 		return (-1);
 	return (0);
 }
 
+int	not_exeption_do_pipe(int i, int comm_n, t_type type)
+{
+	if (type == BUILTIN && i == 0) ///first and builtin - I do not pipe
+		return (FLS);
+	else if (i == comm_n - 1)///last - I do not pipe
+		return (FLS);
+	
+	return (TRU);
+}
+
 void	handle_one_param_set(int i, int comm_number, char **envp, t_param *param)
 {
-	//TODO check if command is built-in
-	
-	if (i == comm_number - 1) ///last command I do not pipe
+	if (not_exeption_do_pipe(i, comm_number, param->cmd.type) == TRU)
 	{
 		if (pipe(param->fd.pipe) < 0)
 			exit(1);
 	}
-	
 	param->child_pid = fork();
 	if (param->child_pid < 0)
 		exit(1);
@@ -54,11 +60,11 @@ void	go_through_commands(t_exec *exec)
 	i = 0;
 	while (exec->index < exec->comm_number)
 	{
-		handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params); //make sure comm number is NUMBER of commands I receive
+		
+		handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params); ///make sure comm number is NUMBER of commands I receive
 		exec->index++;
 		i++;
 	}
-	
 }
 ///	at the end I expect to receive sequence of pod_t in every t_param
 
@@ -67,5 +73,5 @@ void	creat_exec_loop_commands(t_together *input, char **envp)
 	t_exec exec;
 
 	exec = form_input_for_execution(envp, input);
-	
+	go_through_commands(&exec);
 }

@@ -319,27 +319,11 @@
 		0DED0B1F28CCD3DC00DEFE27 /* builtins */ = {
 			isa = PBXGroup;
 			children = (
-				0DED0BA328CCD50A00DEFE27 /* array_sort.c */,
-				0DED0BAC28CCD50A00DEFE27 /* built_in_set.c */,
-				0DED0BA628CCD50A00DEFE27 /* builtin_utils.c */,
-				0DED0BA928CCD50A00DEFE27 /* cd.c */,
-				0DED0BA728CCD50A00DEFE27 /* echo.c */,
-				0DED0BA528CCD50A00DEFE27 /* env.c */,
-				0DED0BAA28CCD50A00DEFE27 /* exit.c */,
-				0DED0BAB28CCD50A00DEFE27 /* export.c */,
-				0DED0BA428CCD50A00DEFE27 /* pwd.c */,
-				0DED0BA828CCD50A00DEFE27 /* unset.c */,
-				0DED0B4D28CCD4AA00DEFE27 /* array_sort.h */,
-				0DED0B5628CCD4AA00DEFE27 /* built_in_set.h */,
+				3296FE2928D1E76D002B8C78 /* commands */,
 				0DED0B4F28CCD4AA00DEFE27 /* builtin_utils.h */,
-				0DED0B4C28CCD4AA00DEFE27 /* cd.h */,
-				0DED0B5428CCD4AA00DEFE27 /* commands.h */,
-				0DED0B5328CCD4AA00DEFE27 /* echo.h */,
-				0DED0B5528CCD4AA00DEFE27 /* env.h */,
-				0DED0B5028CCD4AA00DEFE27 /* exit.h */,
-				0DED0B5128CCD4AA00DEFE27 /* export.h */,
-				0DED0B4E28CCD4AA00DEFE27 /* pwd.h */,
-				0DED0B5228CCD4AA00DEFE27 /* unset.h */,
+				0DED0BA628CCD50A00DEFE27 /* builtin_utils.c */,
+				0DED0B5628CCD4AA00DEFE27 /* built_in_set.h */,
+				0DED0BAC28CCD50A00DEFE27 /* built_in_set.c */,
 			);
 			name = builtins;
 			sourceTree = "<group>";
@@ -409,6 +393,30 @@
 				328F248E28D0DC280089D776 /* fd_last_child.c */,
 			);
 			name = fd_children;
+			sourceTree = "<group>";
+		};
+		3296FE2928D1E76D002B8C78 /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				0DED0B5428CCD4AA00DEFE27 /* commands.h */,
+				0DED0B4C28CCD4AA00DEFE27 /* cd.h */,
+				0DED0BA928CCD50A00DEFE27 /* cd.c */,
+				0DED0B5328CCD4AA00DEFE27 /* echo.h */,
+				0DED0BA728CCD50A00DEFE27 /* echo.c */,
+				0DED0B5528CCD4AA00DEFE27 /* env.h */,
+				0DED0BA528CCD50A00DEFE27 /* env.c */,
+				0DED0B5028CCD4AA00DEFE27 /* exit.h */,
+				0DED0BAA28CCD50A00DEFE27 /* exit.c */,
+				0DED0B5128CCD4AA00DEFE27 /* export.h */,
+				0DED0BAB28CCD50A00DEFE27 /* export.c */,
+				0DED0B4E28CCD4AA00DEFE27 /* pwd.h */,
+				0DED0BA428CCD50A00DEFE27 /* pwd.c */,
+				0DED0B5228CCD4AA00DEFE27 /* unset.h */,
+				0DED0BA828CCD50A00DEFE27 /* unset.c */,
+				0DED0B4D28CCD4AA00DEFE27 /* array_sort.h */,
+				0DED0BA328CCD50A00DEFE27 /* array_sort.c */,
+			);
+			name = commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

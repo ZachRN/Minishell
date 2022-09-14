@@ -27,6 +27,12 @@ typedef enum	e_infile_src
 	HEREDOC = 2
 }				t_infile_src;
 
+typedef enum	e_type
+{
+	BUILTIN = 0,
+	NORMAL = 1
+}				t_type;
+
 typedef struct s_lexer
 {
 	int				token_id;
@@ -74,6 +80,7 @@ typedef struct t_cmd
 	char	**cmd_args;
 	char	*cmd_path;
 	char	*command;
+	t_type type;
 }	t_cmd;
 
 typedef struct	s_param

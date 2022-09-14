@@ -12,6 +12,6 @@
 
 int	if_is_builtin_command(char *str, char **array_built_in);
 char **built_in_commands(t_env_struct *data);
-
+char **enviromental_variable_function(char **envp, char *command, char **arguments);
 
 #endif /* built_in_set_h */

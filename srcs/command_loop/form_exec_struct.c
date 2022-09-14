@@ -7,7 +7,31 @@
 //
 
 #include "form_exec_struct.h"
+#include "utils.h"
 #include <stdlib.h>
+
+int	if_built_in(const char *command)
+{
+	char *array_built_in[8];
+	int i;
+
+	i = 0;
+	array_built_in[0] = "echo";
+	array_built_in[1] = "cd";
+	array_built_in[2] = "pwd";
+	array_built_in[3] = "export";
+	array_built_in[4] = "env";
+	array_built_in[5] = "unset";
+	array_built_in[6] = "exit";
+	array_built_in[7] = NULL;
+	while (i < 7)
+	{
+		if (compare_str(array_built_in[i], command) == TRU)
+			return (TRU);;
+		i++;
+	}
+	return (FLS);
+}
 
 t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
 {
@@ -18,6 +42,10 @@ t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
 	cmd.command = comm_name;
 	possible_path = find_possible_path_options_from_envp(envp);
 	cmd.cmd_path = find_path(comm_name, possible_path);
+	if (if_built_in(comm_name) == TRU)
+		cmd.type = BUILTIN;
+	else
+		cmd.type = NORMAL;
 	return (cmd);
 }
 
