@@ -1,11 +1,7 @@
 **/.DS_Store
 **/*.o
-**/mini_codam/
-**/ymain.c
-**/test_inviromental_var_separately.c
 .vscode
 minishell
-build/
-UserInterfaceState.xcuserstate
-/Users/yuliia/Desktop/mini_together/merged_mini_xcode_project/merged_mini_xcode_project.xcodeproj/project.xcworkspace/xcuserdata/yuliia.xcuserdatad
-merged_mini_xcode_project/merged_mini_xcode_project.xcodeproj/project.xcworkspace/xcuserdata/yuliia.xcuserdatad/
+xcuserdata
+xcuserdata
+/Users/yuliia/Desktop/mini_together/merged_mini_xcode_project/merged_mini_xcode_project.xcodeproj/xcuserdata

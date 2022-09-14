@@ -9,15 +9,15 @@
 #include "form_exec_struct.h"
 #include <stdlib.h>
 
-t_cmd initiate_cmd_struct(char **args, char *comm_name, char **envp)
+t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
 {
 	t_cmd cmd;
 	char **possible_path;
 
-	cmd.cmd_args = args; //ready to use
-	cmd.command = comm_name; //just a name that needs to be converted into path
+	cmd.cmd_args = args;
+	cmd.command = comm_name;
 	possible_path = find_possible_path_options_from_envp(envp);
-	cmd.cmd_path = find_path(comm_name, possible_path); //NEED to work with path here
+	cmd.cmd_path = find_path(comm_name, possible_path);
 	return (cmd);
 }
 
@@ -57,7 +57,7 @@ int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
 {
 	if (current == NULL)
 		return (0);
-	par->cmd = initiate_cmd_struct(current->args, current->cmd, envp); //path need to initiate
+	par->cmd = initiate_cmd_struct(current->args, current->cmd, envp);
 	par->fd	= initiate_fd_struct(current->hd_pipe);
 	par->child_pid = -1;
 	par->path_infile = current->infile;
@@ -65,7 +65,6 @@ int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
 	par->param_index = i;
 	par->append = current->append;
 	par->in_flag = current->rd_in;
-//	par->inlile_heredoc_flag = current->rd_in;
 	if (current->next == NULL)
 		return (0);
 	return (1);
@@ -92,7 +91,7 @@ t_param	*fill_exec_struct(t_parse *head, int size, char **envp)
 	return (params);
 }
 
-t_exec form_input_for_execution(char **envp, t_together *input)
+t_exec	form_input_for_execution(char **envp, t_together *input)
 {
 	t_exec exec;
 	int size_exec;
