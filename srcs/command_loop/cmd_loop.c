@@ -48,23 +48,20 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 	param->child_pid = fork();
 	if (param->child_pid < 0)
 		exit(1);
-	if (param->child_pid == 0) ///child was created, we enter its process
+	if (param->child_pid == 0)
 	{
-		if (check_assess_to_file(param->path_infile) < 0) ///check for file access for infile and in case of failure skip to next command
+		if (check_assess_to_file(param->path_infile) < 0) ///in case of failure skip to next command
 			return (envp);
-		///	maybe I also skip command if its builtin but not the first one?
 		pick_a_child(i, comm_number, param); ///pick_fd_for_child_function
 		if (param->cmd.type == BUILTIN)
 		{
-			new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args);
+			new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args, param->fd);
 		}
 		else
 		{
-			printf("child number: %i", i);
 			execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
-			exit(1); ///if kid fails and I need to update it in order to give err number
 		}
-		
+		exit(1); ///if kid fails and I need to update it in order to give err number
 	}
 	manage_parent_fd(i, comm_number, &param->fd);
 	return (new_envp);

@@ -9,6 +9,6 @@
 #define starting_point_after_main_h
 
 int	starting_point(void);
-char **	enviromental_variable_function(char **envp, char *command, char **arguments);
+//char **	enviromental_variable_function(char **envp, char *command, char **arguments);
 
 #endif /* starting_point_after_main_h */

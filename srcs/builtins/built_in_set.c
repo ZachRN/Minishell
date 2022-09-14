@@ -61,7 +61,7 @@ char **built_in_commands(t_env_struct *data)
 /// make error message - export and unset, same format described in export c file
 
 
-char **enviromental_variable_function(char **envp, char *command, char **arguments)
+char **enviromental_variable_function(char **envp, char *command, char **arguments, t_fd fd)
 {
 	t_env_struct data;
 	int len;

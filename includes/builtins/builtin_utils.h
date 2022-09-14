@@ -9,6 +9,7 @@
 #define builtin_utils_h
 
 #include "utils.h"
+#include "form_exec_struct.h"
 
 typedef enum	e_comm_n
 {
@@ -31,6 +32,7 @@ typedef struct	s_env_struct
 	int num_var;
 	int n_arguments;
 	int envvar_repeat;
+	t_fd fd;
 }				t_env_struct;
 
 int is_valid_envp_name(const char *name);
