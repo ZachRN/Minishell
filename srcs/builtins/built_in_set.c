@@ -61,6 +61,16 @@ char **built_in_commands(t_env_struct *data)
 /// make error message - export and unset, same format described in export c file
 
 
+int	pick_fd_for_builtin(t_fd fd)/// decide which fd has priority? how to pick one
+{
+	if (fd.outfile >= 0)
+		return (fd.outfile);
+	else if (fd.pipe[1] >= 0)
+		return (fd.pipe[1]);
+	else
+		return (STDOUT_FILENO);
+}
+
 char **enviromental_variable_function(char **envp, char *command, char **arguments, t_fd fd)
 {
 	t_env_struct data;
@@ -69,6 +79,8 @@ char **enviromental_variable_function(char **envp, char *command, char **argumen
 	data.command = command;
 	data.arguments = arguments;
 	data.n_arguments = find_arr_len(arguments);
+	data.fd = fd; //do I need?
+	data.fd_chosen = pick_fd_for_builtin(fd);
 
 	len = find_arr_len(envp);
 	if (number_var_in_list(envp, "OLDPWD") > 0)

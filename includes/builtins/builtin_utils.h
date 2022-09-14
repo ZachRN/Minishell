@@ -33,6 +33,7 @@ typedef struct	s_env_struct
 	int n_arguments;
 	int envvar_repeat;
 	t_fd fd;
+	int fd_chosen;
 }				t_env_struct;
 
 int is_valid_envp_name(const char *name);

@@ -76,8 +76,6 @@ t_fd	initiate_fd_struct(int heredoc)
 	fd.pipe[0] = -1;
 	fd.pipe[1] = -1;
 	fd.heredoc = heredoc;
-	fd.rdr_infile = -1;
-	fd.rdr_outfile = -1;
 	return (fd);
 }
 
