@@ -20,6 +20,7 @@
 #include "structs.h"
 #include "parser_all.h"
 #include "lexer_all.h"
+#include "cmd_loop.h"
 
 //#include <lexer_display.h>
 static void	control_d(void)
@@ -57,19 +58,13 @@ int	minishell(t_together *all)
 			all = parser(input, all);
 		else
 			all->last_error = 258;
+		
+		creat_exec_loop_commands(all, all->env_array);
+		
+		
+		
 		all->head = t_parse_clear_list(all->head);
 		all->lex_head = t_lexer_clear_list(all->lex_head);
-		//YOU CAN PUT YOUR FUNCTION HERE.
-		//all is a t_together struct, , where ->head
-		// is the most important one for you, it contains
-		//the struct that holds the cmd name, arguements, outfile
-		//etc etc.. last_Error is also somehting that potentially needs to be updated
-		//from you with the exit code of the last command.
-
-		//Important to know that during execution you need to check for the path
-		//of the command name.
-		//Also check if the infile exists, if it doesnt exist you should void
-		//the entire command basically. I can explain in more detail if you want.
 		if (ft_strncmp(input, "exit", 5) == 0)
 			break ;
 		free(input);

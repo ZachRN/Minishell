@@ -129,5 +129,6 @@ t_exec	form_input_for_execution(char **envp, t_together *input)
 	exec.comm_number = size_exec;
 	exec.envp = envp;
 	exec.index = 0;
+	exec.upd_envp = NULL;
 	return (exec);
 }
