@@ -9,7 +9,7 @@
 #include "utils_basics.h"
 #include <stdlib.h>
 
-int	compare_str(char *str1, char *str2)
+int	compare_str(const char *str1, const char *str2)
 {
 	if (str1 == NULL || str2 == NULL)
 		return (0);
