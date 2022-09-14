@@ -35,22 +35,6 @@ int	if_built_in(const char *command)
 	return (FLS);
 }
 
-t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
-{
-	t_cmd cmd;
-	char **possible_path;
-
-	cmd.cmd_args = args;
-	cmd.command = comm_name;
-	possible_path = find_possible_path_options_from_envp(envp);
-	cmd.cmd_path = find_path(comm_name, possible_path);
-	if (if_built_in(comm_name) == TRU)
-		cmd.type = BUILTIN;
-	else
-		cmd.type = NORMAL;
-	return (cmd);
-}
-
 int	linked_list_size(t_parse *head)
 {
 	int res;
@@ -68,6 +52,22 @@ int	linked_list_size(t_parse *head)
 	return (res);
 }
 
+t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
+{
+	t_cmd cmd;
+	char **possible_path;
+
+	cmd.cmd_args = args;
+	cmd.command = comm_name;
+	possible_path = find_possible_path_options_from_envp(envp);
+	cmd.cmd_path = find_path(comm_name, possible_path);
+	if (if_built_in(comm_name) == TRU)
+		cmd.type = BUILTIN;
+	else
+		cmd.type = NORMAL;
+	return (cmd);
+}
+
 t_fd	initiate_fd_struct(int heredoc)
 {
 	t_fd fd;
@@ -82,23 +82,6 @@ t_fd	initiate_fd_struct(int heredoc)
 	fd.rdr_outfile = -1;
 	return (fd);
 }
-
-//int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
-//{
-//	if (current == NULL)
-//		return (0);
-//	par[i].cmd = initiate_cmd_struct(current->args, current->cmd, envp);
-//	par[i].fd = initiate_fd_struct(current->hd_pipe);
-//	par[i].child_pid = -1;
-//	par[i].path_infile = current->infile;
-//	par[i].path_outfile = current->outfile;
-//	par[i].param_index = i;
-//	par[i].append = current->append;
-//	par[i].in_flag = current->rd_in;
-//	if (current->next == NULL)
-//		return (0);
-//	return (1);
-//}
 
 t_param initiate_each_param(t_parse *current, int i, char **envp)
 {
