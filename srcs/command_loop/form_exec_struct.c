@@ -10,6 +10,8 @@
 #include "utils.h"
 #include <stdlib.h>
 
+#include <stdio.h>
+
 int	if_built_in(const char *command)
 {
 	char *array_built_in[8];
@@ -81,21 +83,36 @@ t_fd	initiate_fd_struct(int heredoc)
 	return (fd);
 }
 
-int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
+//int initiate_each_param(t_param *par, t_parse *current, int i, char **envp)
+//{
+//	if (current == NULL)
+//		return (0);
+//	par[i].cmd = initiate_cmd_struct(current->args, current->cmd, envp);
+//	par[i].fd = initiate_fd_struct(current->hd_pipe);
+//	par[i].child_pid = -1;
+//	par[i].path_infile = current->infile;
+//	par[i].path_outfile = current->outfile;
+//	par[i].param_index = i;
+//	par[i].append = current->append;
+//	par[i].in_flag = current->rd_in;
+//	if (current->next == NULL)
+//		return (0);
+//	return (1);
+//}
+
+t_param initiate_each_param(t_parse *current, int i, char **envp)
 {
-	if (current == NULL)
-		return (0);
-	par[i].cmd = initiate_cmd_struct(current->args, current->cmd, envp);
-	par[i].fd = initiate_fd_struct(current->hd_pipe);
-	par[i].child_pid = -1;
-	par[i].path_infile = current->infile;
-	par[i].path_outfile = current->outfile;
-	par[i].param_index = i;
-	par[i].append = current->append;
-	par[i].in_flag = current->rd_in;
-	if (current->next == NULL)
-		return (0);
-	return (1);
+	t_param param;
+
+	param.cmd = initiate_cmd_struct(current->args, current->cmd, envp);
+	param.fd = initiate_fd_struct(current->hd_pipe);
+	param.child_pid = -1;
+	param.path_infile = current->infile;
+	param.path_outfile = current->outfile;
+	param.param_index = i;
+	param.append = current->append;
+	param.in_flag = current->rd_in;
+	return (param);
 }
 
 t_param	*fill_exec_struct(t_parse *head, int size, char **envp)
@@ -113,9 +130,10 @@ t_param	*fill_exec_struct(t_parse *head, int size, char **envp)
 	{
 //		if (initiate_each_param(params, temp_head, i, envp) == 0)
 //			break ;
-		
+		params[i] = initiate_each_param(temp_head, i, envp);
 		temp_head = temp_head->next;
 		i++;
+		
 	}
 	return (params);
 }
