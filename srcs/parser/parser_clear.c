@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:29:59 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:19:29 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:37:47 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,5 @@ t_parse	*t_parse_clear_list(t_parse *head)
 		return (NULL);
 	while (head)
 		head = rm_one_from_parse_list(head);
-	return (NULL);
-}
-
-t_parse	*list_malloc_error(t_parse *head)
-{
-	free(head);
 	return (NULL);
 }

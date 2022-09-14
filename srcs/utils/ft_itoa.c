@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:24:41 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:24:44 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:35:49 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_itoa(int n)
 	strlen = numcheck(n);
 	str = (char *)malloc(sizeof(char) * (strlen + 1));
 	if (!str)
-		return (NULL);
+		exit(1);
 	if (n < 0)
 	{
 		str[0] = '-';

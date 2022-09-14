@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:24:49 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:24:19 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:36:04 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	**wordfill(char const *s, char c, char **str)
 		{
 			str[line] = (char *)ft_calloc((end - start + 1), sizeof(char));
 			if (!str[line])
-				return (free_my_lines(str));
+				exit(1);
 			wordinput(s, start, str, c);
 			while (s[end] == c && s[end])
 				end++;
@@ -105,7 +105,7 @@ char	**ft_split(char const *s, char c)
 	words = word_amount(s, c);
 	str = (char **)malloc((words + 1) * sizeof(char *));
 	if (!str)
-		return (NULL);
+		exit(1);
 	str[words] = NULL;
 	str = wordfill(s, c, str);
 	if (!str)

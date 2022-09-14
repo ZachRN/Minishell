@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:26:08 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:24:06 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:36:16 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	s3 = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (s3 == NULL)
-		return (NULL);
+		exit(1);
 	y = 0;
 	while (s1[y] != '\0')
 	{
