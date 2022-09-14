@@ -23,7 +23,7 @@ int	check_assess_to_file(const char *path)
 
 int	not_exeption_do_pipe(int i, int comm_n, t_type type)
 {
-	if (type == BUILTIN && i == 0) ///first and builtin - I do not pipe
+	if (type == BUILTIN && comm_n == 1) ///first and builtin - I do not pipe
 		return (FLS);
 	else if (i == comm_n - 1)///last - I do not pipe
 		return (FLS);
@@ -31,8 +31,11 @@ int	not_exeption_do_pipe(int i, int comm_n, t_type type)
 	return (TRU);
 }
 
-void	handle_one_param_set(int i, int comm_number, char **envp, t_param *param)
+char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param)
 {
+	char **new_envp;
+
+	new_envp = NULL;
 	if (not_exeption_do_pipe(i, comm_number, param->cmd.type) == TRU)
 	{
 		if (pipe(param->fd.pipe) < 0)
@@ -44,13 +47,22 @@ void	handle_one_param_set(int i, int comm_number, char **envp, t_param *param)
 	if (param->child_pid == 0) ///child was created, we enter its process
 	{
 		if (check_assess_to_file(param->path_infile) < 0) ///check for file access for infile and in case of failure skip to next command
-			return ;
+			return (envp);
 		///	maybe I also skip command if its builtin but not the first one?
 		pick_a_child(i, comm_number, param); ///pick_fd_for_child_function
-		execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
-		exit(1); ///if kid fails and I need to update it in order to give err number
+		if (param->cmd.type == BUILTIN)
+		{
+			new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args);
+		}
+		else
+		{
+			execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
+			exit(1); ///if kid fails and I need to update it in order to give err number
+		}
+		
 	}
 	manage_parent_fd(i, comm_number, &param->fd);
+	return (new_envp);
 }
 
 void	go_through_commands(t_exec *exec)
@@ -60,8 +72,13 @@ void	go_through_commands(t_exec *exec)
 	i = 0;
 	while (exec->index < exec->comm_number)
 	{
-		
-		handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params); ///make sure comm number is NUMBER of commands I receive
+		exec->upd_envp = handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params); ///make sure comm number is NUMBER of commands I receive
+		if (exec->upd_envp != NULL)
+		{
+			free_array_of_str(exec->envp);
+			exec->envp = exec->upd_envp;
+			exec->upd_envp = NULL;
+		}
 		exec->index++;
 		i++;
 	}

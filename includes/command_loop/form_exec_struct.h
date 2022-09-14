@@ -10,15 +10,9 @@
 #define form_exec_struct_h
 
 #include "path_search.h"
+#include "structs.h"
 #include <sys/types.h>
 #include <unistd.h>
-
-enum    e_redirect_in
-{
-	No_Infile = 0,
-	Infile,
-	Heredoc
-};
 
 typedef enum	e_infile_src
 {
@@ -32,37 +26,6 @@ typedef enum	e_type
 	BUILTIN = 0,
 	NORMAL = 1
 }				t_type;
-
-typedef struct s_lexer
-{
-	int				token_id;
-	int				token_type;
-	int				start;
-	int				end;
-	char			*content;
-	struct s_lexer	*next;
-	struct s_lexer	*prev;
-}				t_lexer;
-
-typedef struct s_parse
-{
-	char			*cmd;
-	char			**args;
-	char			*outfile;
-	int				append;
-	char			*infile;
-	int				hd_pipe;
-	struct s_parse	*next;
-	int				rd_in;
-}				t_parse;
-
-typedef struct s_together
-{
-	t_parse		*head;
-	char		**env_array;
-	int			last_error;
-	t_lexer		*lex_head;
-}				t_together;
 
 typedef struct s_fd
 {
@@ -102,6 +65,7 @@ typedef struct	s_exec
 {
 	t_param *params;
 	char	**envp;
+	char	**upd_envp;
 	int		comm_number;
 	int		last_error;
 	int		index; ///	not sure if needed not initiated yet
