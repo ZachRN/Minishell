@@ -55,16 +55,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "03968C27-8235-45B7-BDB7-37DC44E8584E"
+            uuid = "7700A711-E4C0-4331-AD31-D5D302B42ED0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../srcs/utils/utils_strings.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "check_word(word, word_len, str)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA10E017-4DAE-49F0-AEF9-C9B75ECE8EEF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../srcs/command_loop/cmd_loop.c"
+            filePath = "../srcs/command_loop/fd_management.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "go_through_commands(exec)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "pick_a_child(index, comm_number, param)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

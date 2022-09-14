@@ -17,6 +17,7 @@ char **find_possible_path_options_from_envp(char **env)
 	char **possible_pathes;
 
 	i = 0;
+	possible_pathes = NULL;
 	while (env[i] != NULL)
 	{
 		if (check_word("PATH=/", 6, env[i]) == 1)
@@ -33,7 +34,7 @@ char **find_possible_path_options_from_envp(char **env)
 		if (possible_pathes == NULL)
 			exit(1);
 	}
-	return (NULL);
+	return (possible_pathes);
 }
 
 char	*check_correct_path(char *command, char *possible_path)
@@ -56,6 +57,7 @@ char	*check_correct_path(char *command, char *possible_path)
 char	*find_path(char *command, char **possibl_paths)
 {
 	char	*correct_path;
+	char	*joined_command;
 	int		i;
 
 	correct_path = NULL;
@@ -64,18 +66,18 @@ char	*find_path(char *command, char **possibl_paths)
 		correct_path = strdup_till_char(command, '\0');
 		return(correct_path);
 	}
-	command = ft_strjoin("/", command);
-	if (command == NULL)
+	joined_command = ft_strjoin("/", command);
+	if (joined_command == NULL)
 		exit(1);
 	i = 0;
 	while (possibl_paths[i] != NULL)
 	{
-		correct_path = check_correct_path(command, possibl_paths[i]);
+		correct_path = check_correct_path(joined_command, possibl_paths[i]);
 		if (correct_path == NULL)
 			i++;
 		else
 			break ;
 	}
-	free(command);
+	free(joined_command);
 	return (correct_path);
 }

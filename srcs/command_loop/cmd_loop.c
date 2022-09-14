@@ -11,12 +11,16 @@
 # include <unistd.h>
 #include <stdlib.h>
 
+#include <stdio.h>
+
 
 ///all exit 1 maybe need to be transfered into something more speaking
 
 int	check_assess_to_file(const char *path)
 {
-	if (access(path, R_OK) < 0) ///	R_OK, W_OK, and X_OK test whether the file exists and grants read, write, and execute permissions, respectively.
+	if (path == NULL)
+		return (0);
+	if (access(path, F_OK) < 0) ///	R_OK, W_OK, and X_OK test whether the file exists and grants read, write, and execute permissions, respectively.
 		return (-1);
 	return (0);
 }
@@ -56,6 +60,7 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 		}
 		else
 		{
+			printf("child number: %i", i);
 			execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
 			exit(1); ///if kid fails and I need to update it in order to give err number
 		}
