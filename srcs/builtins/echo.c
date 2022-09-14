@@ -30,7 +30,7 @@
 //	return (0);
 //}
 
-int	echo_builtin(int synopsis, char **str)
+int	echo_builtin(int synopsis, char **str, int fd)
 {
 	int i;
 

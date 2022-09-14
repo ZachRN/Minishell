@@ -40,13 +40,13 @@ char **built_in_commands(t_env_struct *data)
 
 	initiate_data_struct(data->command, data->envp, data);
 	if (data->comm_n == ECHO)
-		echo_builtin(synopsis, data->arguments);
+		echo_builtin(synopsis, data->arguments, data->fd_chosen);
 	else if(data->comm_n == PWD)
 		pwd_builtin();
 	else if (data->comm_n == EXPORT)
 		export_builtin(data); ///	data->new_envp =
 	else if (data->comm_n == ENV)
-		env_builtin(data->envp);
+		env_builtin(data->envp, data->fd_chosen);
 	else if (data->comm_n == UNSET)
 		unset_builtin(data);
 	else if (data->comm_n == CD)

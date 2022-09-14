@@ -6,21 +6,21 @@
 //
 
 #include "env.h"
-#include <stdio.h>
+#include "builtin_utils.h"
 
 //https://www.geeksforgeeks.org/c-program-print-environment-variables/
 //char * envp[]
 
 
 
-int	env_builtin(char **env_arg) /// env with no options or arguments
+int	env_builtin(char **env_arg, int fd) /// env with no options or arguments
 {
 	int i;
 
 	i = 0;
 	while (env_arg[i] != NULL)
 	{
-		printf("%s\n", env_arg[i]);
+		write_str_fd(env_arg[i], fd);
 		i++;
 	}
 	return (0);
