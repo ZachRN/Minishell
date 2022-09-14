@@ -10,7 +10,7 @@
 
 #include "form_exec_struct.h"
 
-void	pick_fd_for_child(t_param *param, int index, int comm_number);
+void	pick_a_child(int index, int comm_number, t_param *param);
 void	manage_parent_fd(int index, int comm_numb, t_fd *fd);
 
 #endif /* fd_management_h */
