@@ -5,13 +5,7 @@
 //  Created by Julia Demura on 03/09/2022.
 //
 
-#ifndef cmd_loop_h
-#define cmd_loop_h
-
-
-
-
-
+#ifndef CMD_LOOP_H
+# define CMD_LOOP_H
 
 #endif /* cmd_loop_h */
-

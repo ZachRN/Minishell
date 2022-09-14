@@ -5,8 +5,8 @@
 //  Created by Julia Demura on 09/08/2022.
 //
 
-#ifndef pwd_h
-#define pwd_h
+#ifndef PWD_H
+# define PWD_H
 
 int	pwd_builtin(void);
 

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:37:13 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:06:55 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/13 13:52:01 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_lexer	*create_new_lexer(char *input, int *pos, int token_id)
 
 	temp = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!temp)
-		return (NULL);
+		exit(1);
 	token = determine_token(input, *pos);
 	if (token == Lesser || token == Greater || token == Pipe
 		|| token == Quote || token == D_Quote)

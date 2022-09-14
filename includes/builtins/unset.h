@@ -5,11 +5,11 @@
 //  Created by Julia Demura on 16/08/2022.
 //
 
-#ifndef unset_h
-#define unset_h
+#ifndef UNSET_H
+# define UNSET_H
 
-#include "builtin_utils.h"
+# include "builtin_utils.h"
 
-char**	unset_builtin(t_env_struct *data);
+char	**unset_builtin(t_env_struct *data);
 
 #endif /* unset_h */

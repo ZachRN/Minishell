@@ -6,10 +6,9 @@
 //  Copyright © 2022 Yuliia Demura. All rights reserved.
 //
 
-#ifndef fd_first_child_h
-#define fd_first_child_h
+#ifndef FD_FIRST_CHILD_H
+# define FD_FIRST_CHILD_H
 
-#include "form_exec_struct.h"
-
+# include "form_exec_struct.h"
 
 #endif /* fd_first_child_h */

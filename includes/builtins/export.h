@@ -5,11 +5,11 @@
 //  Created by Julia Demura on 16/08/2022.
 //
 
-#ifndef export_h
-#define export_h
+#ifndef EXPORT_H
+# define EXPORT_H
 
-#include "builtin_utils.h"
+# include "builtin_utils.h"
 
-char**	export_builtin(t_env_struct *data);
+char	**export_builtin(t_env_struct *data);
 
 #endif /* export_h */

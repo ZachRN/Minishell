@@ -5,9 +5,9 @@
 //  Created by Julia Demura on 26/08/2022.
 //
 
-#ifndef array_sort_h
-#define array_sort_h
+#ifndef ARRAY_SORT_H
+# define ARRAY_SORT_H
 
-char **array_sort_awrite_fd(char **array, int arr_size, int fd);
+char	**array_sort_awrite_fd(char **array, int arr_size, int fd);
 
 #endif /* array_sort_h */

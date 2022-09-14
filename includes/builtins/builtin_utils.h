@@ -5,12 +5,12 @@
 //  Created by Julia Demura on 02/08/2022.
 //
 
-#ifndef builtin_utils_h
-#define builtin_utils_h
+#ifndef BUILTIN_UTILS_H
+# define BUILTIN_UTILS_H
 
-#include "utils.h"
+# include "utils.h"
 
-typedef enum	e_comm_n
+typedef enum e_comm_n
 {
 	ECHO = 0,
 	CD = 1,
@@ -21,21 +21,21 @@ typedef enum	e_comm_n
 	EXIT = 6
 }				t_comm_n;
 
-typedef struct	s_env_struct
+typedef struct s_env_struct
 {
-	t_comm_n comm_n;
-	char **envp;
-	char **new_envp;
-	char **arguments;
-	char *command;
-	int num_var;
-	int n_arguments;
-	int envvar_repeat;
+	t_comm_n	comm_n;
+	char		**envp;
+	char		**new_envp;
+	char		**arguments;
+	char		*command;
+	int			num_var;
+	int			n_arguments;
+	int			envvar_repeat;
 }				t_env_struct;
 
-int is_valid_envp_name(const char *name);
-char **fill_nulls(int i, int len, char **m_envp);
-char **allocate_env_array_without_str(char **envp, int len, const char *str);
-int	number_var_in_list(char **envp, const char *str);
+int		is_valid_envp_name(const char *name);
+char	**fill_nulls(int i, int len, char **m_envp);
+char	**allocate_env_array_without_str(char **envp, int len, const char *str);
+int		number_var_in_list(char **envp, const char *str);
 
 #endif /* builtin_utils_h */

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:35:00 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:18:26 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/13 13:31:14 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	parse_display(t_parse *head)
 {
 	t_parse	*to_display;
 	char	**temp;
+	int		i;
 
 	if (!head)
 		return ;
@@ -40,12 +41,16 @@ void	parse_display(t_parse *head)
 	while (to_display)
 	{
 		temp = to_display->args;
+		i = 0;
 		printf("Command Name: [%s]\n", to_display->cmd);
 		printf("Command Arguements: ");
 		if (temp)
 		{
-			while (*temp++)
-				printf("[%s] ", *temp);
+			while (temp[i])
+			{
+				printf("[%s] ", temp[i]);
+				i++;
+			}
 		}
 		printf("\nOutfile: [%s]\nAppend: [%d]\nInfile: [%s]\n",
 			to_display->outfile, to_display->append, to_display->infile);
@@ -131,5 +136,6 @@ t_together	*parser(char *input, t_together *all)
 		else
 			all->lex_head = NULL;
 	}
+	parse_display(all->head);
 	return (all);
 }

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:27:25 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:16:32 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/13 13:52:05 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**make_arg_list(t_l_p_pack pack, int i)
 
 	temp = (char **)malloc((i + 1) * sizeof(char *));
 	if (!temp)
-		return (NULL);
+		exit(1);
 	temp[i] = NULL;
 	search = pack.to_search;
 	i = 0;

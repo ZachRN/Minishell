@@ -6,10 +6,10 @@
 //  Copyright © 2022 Yuliia Demura. All rights reserved.
 //
 
-#ifndef fd_only_child_h
-#define fd_only_child_h
+#ifndef FD_ONLY_CHILD_H
+# define FD_ONLY_CHILD_H
 
-#include "form_exec_struct.h"
+# include "form_exec_struct.h"
 
 void	fd_only_child(t_param *param);
 

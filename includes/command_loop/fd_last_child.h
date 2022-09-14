@@ -6,11 +6,11 @@
 //  Copyright © 2022 Yuliia Demura. All rights reserved.
 //
 
-#ifndef fd_last_child_h
-#define fd_last_child_h
+#ifndef FD_LAST_CHILD_H
+# define FD_LAST_CHILD_H
 
-#include "form_exec_struct.h"
+# include "form_exec_struct.h"
 
-void fd_last_child(t_param *param);
+void	fd_last_child(t_param *param);
 
 #endif /* fd_last_child_h */

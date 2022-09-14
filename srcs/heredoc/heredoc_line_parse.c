@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:45:02 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:18:38 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/13 14:09:15 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,11 @@ int	parse_line_heredoc(t_together *all, t_heredoc *heredoc, t_parse *to_add)
 		close(to_add->hd_pipe);
 	ex = -2;
 	if (pipe(pipe_hold) == -1)
-		return (-2);
+		exit(-1);
 	signal_director(PAUSE_SIG);
 	p_id = fork();
 	if (p_id == -1)
-		return (-2);
+		exit(1);
 	else if (p_id == 0)
 		write_input_to_pipe(heredoc->end, heredoc->has_quote, pipe_hold, all);
 	waitpid(p_id, &status, 0);

@@ -5,8 +5,8 @@
 //  Created by Julia Demura on 12/08/2022.
 //
 
-#ifndef env_h
-#define env_h
+#ifndef ENV_H
+# define ENV_H
 
 int	env_builtin(char **env_arg);
 

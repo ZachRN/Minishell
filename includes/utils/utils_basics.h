@@ -5,8 +5,8 @@
 //  Created by Julia Demura on 06/09/2022.
 //
 
-#ifndef utils_basics_h
-#define utils_basics_h
+#ifndef UTILS_BASICS_H
+# define UTILS_BASICS_H
 
 typedef enum e_status
 {

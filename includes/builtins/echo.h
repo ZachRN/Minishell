@@ -5,8 +5,8 @@
 //  Created by Julia Demura on 02/08/2022.
 //
 
-#ifndef echo_h
-#define echo_h
+#ifndef ECHO_H
+# define ECHO_H
 
 int	echo_builtin(int synopsis, char **str);
 

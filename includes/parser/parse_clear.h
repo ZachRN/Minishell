@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:48:10 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/17 14:51:44 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/13 13:52:38 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@
 # include "structs.h"
 
 t_parse	*t_parse_clear_list(t_parse *head);
-t_parse	*list_malloc_error(t_parse *head);
 
 #endif

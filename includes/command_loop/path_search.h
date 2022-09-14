@@ -5,8 +5,8 @@
 //  Created by Julia Demura on 06/09/2022.
 //
 
-#ifndef path_search_h
-#define path_search_h
+#ifndef PATH_SEARCH_H
+# define PATH_SEARCH_H
 
 char	**find_possible_path_options_from_envp(char **env);
 char	*find_path(char *command, char **possibl_paths);

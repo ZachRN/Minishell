@@ -5,10 +5,10 @@
 //  Created by Julia Demura on 26/08/2022.
 //
 
-#ifndef exit_h
-#define exit_h
+#ifndef EXIT_H
+# define EXIT_H
 
-#include "builtin_utils.h"
+# include "builtin_utils.h"
 
 void	exit_builtin(t_env_struct *data, int status);
 

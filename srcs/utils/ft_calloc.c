@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:24:32 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:24:38 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/13 13:50:06 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*ft_calloc(size_t nmeb, size_t size)
 	}
 	memory = malloc(nmeb * size);
 	if (!memory)
-		return (NULL);
+		exit(1);
 	ft_bzero(memory, (nmeb * size));
 	return (memory);
 }

@@ -6,21 +6,21 @@
 //  Copyright © 2022 Yuliia Demura. All rights reserved.
 //
 
-#ifndef form_exec_struct_h
-#define form_exec_struct_h
+#ifndef FORM_EXEC_STRUCT_H
+# define FORM_EXEC_STRUCT_H
 
-#include "path_search.h"
-#include <sys/types.h>
-#include <unistd.h>
+# include "path_search.h"
+# include <sys/types.h>
+# include <unistd.h>
 
-enum    e_redirect_in
+enum e_redirect_in
 {
 	No_Infile = 0,
 	Infile,
 	Heredoc
 };
 
-typedef enum	e_infile_src
+typedef enum e_infile_src
 {
 	STDIN = 0,
 	INFILE = 1,
@@ -62,11 +62,11 @@ typedef struct s_fd
 {
 	int	infile;
 	int	outfile;
-	int heredoc;
+	int	heredoc;
 	int	temp_file;
 	int	pipe[2];
-	int rdr_infile;
-	int rdr_outfile;
+	int	rdr_infile;
+	int	rdr_outfile;
 }	t_fd;
 
 typedef struct t_cmd
@@ -76,30 +76,30 @@ typedef struct t_cmd
 	char	*command;
 }	t_cmd;
 
-typedef struct	s_param
+typedef struct s_param
 {
-	t_cmd	cmd;
-	t_fd	fd;
-	int		wait_status;
-	int		res_wait_status;
-	pid_t	child_pid;
-	char	*path_infile;
-	char	*path_outfile;
-	int		param_index;
-	int		append;
-	int		inlile_heredoc_flag;
-	t_infile_src in_flag;
+	t_cmd			cmd;
+	t_fd			fd;
+	int				wait_status;
+	int				res_wait_status;
+	pid_t			child_pid;
+	char			*path_infile;
+	char			*path_outfile;
+	int				param_index;
+	int				append;
+	int				inlile_heredoc_flag;
+	t_infile_src	in_flag;
 }				t_param;
 
-typedef struct	s_exec
+typedef struct s_exec
 {
-	t_param *params;
+	t_param	*params;
 	char	**envp;
 	int		comm_number;
 	int		last_error;
 	int		index; ///	not sure if needed not initiated yet
 }				t_exec;
 
-t_exec form_input_for_execution(char **envp, t_together *input);
+t_exec	form_input_for_execution(char **envp, t_together *input);
 
 #endif /* form_exec_struct_h */

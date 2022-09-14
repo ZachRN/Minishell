@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:49:09 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:16:48 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/13 13:51:54 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_lexer	*new_lex(t_lexer *head, char *str)
 
 	to_add = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!to_add)
-		return (head);
+		exit(1);
 	to_add->content = str;
 	to_add->prev = NULL;
 	to_add->next = NULL;
