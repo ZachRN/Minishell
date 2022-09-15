@@ -63,11 +63,11 @@ char **find_possible_path_options_from_envp(char **env)
 
 	i = 0;
 	possible_pathes = NULL;
-	while (*env && !possible_pathes)
+	while (env[i] && !possible_pathes)
 	{
-		if (!ft_strncmp(*env, "PATH=", 5))
-			possible_pathes = ft_split(*env + 5, ':');
-		env++;
+		if (!ft_strncmp(env[i], "PATH=", 5))
+			possible_pathes = ft_split(&env[i][5], ':');
+		i++;
 	}
 	return (possible_pathes);
 }

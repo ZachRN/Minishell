@@ -21,12 +21,25 @@
 #include "parser_all.h"
 #include "lexer_all.h"
 #include "cmd_loop.h"
+#include "form_exec_struct.h"
 
 //#include <lexer_display.h>
 static void	control_d(void)
 {
 	printf("exit");
 	exit(EXIT_SUCCESS);
+}
+
+void	clean_up_post_exec(t_exec exec, t_together *all, char *input)
+{
+	// printf("Seg faulting here\n");
+	free(input);
+	all->head = t_parse_clear_list(all->head);
+	all->lex_head = t_lexer_clear_list(all->lex_head);
+	if (exec.upd_envp == NULL)
+		return ;
+	free_my_lines(all->env_array);
+	all->env_array = exec.upd_envp;
 }
 
 /*This is the core loop for our minishell to read an infinite amount
@@ -45,7 +58,7 @@ Step 6: We do a basic clean up for the next round of commands.*/
 int	minishell(t_together *all)
 {
 	char	*input;
-
+	t_exec	exec;
 	while (TRUE)
 	{
 		input = readline("minishell>");
@@ -53,21 +66,14 @@ int	minishell(t_together *all)
 			control_d();
 		add_history(input);
 		all->lex_head = lexer(input);
-		// lexer_display(all->lex_head);
 		if (lexer_valid(all->lex_head))
 			all = parser(input, all);
 		else
 			all->last_error = 258;
-		
-		creat_exec_loop_commands(all, all->env_array);
-		
-		
-		
-		all->head = t_parse_clear_list(all->head);
-		all->lex_head = t_lexer_clear_list(all->lex_head);
-		if (ft_strncmp(input, "exit", 5) == 0)
-			break ;
-		free(input);
+		if (all->head)
+			exec = creat_exec_loop_commands(all, all->env_array);
+		// printf("Seg fault post exec prior to clean\n");
+		clean_up_post_exec(exec, all, input);
 	}
 	if (input)
 		free(input);

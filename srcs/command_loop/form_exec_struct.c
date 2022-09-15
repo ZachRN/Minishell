@@ -65,6 +65,7 @@ t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
 		cmd.type = BUILTIN;
 	else
 		cmd.type = NORMAL;
+	free_my_lines(possible_path);
 	return (cmd);
 }
 

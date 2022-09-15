@@ -12,19 +12,23 @@
 
 void	close_for_only_child(t_fd *fd)
 {
-	if (close(fd->pipe[0]) < 0)
-		exit(1);
-	if (close(fd->pipe[1]) < 0)
-		exit(1);
+	if (fd->pipe[0] >= 0)
+	{
+		if (close(fd->pipe[0]) < 0)
+			exit(1);
+	}
+	if (fd->pipe[1] >= 0)
+	{
+		if (close(fd->pipe[1]) < 0)
+			exit(1);
+	}
 	close_if_infile_if_heredoc_if_outfile(fd);
 }
 
 void fd_only_child(t_param *param)
 {
 	if (param->in_flag == HEREDOC || param->in_flag == INFILE)
-	{
 		param->fd.infile = get_fd_infile_or_heredoc(param->fd.heredoc, param->path_infile, param->in_flag);
-	}
 	if (param->path_outfile != NULL)
 		param->fd.outfile = open_outfile_with_without_append(param->in_flag, param->path_infile);
 	close_for_only_child(&param->fd);

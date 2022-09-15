@@ -9,6 +9,8 @@
 #include "builtin_utils.h"
 #include <stdlib.h>
 
+#include <stdio.h>
+
 //echo $ENV_VAR - gives the value of this var
 // - echo env
 /// • Handle environment variables ($ followed by a sequence of characters) which should expand to their values
@@ -34,7 +36,7 @@ int	echo_builtin(int synopsis, char **str)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 //	if (*str[0] == '$')
 //		handle_env_var(*str++, '\n');
 	while (str[i] != NULL && compare_str("-n", str[i]) == 1)
