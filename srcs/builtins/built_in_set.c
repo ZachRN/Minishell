@@ -9,7 +9,7 @@
 #include "commands.h"
 #include <stdlib.h>
 
-int	initiate_data_struct(char *command, char **envp, t_env_struct *data)
+int	initiate_data_struct(char *command, t_env_struct *data)
 {
 	char *array_built_in[8];
 
@@ -38,7 +38,7 @@ char **built_in_commands(t_env_struct *data)
 {
 	int synopsis = 1; //should be in input array
 
-	initiate_data_struct(data->command, data->envp, data);
+	initiate_data_struct(data->command, data);
 	if (data->comm_n == ECHO)
 		echo_builtin(synopsis, data->arguments, data->fd_chosen);
 	else if(data->comm_n == PWD)
@@ -51,15 +51,18 @@ char **built_in_commands(t_env_struct *data)
 		unset_builtin(data);
 	else if (data->comm_n == CD)
 		cd_builtin(data);
-	if (data->envp != NULL && data->new_envp != NULL)
-		free_array_of_str(data->envp);
-	if (data->new_envp == NULL)
-		data->new_envp = data->envp;
+	else if (data->comm_n == EXIT)
+		exit(0);
+	// if (data->envp != NULL && data->new_envp != NULL)
+	free_array_of_str(data->envp);
+	// if (data->new_envp == NULL)
+	// 	data->new_envp = data->envp;
 	return (data->new_envp);
 }
 
 /// make error message - export and unset, same format described in export c file
 
+#include <stdio.h>
 
 int	pick_fd_for_builtin(t_fd fd)/// decide which fd has priority? how to pick one
 {
@@ -83,8 +86,8 @@ char **enviromental_variable_function(char **envp, char *command, char **argumen
 	data.fd_chosen = pick_fd_for_builtin(fd);
 
 	len = find_arr_len(envp);
-	if (number_var_in_list(envp, "OLDPWD") > 0)
-		len--;
+	// if (number_var_in_list(envp, "OLDPWD") > 0)
+	// 	len--;
 	data.envp = allocate_env_array_without_str(envp, len, "OLDPWD"); //malloced envp
 	data.envp = built_in_commands(&data); // malloced new_envp in export, free envp, reassighn envp
 	// need to manage memory at this point as I am rewriting data.envp and leaking memory.  need to free in in a function before.

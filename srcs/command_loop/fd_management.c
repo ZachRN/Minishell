@@ -13,6 +13,8 @@
 #include "fd_middle_child.h"
 #include "fd_last_child.h"
 
+#include <stdio.h>
+
 void	cleaning_heredocs_if_open(int current_index, int comm_number, t_fd *fd)
 {
 	int next_command_index;

@@ -52,7 +52,7 @@ int	get_fd_infile_or_heredoc(int heredoc, const char *path_infile, int in_flag)
 {
 	int fd;
 
-	fd = -1;
+	fd = STDIN_FILENO;
 	if (in_flag == INFILE)
 	{
 		fd = open(path_infile, O_RDONLY);

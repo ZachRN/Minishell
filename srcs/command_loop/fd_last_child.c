@@ -28,9 +28,7 @@ void	fd_last_child(t_param *param)
 		if (dup2(param->fd.temp_file, STDIN_FILENO) < 0) //pipe into temp so I can manage temp-pipe in parent process
 			exit(1);
 	}
-	if (param->path_outfile == NULL)
-		param->fd.outfile = STDOUT_FILENO;
-	else
+	if (param->path_outfile != NULL)
 	{
 		param->fd.outfile = open_outfile_with_without_append(param->in_flag, param->path_infile);
 	}

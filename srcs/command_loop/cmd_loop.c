@@ -10,6 +10,7 @@
 #include "built_in_set.h"
 # include <unistd.h>
 #include <stdlib.h>
+#include <signal_handles.h>
 
 #include <stdio.h>
 
@@ -27,11 +28,11 @@ int	check_assess_to_file(const char *path)
 
 int	not_exeption_do_pipe(int i, int comm_n, t_type type)
 {
+	// printf("I is:%d\nComm_n is: %d", i, comm_n);
 	if (type == BUILTIN && comm_n == 1) ///first and builtin - I do not pipe
 		return (FLS);
-	else if (i == comm_n - 1)///last - I do not pipe
+	else if (i == comm_n - 1)///last - I do not pipe, got rid of i == 0
 		return (FLS);
-	
 	return (TRU);
 }
 
@@ -45,6 +46,12 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 		if (pipe(param->fd.pipe) < 0)
 			exit(1);
 	}
+	if (i == 0 && param->cmd.type == BUILTIN && comm_number == 1)
+	{
+		// printf("Shouldn't be here\n");
+		new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args);
+		return (new_envp);
+	}	
 	param->child_pid = fork();
 	if (param->child_pid < 0)
 		exit(1);
@@ -63,34 +70,93 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 		}
 		exit(1); ///if kid fails and I need to update it in order to give err number
 	}
+	while (wait(NULL) > 0)
+		continue;
 	manage_parent_fd(i, comm_number, &param->fd);
+	// printf("Seg fault prior new_envp return\n");
 	return (new_envp);
 }
 
-void	go_through_commands(t_exec *exec)
+int	go_through_commands(t_exec *exec)
 {
 	int i;
 
 	i = 0;
 	while (exec->index < exec->comm_number)
 	{
-		exec->upd_envp = handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params); ///make sure comm number is NUMBER of commands I receive
-		if (exec->upd_envp != NULL)
-		{
-			free_array_of_str(exec->envp);
-			exec->envp = exec->upd_envp;
-			exec->upd_envp = NULL;
-		}
+		exec->upd_envp = handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params);
+		// if (exec->upd_envp != NULL)
+		// {
+		// 	free_array_of_str(exec->envp);
+		// 	exec->envp = exec->upd_envp;
+		// 	exec->upd_envp = NULL;
+		// }
 		exec->index++;
 		i++;
 	}
+	// printf("Beofre the thingy\n");
+	// printf("This exec thing: %d", exec[exec->index].params->child_pid);
+	return (exec->params[exec->index].child_pid);
 }
 ///	at the end I expect to receive sequence of pod_t in every t_param
+///
 
-void	creat_exec_loop_commands(t_together *input, char **envp)
+int	loop_through_waitpid(int comm_num, t_param *params, int last_pid)
+{
+//	int i;
+//	int wait_status;
+//	int res_of_wait_status;
+//
+//	i = 0;
+//	wait_status = -1;
+//	res_of_wait_status = -1;
+//	while (i < comm_num)
+//	{
+//		waitpid(params[i].child_pid, &wait_status, 0);
+//		printf("\n%i/n", params[i].child_pid);
+//		res_of_wait_status = WEXITSTATUS(wait_status); //not sure what this gives me
+//		i++;
+//	}
+		int	status;
+		int	p_id;
+		int ex;
+
+		ex = 0;
+		p_id = last_pid;
+		waitpid(p_id, &status, 0);
+		if (WIFEXITED(status))
+			ex = WEXITSTATUS(status);
+		while (wait(NULL) > 0)
+			continue;
+		return (ex);
+}
+
+void	free_exec_params(t_exec *exec)
+{
+	int i;
+
+	i = 0;
+
+	while (i < exec->comm_number)
+	{
+		free(exec->params[i].cmd.cmd_path);
+		i++;
+	}
+	free(exec->params);
+}
+
+t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 {
 	t_exec exec;
+	int ch_pid;
 
 	exec = form_input_for_execution(envp, input);
-	go_through_commands(&exec);
+	// printf("Seg fault prior go through commands\n");
+	signal_director(PAUSE_SIG);
+	ch_pid = go_through_commands(&exec);
+	exec.last_error = loop_through_waitpid(exec.comm_number, exec.params, ch_pid);
+	signal_director(MAIN_SIG);
+	free_exec_params(&exec);
+	exec.params = NULL;
+	return (exec);
 }
