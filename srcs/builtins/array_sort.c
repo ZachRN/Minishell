@@ -9,18 +9,6 @@
 #include "utils.h"
 #include <stdio.h>
 
-void	printtest_arr(char **arr, char *name)
-{
-	int j = 0;
-	printf("\n%s START\n\n", name);
-	while (arr[j] != NULL)
-	{
-		printf("%s\n", arr[j]);
-		j++;
-	}
-	printf("\n%s END\n", name);
-}
-
 int write_export_no_arguments(char **array, int fd)
 {
 	int i;

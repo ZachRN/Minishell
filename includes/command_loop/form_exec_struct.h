@@ -34,8 +34,6 @@ typedef struct s_fd
 	int heredoc;
 	int	temp_file;
 	int	pipe[2];
-	int rdr_infile;
-	int rdr_outfile;
 }	t_fd;
 
 typedef struct t_cmd

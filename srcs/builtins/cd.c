@@ -135,11 +135,9 @@ char**	cd_builtin(t_env_struct *data)
 	int i_pwd;
 	int i_oldpwd;
 	int len;
-	
-	//fd for further write
-	int fd = 1;
-	
-	
+	int fd;
+
+	fd = data->fd_chosen;
 	i_pwd = number_var_in_list(data->envp, "PWD=") - 1;
 	i_oldpwd = number_var_in_list(data->envp, "OLDPWD=") - 1;
 	i_homevar = number_var_in_list(data->envp, "HOME=") - 1;

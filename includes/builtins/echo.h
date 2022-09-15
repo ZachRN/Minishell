@@ -8,6 +8,6 @@
 #ifndef echo_h
 #define echo_h
 
-int	echo_builtin(int synopsis, char **str);
+int	echo_builtin(int synopsis, char **str, int fd);
 
 #endif /* echo_h */
