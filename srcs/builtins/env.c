@@ -21,6 +21,7 @@ int	env_builtin(char **env_arg, int fd) /// env with no options or arguments
 	while (env_arg[i] != NULL)
 	{
 		write_str_fd(env_arg[i], fd);
+		write_one_char_fd(fd, '\n');
 		i++;
 	}
 	return (0);

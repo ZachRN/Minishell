@@ -57,6 +57,7 @@ typedef struct	s_param
 	int		append;
 	int		inlile_heredoc_flag;
 	t_infile_src in_flag;
+	int		last_error;
 }				t_param;
 
 typedef struct	s_exec

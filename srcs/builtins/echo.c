@@ -11,44 +11,36 @@
 
 #include <stdio.h>
 
-//echo $ENV_VAR - gives the value of this var
-// - echo env
-/// • Handle environment variables ($ followed by a sequence of characters) which should expand to their values
-
-///	echo $COLORTERMOKBKK - newline if no env
-//
-//
-//int	handle_env_var(char *name, char newline)
-//{
-//	char *found_value;
-//
-//	if (*name == '$')
-//		name++;
-//	found_value = getenv(name);
-//	if (found_value == NULL)
-//		write(1, &newline, 1);
-//	else
-//		printf("%s\n", found_value);
-//	return (0);
-//}
-
-int	echo_builtin(int synopsis, char **str, int fd)
+int	check_synopsis_alter_array(char **argc)
 {
 	int i;
 
 	i = 1;
-//	if (*str[0] == '$')
-//		handle_env_var(*str++, '\n');
-	while (str[i] != NULL && compare_str("-n", str[i]) == 1)
+	if (compare_str(argc[1], "-n") == FLS)
+		return (0);
+	else if (argc[i] == NULL)
+		return (0);
+	while (argc[i] != NULL && compare_str(argc[i], "-n") == TRU)
 		i++;
-	while (str[i] != NULL)
+	return (i - 1);
+}
+
+int	echo_builtin(char **argc, int fd)
+{
+	int i;
+	int skip_n;
+
+	i = 1;
+	skip_n = check_synopsis_alter_array(argc);
+	i += skip_n;
+	while (argc[i] != NULL)
 	{
-		write_str_fd(str[i], 1);
-		if (str[i + 1] != NULL)
-			write_one_char_fd(1, ' ');
+		write_str_fd(argc[i], fd);
+		if (argc[i + 1] != NULL)
+			write_one_char_fd(fd, ' ');
 		i++;
 	}
-	if (synopsis > 0) ///if synopsis == -1 there is non
-		write_one_char_fd(1, '\n');
+	if (skip_n == 0)
+		write_one_char_fd(fd, '\n');
 	return (0);
 }

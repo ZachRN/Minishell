@@ -16,6 +16,7 @@ The exit() function causes normal process termination and the least significant 
 
 void	exit_builtin(t_env_struct *data, int status)
 {
+	write_str_fd("exit\n", data->fd_chosen);
 	exit(status);
 	
 	//status − This is the status value returned to the parent process.

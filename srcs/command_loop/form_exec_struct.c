@@ -94,6 +94,7 @@ t_param initiate_each_param(t_parse *current, int i, char **envp)
 	param.param_index = i;
 	param.append = current->append;
 	param.in_flag = current->rd_in;
+	param.last_error = 0;
 	return (param);
 }
 
