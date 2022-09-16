@@ -10,6 +10,6 @@
 
 #include "builtin_utils.h"
 
-char**	export_builtin(t_env_struct *data);
+char	**export_builtin(t_env_struct *data);
 
 #endif /* export_h */

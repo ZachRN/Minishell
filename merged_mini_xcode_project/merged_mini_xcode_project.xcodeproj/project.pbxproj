@@ -407,14 +407,14 @@
 				0DED0BAA28CCD50A00DEFE27 /* exit.c */,
 				0DED0B4E28CCD4AA00DEFE27 /* pwd.h */,
 				0DED0BA428CCD50A00DEFE27 /* pwd.c */,
-				0DED0B4C28CCD4AA00DEFE27 /* cd.h */,
-				0DED0BA928CCD50A00DEFE27 /* cd.c */,
-				0DED0B5128CCD4AA00DEFE27 /* export.h */,
-				0DED0BAB28CCD50A00DEFE27 /* export.c */,
 				0DED0B5228CCD4AA00DEFE27 /* unset.h */,
 				0DED0BA828CCD50A00DEFE27 /* unset.c */,
+				0DED0B5128CCD4AA00DEFE27 /* export.h */,
+				0DED0BAB28CCD50A00DEFE27 /* export.c */,
 				0DED0B4D28CCD4AA00DEFE27 /* array_sort.h */,
 				0DED0BA328CCD50A00DEFE27 /* array_sort.c */,
+				0DED0B4C28CCD4AA00DEFE27 /* cd.h */,
+				0DED0BA928CCD50A00DEFE27 /* cd.c */,
 			);
 			name = commands;
 			sourceTree = "<group>";

@@ -36,9 +36,10 @@ typedef struct	s_env_struct
 	int last_error;
 }				t_env_struct;
 
-int is_valid_envp_name(const char *name);
-char **fill_nulls(int i, int len, char **m_envp);
-char **allocate_env_array_without_str(char **envp, int len, const char *str);
-int	number_var_in_list(char **envp, const char *str);
+void	write_not_a_valid_identifier(const char *command, const char *argument, int fd);
+int		is_valid_envp_name(const char *name);
+char	**fill_nulls(int i, int len, char **m_envp);
+char	**allocate_env_array_without_str(char **envp, int len, const char *str);
+int		number_var_in_list(char **envp, const char *str);
 
 #endif /* builtin_utils_h */

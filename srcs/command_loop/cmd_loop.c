@@ -113,8 +113,6 @@ int	go_through_commands(t_exec *exec)
 	return (exec->params[exec->index - 1].child_pid);
 }
 ///	at the end I expect to receive sequence of pod_t in every t_param
-///
-
 
 t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 {
