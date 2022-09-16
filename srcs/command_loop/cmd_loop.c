@@ -10,7 +10,7 @@
 #include "built_in_set.h"
 # include <unistd.h>
 #include <stdlib.h>
-#include <signal_handles.h>
+#include "signal_handles.h"
 
 #include <stdio.h>
 
@@ -48,8 +48,7 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 	}
 	if (i == 0 && param->cmd.type == BUILTIN && comm_number == 1)
 	{
-		// printf("Shouldn't be here\n");
-		new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args);
+		new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args, param->fd);
 		return (new_envp);
 	}	
 	param->child_pid = fork();
@@ -70,10 +69,7 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 		}
 		exit(1); ///if kid fails and I need to update it in order to give err number
 	}
-	while (wait(NULL) > 0)
-		continue;
 	manage_parent_fd(i, comm_number, &param->fd);
-	// printf("Seg fault prior new_envp return\n");
 	return (new_envp);
 }
 
@@ -85,17 +81,9 @@ int	go_through_commands(t_exec *exec)
 	while (exec->index < exec->comm_number)
 	{
 		exec->upd_envp = handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params);
-		// if (exec->upd_envp != NULL)
-		// {
-		// 	free_array_of_str(exec->envp);
-		// 	exec->envp = exec->upd_envp;
-		// 	exec->upd_envp = NULL;
-		// }
 		exec->index++;
 		i++;
 	}
-	// printf("Beofre the thingy\n");
-	// printf("This exec thing: %d", exec[exec->index].params->child_pid);
 	return (exec->params[exec->index].child_pid);
 }
 ///	at the end I expect to receive sequence of pod_t in every t_param
@@ -117,18 +105,18 @@ int	loop_through_waitpid(int comm_num, t_param *params, int last_pid)
 //		res_of_wait_status = WEXITSTATUS(wait_status); //not sure what this gives me
 //		i++;
 //	}
-		int	status;
-		int	p_id;
-		int ex;
+	int	status;
+	int	p_id;
+	int ex;
 
-		ex = 0;
-		p_id = last_pid;
-		waitpid(p_id, &status, 0);
-		if (WIFEXITED(status))
-			ex = WEXITSTATUS(status);
-		while (wait(NULL) > 0)
-			continue;
-		return (ex);
+	ex = 0;
+	p_id = last_pid;
+	waitpid(p_id, &status, 0);
+	if (WIFEXITED(status))
+		ex = WEXITSTATUS(status);
+	while (wait(NULL) > 0)
+		continue;
+	return (ex);
 }
 
 void	free_exec_params(t_exec *exec)
@@ -136,7 +124,6 @@ void	free_exec_params(t_exec *exec)
 	int i;
 
 	i = 0;
-
 	while (i < exec->comm_number)
 	{
 		free(exec->params[i].cmd.cmd_path);

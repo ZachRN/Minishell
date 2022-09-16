@@ -80,7 +80,10 @@ char **enviromental_variable_function(char **envp, char *command, char **argumen
 	int len;
 
 	data.command = command;
-	data.arguments = arguments;
+	if (arguments[1] == NULL)
+		data.arguments = NULL;
+	else
+		data.arguments = arguments;
 	data.n_arguments = find_arr_len(arguments);
 	data.fd = fd; //do I need?
 	data.fd_chosen = pick_fd_for_builtin(fd);
