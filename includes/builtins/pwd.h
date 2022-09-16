@@ -8,6 +8,6 @@
 #ifndef pwd_h
 #define pwd_h
 
-int	pwd_builtin(void);
+int	pwd_builtin(int fd);
 
 #endif /* pwd_h */

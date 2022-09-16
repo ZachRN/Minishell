@@ -10,15 +10,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-//getcwd():
-//The getcwd() function places an absolute pathname of the current working directory in the array pointed to by buf, and returns buf. The size argument is the size in bytes of the character array pointed to by the buf argument. If buf is a null pointer, the behaviour of getcwd() is undefined.The return value represent our current working directory.
-//
-//Function declaration:
-//
-//char *getcwd(char *buf, size_t size);
-//CCopy
-//Function return :The getcwd() function returns a pointer which points to a character array where the path of current working directory is stored.In case the path is not found then it returns a null pointer and the contents of the array are undefined and the errno is set to indicate the type of error.
-//
 //Type of errors in getcwd():
 //
 //1.EINVAL:The size argument is 0.
@@ -27,21 +18,19 @@
 //4.ENOMEM:Insufficient storage space is available.
 // SRC https://iq.opengenus.org/chdir-fchdir-getcwd-in-c/
 
+/// in the shell the pwd command says something like “name too long” for paths over 1024 characters for mac
 
-int	pwd_builtin(void)
+int	pwd_builtin(int fd)
 {
-	char buff[1024]; /// in the shell the pwd command says something like “name too long” for paths over 1024 characters for mac
-
+	char buff[1024];
 	if (getcwd(buff, sizeof(buff)) == NULL)
-		return (ERR); //use perror here?
+	{
+		perror("pwd");
+		return (1); //use perror here?
+	}
+		
 	else
-		printf("%s\n", buff); /// dont know if \n is needed
-	///yuliia@Julias-MacBook-Air ~ % pwd
-	///	/Users/yuliia
-	/// yuliia@Julias-MacBook-Air ~ %
-	/// looks like there is newline automatically and not just new line but terminal line, need to test
-	
-	
+		write_str_fd(buff, fd);
 	return (0);
 }
 

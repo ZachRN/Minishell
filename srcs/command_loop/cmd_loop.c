@@ -64,9 +64,7 @@ char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param
 			new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args, param->fd);
 		}
 		else
-		{
 			execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
-		}
 		exit(1); ///if kid fails and I need to update it in order to give err number
 	}
 	manage_parent_fd(i, comm_number, &param->fd);
