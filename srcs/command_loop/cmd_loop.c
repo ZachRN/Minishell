@@ -14,9 +14,6 @@
 
 #include <stdio.h>
 
-
-///all exit 1 maybe need to be transfered into something more speaking
-
 int	check_assess_to_file(const char *path)
 {
 	if (path == NULL)
@@ -26,83 +23,8 @@ int	check_assess_to_file(const char *path)
 	return (0);
 }
 
-int	not_exeption_do_pipe(int i, int comm_n, t_type type)
-{
-	// printf("I is:%d\nComm_n is: %d", i, comm_n);
-	if (type == BUILTIN && comm_n == 1) ///first and builtin - I do not pipe
-		return (FLS);
-	else if (i == comm_n - 1)///last - I do not pipe, got rid of i == 0
-		return (FLS);
-	return (TRU);
-}
-
-char **	handle_one_param_set(int i, int comm_number, char **envp, t_param *param)
-{
-	char **new_envp;
-
-	new_envp = NULL;
-	if (not_exeption_do_pipe(i, comm_number, param->cmd.type) == TRU)
-	{
-		if (pipe(param->fd.pipe) < 0)
-			exit(1);
-	}
-	if (i == 0 && param->cmd.type == BUILTIN && comm_number == 1)
-	{
-		new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args, param->fd);
-		return (new_envp);
-	}	
-	param->child_pid = fork();
-	if (param->child_pid < 0)
-		exit(1);
-	if (param->child_pid == 0)
-	{
-		if (check_assess_to_file(param->path_infile) < 0) ///in case of failure skip to next command
-			return (envp);
-		pick_a_child(i, comm_number, param); ///pick_fd_for_child_function
-		if (param->cmd.type == BUILTIN)
-		{
-			new_envp = enviromental_variable_function(envp, param->cmd.command, param->cmd.cmd_args, param->fd);
-		}
-		else
-			execve(param->cmd.cmd_path, param->cmd.cmd_args, envp);
-		exit(1); ///if kid fails and I need to update it in order to give err number
-	}
-	manage_parent_fd(i, comm_number, &param->fd);
-	return (new_envp);
-}
-
-int	go_through_commands(t_exec *exec)
-{
-	int i;
-
-	i = 0;
-	while (exec->index < exec->comm_number)
-	{
-		exec->upd_envp = handle_one_param_set(i, exec->comm_number, exec->envp, exec[exec->index].params);
-		exec->index++;
-		i++;
-	}
-	return (exec->params[exec->index].child_pid);
-}
-///	at the end I expect to receive sequence of pod_t in every t_param
-///
-
 int	loop_through_waitpid(int comm_num, t_param *params, int last_pid)
 {
-//	int i;
-//	int wait_status;
-//	int res_of_wait_status;
-//
-//	i = 0;
-//	wait_status = -1;
-//	res_of_wait_status = -1;
-//	while (i < comm_num)
-//	{
-//		waitpid(params[i].child_pid, &wait_status, 0);
-//		printf("\n%i/n", params[i].child_pid);
-//		res_of_wait_status = WEXITSTATUS(wait_status); //not sure what this gives me
-//		i++;
-//	}
 	int	status;
 	int	p_id;
 	int ex;
@@ -129,6 +51,70 @@ void	free_exec_params(t_exec *exec)
 	}
 	free(exec->params);
 }
+
+int	not_exeption_do_pipe(int i, int comm_n, t_type type)
+{
+	if (type == BUILTIN && comm_n == 1) ///first and builtin - I do not pipe
+		return (FLS);
+	else if (i == comm_n - 1)///last - I do not pipe, got rid of i == 0
+		return (FLS);
+	return (TRU);
+}
+
+void	fork_and_manage_child(t_exec *exec, t_param *param)
+{
+	param->child_pid = fork();
+	if (param->child_pid < 0)
+		exit(1);
+	if (param->child_pid == 0)
+	{
+		if (check_assess_to_file(param->path_infile) < 0) ///in case of failure skip to next command
+			exit(1);
+		pick_a_child(exec->index, exec->comm_number, param); ///pick_fd_for_child_function
+		if (param->cmd.type == BUILTIN)
+			enviromental_variable_function(exec, param->cmd.cmd_args, param->fd);
+		else
+			execve(param->cmd.cmd_path, param->cmd.cmd_args, exec->envp);
+		exit(1); ///if kid fails and I need to update it in order to give err number
+	}
+}
+
+char	**handle_one_param_set(t_exec *exec, t_param *param)
+{
+	char **new_envp;
+
+	new_envp = NULL;
+	if (not_exeption_do_pipe(exec->index, exec->comm_number, param->cmd.type) == TRU)
+	{
+		if (pipe(param->fd.pipe) < 0)
+			exit(1);
+	}
+	if (exec->index == 0 && param->cmd.type == BUILTIN && exec->comm_number == 1)
+	{
+		new_envp = enviromental_variable_function(exec, param->cmd.cmd_args, param->fd);
+		return (new_envp);
+	}
+	fork_and_manage_child(exec, param);
+	manage_parent_fd(exec->index, exec->comm_number, &param->fd);
+	return (new_envp);
+}
+
+int	go_through_commands(t_exec *exec)
+{
+	int i;
+
+	i = 0;
+	while (exec->index < exec->comm_number)
+	{
+		exec->upd_envp = handle_one_param_set(exec, exec[exec->index].params);
+		exec->index++;
+		i++;
+	}
+	return (exec->params[exec->index].child_pid);
+}
+///	at the end I expect to receive sequence of pod_t in every t_param
+///
+
 
 t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 {
