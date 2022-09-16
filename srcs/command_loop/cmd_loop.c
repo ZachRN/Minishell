@@ -71,6 +71,7 @@ void	fork_and_manage_child(t_exec *exec, t_param *param)
 		if (check_assess_to_file(param->path_infile) < 0) ///in case of failure skip to next command
 			exit(1);
 		pick_a_child(exec->index, exec->comm_number, param); ///pick_fd_for_child_function
+		signal_director(4);
 		if (param->cmd.type == BUILTIN)
 			enviromental_variable_function(exec, param->cmd.cmd_args, param->fd);
 		else
