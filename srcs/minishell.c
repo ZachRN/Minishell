@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 15:15:16 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:16:12 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/16 18:22:06 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ static void	control_d(void)
 
 void	clean_up_post_exec(t_exec exec, t_together *all, char *input)
 {
-	// printf("Seg faulting here\n");
 	free(input);
 	all->head = t_parse_clear_list(all->head);
 	all->lex_head = t_lexer_clear_list(all->lex_head);
+	if (exec.last_error != -10)
+		all->last_error = exec.last_error;
 	if (exec.upd_envp == NULL)
 		return ;
 	free_my_lines(all->env_array);
 	all->env_array = exec.upd_envp;
+	exec.upd_envp = NULL;
 }
 
 /*This is the core loop for our minishell to read an infinite amount
@@ -59,8 +61,11 @@ int	minishell(t_together *all)
 {
 	char	*input;
 	t_exec	exec;
+
+	exec.upd_envp = NULL;
 	while (TRUE)
 	{
+		exec.last_error = -10;
 		input = readline("minishell>");
 		if (!input)
 			control_d();

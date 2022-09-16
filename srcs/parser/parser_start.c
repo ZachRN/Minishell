@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:35:00 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/14 12:52:10 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/16 16:33:42 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ t_together	*error_heredoc_clean(t_together *all, t_parse *to_add)
 {
 	all->last_error = 1;
 	all->head = t_parse_clear_list(all->head);
+	all->head = NULL;
 	all->lex_head = t_lexer_clear_list(all->lex_head);
+	all->lex_head = NULL;
 	t_parse_clear_list(to_add);
 	return (all);
 }
