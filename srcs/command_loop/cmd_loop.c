@@ -110,7 +110,7 @@ int	go_through_commands(t_exec *exec)
 		exec->index++;
 		i++;
 	}
-	return (exec->params[exec->index].child_pid);
+	return (exec->params[exec->index - 1].child_pid);
 }
 ///	at the end I expect to receive sequence of pod_t in every t_param
 ///
