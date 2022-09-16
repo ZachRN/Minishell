@@ -9,12 +9,6 @@
 #include "builtin_utils.h"
 #include <stdio.h>
 
-//unsetting bullshit is giving next bash line, same with no arg
-
-// command ends with newline, doest matter if env exists
-///if env in argument does not exists, bash does nothing - newline
-/// if invilid identifier, unset still unsets all that needed but then write error message
-
 void	loop_memory(t_env_struct *data)
 {
 	if (data->new_envp == NULL && data->envp != NULL)
@@ -23,7 +17,7 @@ void	loop_memory(t_env_struct *data)
 	{
 		free_array_of_str(data->envp);
 		data->envp = data->new_envp;
-		data->new_envp = NULL; ///	do not free 
+		data->new_envp = NULL;
 	}
 }
 
@@ -35,7 +29,10 @@ char	**unset_builtin(t_env_struct *data) /// unset works with multiple var names
 	while (data->arguments[i] != NULL)
 	{
 		if (is_valid_envp_name(data->arguments[i]) == FLS)
-			printf("\n Minishell : %s : '%s' : not a valid identifier", data->command, data->arguments[i]);
+		{
+			write_not_a_valid_identifier(data->command, data->arguments[i], data->fd_chosen);
+			data->last_error = 1; ///error remains even if next argument is valid
+		}
 		else if (number_var_in_list(data->envp, data->arguments[i]) > 0)
 		{
 			if (i > 0)

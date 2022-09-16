@@ -26,11 +26,15 @@ int	pwd_builtin(int fd)
 	if (getcwd(buff, sizeof(buff)) == NULL)
 	{
 		perror("pwd");
-		return (1); //use perror here?
+		return (1);
 	}
 		
 	else
+	{
 		write_str_fd(buff, fd);
+		write_one_char_fd(fd, '\n');
+	}
+		
 	return (0);
 }
 

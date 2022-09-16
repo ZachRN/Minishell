@@ -8,6 +8,17 @@
 #include "builtin_utils.h"
 #include <stdlib.h>
 
+void	write_not_a_valid_identifier(const char *command, const char *argument, int fd)
+{
+	write_one_char_fd(fd, '\n');
+	write_str_fd("Minishell : ", fd);
+	write_str_fd(command, fd);
+	write_str_fd(" : ", fd);
+	write_str_fd(argument, fd);
+	write_str_fd(" : not a valid identifier", fd);
+	write_one_char_fd(fd, '\n');
+}
+
 int is_valid_envp_name(const char *name)
 {
 	if (is_number(name[0]) == TRU)

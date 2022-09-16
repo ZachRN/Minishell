@@ -9,6 +9,16 @@
 #include "commands.h"
 #include <stdlib.h>
 
+//int	pick_fd_for_builtin(t_fd fd)
+//{
+//	if (fd.outfile >= 0)
+//		return (fd.outfile);
+//	else if (fd.pipe[1] >= 0)
+//		return (fd.pipe[1]);
+//	else
+//		return (STDOUT_FILENO);
+//}
+
 int	initiate_data_struct(char *command, t_env_struct *data)
 {
 	char *array_built_in[8];
@@ -45,12 +55,17 @@ char **built_in_commands(t_env_struct *data)
 		env_builtin(data->envp, data->fd_chosen);
 	else if (data->comm_n == EXIT)
 		exit_builtin(data, data->last_error);
-	
-	
-	else if (data->comm_n == EXPORT)
-		export_builtin(data);
 	else if (data->comm_n == UNSET)
 		unset_builtin(data);
+	else if (data->comm_n == EXPORT)
+		export_builtin(data);
+	//TODO:
+	
+	
+	
+	//next:
+	
+	
 	else if (data->comm_n == CD)
 		cd_builtin(data);
 	free_array_of_str(data->envp);
@@ -59,8 +74,17 @@ char **built_in_commands(t_env_struct *data)
 	return (data->new_envp);
 }
 
-int	pick_fd_for_builtin(t_fd fd)
+int	manage_arg_and_fd_for_data(char **arguments, t_fd fd, t_env_struct *data)
 {
+	data->command = arguments[0];
+	if (arguments[1] == NULL)
+		data->arguments = NULL;
+	else
+	{
+		arguments++;
+		data->arguments = arguments;
+	}
+	data->n_arguments = find_arr_len(data->arguments);
 	if (fd.outfile >= 0)
 		return (fd.outfile);
 	else if (fd.pipe[1] >= 0)
@@ -74,20 +98,13 @@ char **enviromental_variable_function(t_exec *exec, char **arguments, t_fd fd)
 	t_env_struct data;
 	int len;
 
-	data.command = arguments[0];
-	if (arguments[1] == NULL)
-		data.arguments = NULL;
-	else
-	{
-		arguments++;
-		data.arguments = arguments;
-	}
-	data.n_arguments = find_arr_len(arguments);
-	data.fd_chosen = pick_fd_for_builtin(fd);
+	data.fd_chosen = manage_arg_and_fd_for_data(arguments, fd, &data);
+//	data.fd_chosen = pick_fd_for_builtin(fd);
 	data.last_error = 0;
 	len = find_arr_len(exec->envp);
 	data.envp = allocate_env_array_without_str(exec->envp, len, "OLDPWD"); //malloced envp
-	data.envp = built_in_commands(&data); // malloced new_envp in export, free envp, reassighn envp
-	// need to manage memory at this point as I am rewriting data.envp and leaking memory.  need to free in in a function before.
+	data.envp = built_in_commands(&data); /// malloced new_envp in export, free envp, reassighn envp
+	/// need to manage memory at this point as I am rewriting data.envp and leaking memory.  need to free in in a function before.
+	exec->last_error = data.last_error;
 	return (data.envp);
 }
