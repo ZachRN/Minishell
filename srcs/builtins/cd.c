@@ -9,23 +9,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int go_to_other_folder(const char *argument, const char *home_var, int fd)
+int go_to_other_folder(const char *path, int fd)
 {
 	int res;
-	const char *path;
 
-	if (argument != NULL)
-		path = argument;
-	else
-	{
-		if (home_var != NULL)
-		{
-			while (*home_var != '=')
-				home_var++;
-			home_var++;
-			path = home_var;
-		}
-	}
 	res = chdir(path);
 	if (res < 0)
 	{
@@ -84,7 +71,7 @@ int change_pwd_value(t_env_struct *data, int i_homevar, int i_pwd)
 {
 	if (data->new_envp[i_pwd] != NULL)
 		free(data->new_envp[i_pwd]);
-	if (data->arguments[0] == NULL && i_homevar > 0)
+	if (data->arguments != NULL && data->arguments[0] == NULL && i_homevar > 0)
 		data->new_envp[i_pwd] = join_varname_value_malloc("PWD=", data->envp[i_homevar]);
 	else
 		data->new_envp[i_pwd] = ft_strjoin("PWD=", data->arguments[0]);
@@ -129,32 +116,65 @@ char **	handle_enviromntl(t_env_struct *data, int i_homevar, int i_pwd, int i_ol
 	return (data->new_envp);
 }
 
-char**	cd_builtin(t_env_struct *data)
+char *pick_argument_for_cd(char **arguments, const char *home_var)
 {
-	int i_homevar;
+	char *path;
+
+	path = NULL;
+	if (arguments != NULL)
+		path = ft_strdup(arguments[0]);
+	else
+	{
+		if (home_var != NULL)
+		{
+			while (*home_var != '=')
+				home_var++;
+			home_var++;
+			path = ft_strdup(home_var);
+		}
+	}
+	return (path);
+}
+
+char **change_enviromental_variable_after_cd(int i_homevar, const char *cd_arg, t_env_struct *data)
+{
 	int i_pwd;
 	int i_oldpwd;
 	int len;
-	int fd;
-
-	fd = data->fd_chosen;
+	
 	i_pwd = number_var_in_list(data->envp, "PWD=") - 1;
 	i_oldpwd = number_var_in_list(data->envp, "OLDPWD=") - 1;
-	i_homevar = number_var_in_list(data->envp, "HOME=") - 1;
-	if (go_to_other_folder(data->arguments[0], data->envp[i_homevar], fd) >= 0)
-	{
-		len = data->num_var + 1;
-		if (i_oldpwd < 0)
-			len++;
-		data->new_envp = malloc(sizeof(char *) * len); ///create new_envp, cope from data->envp if envp NULL, which I need to test
-		if (data->new_envp == NULL)
-			exit(1);
-		data->new_envp = fill_nulls(0, data->num_var, data->new_envp);
-		handle_enviromntl(data, i_homevar, i_pwd, i_oldpwd);
-		return (data->new_envp);
-	}
-	return (data->envp);
+	len = data->num_var + 1;
+	if (i_oldpwd < 0)
+		len++;
+	data->new_envp = malloc(sizeof(char *) * len); ///create new_envp, cope from data->envp if envp NULL, which I need to test
+	if (data->new_envp == NULL)
+		exit(1);
+	data->new_envp = fill_nulls(0, data->num_var, data->new_envp);
+	handle_enviromntl(data, i_homevar, i_pwd, i_oldpwd);
+	return (data->new_envp);
 }
 
-//error messages \
-bash: cd: Docume/: No such file or directory \
+char**	cd_builtin(t_env_struct *data)
+{
+	int i_homevar;
+	const char *cd_arg;
+
+	i_homevar = number_var_in_list(data->envp, "HOME=") - 1;
+	if (data->arguments == NULL && i_homevar < 0) ///bone CD command use HOME env var to go there but if unset HOME and not give any arg to cd there is no path
+	{
+		write_str_fd("minishell: cd: HOME not set", data->fd_chosen);
+		return (NULL);
+	}
+	cd_arg = pick_argument_for_cd(data->arguments, data->envp[i_homevar]);
+	if (go_to_other_folder(cd_arg, data->fd_chosen) >= 0)
+	{
+		data->new_envp = change_enviromental_variable_after_cd(i_homevar, cd_arg, data);
+		return (data->new_envp);
+	}
+	return (NULL);
+}
+//TODO if argument == ".." need to go back
+
+//error messages
+//bash: cd: Docume/: No such file or directory
