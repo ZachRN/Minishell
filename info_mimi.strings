@@ -6,6 +6,251 @@
   
 */
 
+TEST
+
+#BUILTIN echo
+//echo
+//echo -n
+//echo -nnnnnnnnnnn
+//echo -n -n
+//echo -nf -n
+//echo -n -nf
+//echo test -n
+//echo -n test
+//echo test -n -n
+//echo -n -n test
+//echo -n test -n
+//echo testOne testTwo testThree
+//echo $PWD
+//echo $OLDPWD
+
+
+#BUILTIN cd
+//cd
+//cd NOT_EXISTING_DIR
+
+
+'//cd NOT_EXISTING_FILE - ??
+'//cd LICENSE		-??
+//cd ..
+//cd includes/../srcs
+
+#BUILTIN exit
+exit
+exit 255
+exit 10000
+exit bla 24
+exit 24 bla
+exit bla bla
+exit bla bla bla
+exit 1 2 3
+exit -3
+exit -3 7
+
+
+
+
+
+#BUILTIN env
+env | grep --invert-match | sort
+env bla
+export a;env | grep --invert-match | sort
+#BUILTIN pwd
+pwd
+pwd bla
+pwd 1
+pwd bla bla
+
+
+
+#BUILTIN unset
+unset USER
+env | grep USER=;unset USER;env | grep USER=
+unset BLA
+unset bla
+unset PATH1
+unset 1PATH
+unset PATH*
+unset PATH USER
+unset PATH USER LOGNAME
+unset _PATH
+unset PATH_
+
+
+
+
+#BUILTIN export
+export | grep --invert-match 'declare -x _='
+export NEW_VAR;export | grep "NEW_VAR"
+export NEW_VAR;export NEW_VAR=t;export | grep "NEW_VAR"
+export NEW_VAR=t;export NEW_VAR=test;export | grep "NEW_VAR"
+export NEW_VAR=t;export NEW_VAR+=e;export NEW_VAR+=s;export NEW_VAR+=t;export | grep "NEW_VAR"
+export NEW_VAR=a;export NEW_VAR=a=b;export NEW_VAR+==c=d;export | grep "NEW_VAR"
+export NEW_VAR=a;export NEW_VAR;export | grep "NEW_VAR"
+export _NEW_VAR;export | grep "_NEW_VAR"
+export ___NEW_VAR;export | grep "___NEW_VAR"
+export _NEW_VAR1;export | grep "_NEW_VAR1"
+
+
+
+
+#QUOTES single quote
+echo 'hello there'
+echo '"hello there"'
+echo ''hello''
+echo '$PWD'
+echo 'I am a pipe | and I am a redirect > < << >>'
+
+
+
+#QUOTES double quote
+echo "hello there"
+echo "'hello there'"
+echo ""hello""
+echo "$PWD"
+echo "I am a pipe | and I am a redirect > < << >>"
+#REDIRECT input
+< Makefile
+cat < Makefile
+cat < LICENSE < Makefile
+cat < Dockerfile < LICENSE < Makefile
+#REDIRECT output
+>OUT;cat OUT;rm OUT
+ls -la > OUT;cat OUT;rm OUT
+cat < Makefile > OUT; cat OUT;rm OUT
+ls -la > OUT1 > OUT2;ls;cat OUT1;cat OUT2;rm OUT1 OUT2
+ls -la > OUT1 > OUT2 > OUT3;ls;cat OUT1;cat OUT2;cat OUT3;rm OUT1 OUT2 OUT3
+
+
+
+
+#REDIRECT append
+>>OUT;cat OUT;rm OUT
+ls -la >> OUT;cat OUT;rm OUT
+cat < Makefile >> OUT; cat OUT;rm OUT
+ls -la >> OUT1 >> OUT2;ls;cat OUT1;cat OUT2;rm OUT1 OUT2
+ls -la >> OUT1 >> OUT2 >> OUT3;ls;cat OUT1;cat OUT2;cat OUT3;rm OUT1 OUT2 OUT3
+echo one >> OUT;echo two >> OUT;echo tree >> OUT;cat OUT;rm OUT
+
+
+
+#REDIRECT heredoc
+#PIPES
+ls -l | wc -l
+echo "bla di bla" | wc -l
+echo "bla di bla" | grep "bla" | wc -l
+env | ls -l | wc -l
+echo cat | wc -l | cat
+pwd | cat | env | sort
+echo one | cat -e | cat -e | grep one
+ls -l | wc -l | echo cat
+ls -l | wc -l | echo cat | wc -l
+pwd | wc -l | echo cat | wc -l
+ls -l | head -n 6 | tail -n 5 | head -n 4 | tail -n 3 | head -n 2 | wc -l
+
+
+
+
+#PARSER spaces
+echo one  two   three    four
+cat<Makefile|grep NAME>OUT;cat OUT;rm OUT
+#PARSER word splitting
+cat Make'file'
+cat 'Make'file
+cat Make"file"
+cat "Make"file
+cat "Make"'file'
+cat 'Make'"file"
+cat $HOME"/.bashrc"
+ls "$HOME"'/../'$USER
+echo $USER$PWD
+#PARSER normalization / word order
+< Makefile cat
+< LICENSE < Dockerfile < Makefile cat -e
+cat < Dockerfile < LICENSE < Makefile -e
+< LICENSE cat -e < Makefile
+> OUT cat -e < Makefile;cat OUT;rm OUT
+< Makefile grep NAME > OUT;cat OUT;rm OUT
+#PATHRESOLVE
+ls
+/bin/ls
+/bin/../bin/ls
+/usr/bin/../../bin/ls
+cd /bin;./ls
+cd /;bin/ls
+#ENVIRONMENT variables
+echo $
+echo $USER
+echo "$USER"
+echo "$USER $PWD $HOME"
+echo;echo $?
+echo one | grep -q two;echo $?
+#EVAL
+/bin/ls
+touch DANG;chmod u-r DANG;cat DANG;rm DANG
+/bin/ls -l
+echo Hi
+echo -n Hi
+exit
+exit 42
+exit -3
+exit bla
+/bin/ls -l
+echo;echo $?
+/bin/ls filethatdoesntexist
+echo;echo $?
+expr $? + $?
+echo "bla bla"
+echo "cat lol.c | cat > lol.c"
+echo ''
+echo 'bla'
+exit '42'
+echo 'env'
+echo 'ls -l | wc -l'
+echo '$USER'
+env | sort
+export NEW_VAR;export | grep "NEW_VAR"
+env | grep USER=;unset USER;env | grep USER=
+cd tests
+cd tests;pwd
+cd .;pwd
+cd ..;pwd
+pwd
+unset PATH
+export PATH=directory1:directory2
+cat < Makefile
+< Makefile cat
+ls -la > OUT1
+ls -la > OUT1 > OUT1;rm OUT1
+ls -la > OUT1 > OUT2;rm OUT1;rm OUT2
+< Makefile cat > OUT1;rm OUT1
+< OUT1 ls -la >> OUT1
+dsbksdgbksdghsd
+echo $PATH
+echo "$PATH"
+echo $USER
+echo "$USER"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 tutorial on altering scripts// https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 
 bubble sort //https://pencilprogrammer.com/algorithms/bubble-sort/ - bubble alg
