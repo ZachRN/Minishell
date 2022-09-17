@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <stdio.h>
+
 int go_to_other_folder(const char *path, int fd)
 {
 	int res;
@@ -67,24 +69,19 @@ char	*join_varname_value_malloc(char *name, char *value)
 	return (str);
 }
 
-int change_pwd_value(t_env_indexes i, const char *cd_arg, t_env_struct *data)
+int change_pwd_value(t_env_indexes i, t_env_struct *data) //const char *cd_arg
 {
 	char buff[1024];
 	
 	if (data->new_envp[i.pwd] != NULL)
 		free(data->new_envp[i.pwd]);
-	if (cd_arg == NULL && i.homevar > 0)
+	if (data->arguments == NULL && i.homevar > 0) //cd_arg == NULL
 		data->new_envp[i.pwd] = join_varname_value_malloc("PWD=", data->envp[i.homevar]);
 	else
 	{
-		if (compare_str("..", cd_arg) == TRU)
-		{
-			if (getcwd(buff, sizeof(buff)) == NULL)
-				exit(1);// not sure its correct
-			data->new_envp[i.pwd] = ft_strjoin("PWD=", buff);
-		}
-		else
-			data->new_envp[i.pwd] = ft_strjoin("PWD=", cd_arg);
+		if (getcwd(buff, sizeof(buff)) == NULL)
+			exit(1);// not sure its correct
+		data->new_envp[i.pwd] = ft_strjoin("PWD=", buff);
 	}
 		
 	return (0);
@@ -100,7 +97,7 @@ int change_var_value_based_on_indexes(int i_oldpwd, int i_pwd, t_env_struct *dat
 	return (0);
 }
 
-char	**handle_enviromntl(t_env_indexes index, const char *cd_arg, t_env_struct *data)
+char	**handle_enviromntl(t_env_indexes index, t_env_struct *data)
 {
 	int j;
 
@@ -110,7 +107,7 @@ char	**handle_enviromntl(t_env_indexes index, const char *cd_arg, t_env_struct *
 		if (j == index.oldpwd)
 			change_var_value_based_on_indexes(j, index.pwd, data);
 		else if (j == index.pwd)
-			change_pwd_value(index, cd_arg, data);
+			change_pwd_value(index, data); //cd_arg
 		else
 		{
 			data->new_envp[j] = ft_strdup(data->envp[j]);
@@ -148,7 +145,7 @@ char	*pick_argument_for_cd(char **arguments, const char *home_var)
 	return (path);
 }
 
-char	**change_enviromental_variable_after_cd(t_env_indexes i, const char *cd_arg, t_env_struct *data)
+char	**change_enviromental_variable_after_cd(t_env_indexes i, t_env_struct *data)
 {
 	int len;
 	
@@ -161,7 +158,7 @@ char	**change_enviromental_variable_after_cd(t_env_indexes i, const char *cd_arg
 	if (data->new_envp == NULL)
 		exit(1);
 	data->new_envp = fill_nulls(0, data->num_var, data->new_envp);
-	handle_enviromntl(i, cd_arg, data);
+	handle_enviromntl(i, data);
 	return (data->new_envp);
 }
 
@@ -179,22 +176,12 @@ char	**cd_builtin(t_env_struct *data)
 	cd_arg = pick_argument_for_cd(data->arguments, data->envp[index.homevar]);
 	if (go_to_other_folder(cd_arg, data->fd_chosen) >= 0)
 	{
-		data->new_envp = change_enviromental_variable_after_cd(index, cd_arg, data);
+		data->new_envp = change_enviromental_variable_after_cd(index, data);
+		free(cd_arg);
 		return (data->new_envp);
 	}
 	free(cd_arg);
+	
+	
 	return (NULL);
 }
-//TODO if argument == ".." - pwd needs to be catched from current directory
-//char buff[1024];
-//if (getcwd(buff, sizeof(buff)) == NULL)
-//{
-//	perror("pwd");
-//	return (1);
-//}
-
-
-//issue: OLDPWD is gone
-
-//error messages
-//bash: cd: Docume/: No such file or directory

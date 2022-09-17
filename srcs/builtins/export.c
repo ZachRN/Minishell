@@ -78,7 +78,6 @@ char	**export_builtin(t_env_struct *data)
 	if (data->arguments == NULL)
 	{
 		array_sort_awrite_fd(data->envp, data->num_var, 1);
-//		data->new_envp = allocate_env_array_without_str(data->envp, sum, NULL);
 		return (NULL);
 	}
 	data->new_envp = allocate_env_array_without_str(data->envp, sum, NULL);
