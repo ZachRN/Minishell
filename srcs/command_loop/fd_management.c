@@ -38,8 +38,6 @@ void	pick_a_child(int i, int comm_number, t_param *params)
 	if (comm_number > 1 && i > 0)
 	{
 		params[i].fd.temp_file = params[i - 1].fd.temp_file;
-//		dup2(params[i].fd.temp_file, params[i - 1].fd.temp_file);
-//		close(params[i - 1].fd.temp_file);
 	}
 	
 	
@@ -65,6 +63,17 @@ void	manage_parent_fd(int index, int comm_numb, t_fd *fd)
 	{
 		if (close(fd->pipe[1]) < 0)
 			exit(1);
+		fd->pipe[1] = -1;
+	}
+	
+	
+	close_if_infile_if_heredoc_if_outfile(fd);
+	printf("parent1");
+	if (fd->pipe[1] >= 0)
+	{
+		if (close(fd->pipe[1]) < 0)
+			exit(1);
+		fd->pipe[1] = -1;
 	}
 }
 
