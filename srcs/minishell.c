@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 15:15:16 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/16 18:22:06 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/17 16:03:34 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,10 @@ int	minishell(t_together *all)
 		all->lex_head = lexer(input);
 		if (lexer_valid(all->lex_head))
 			all = parser(input, all);
-		else
+		else if (input[0] != '\0')
 			all->last_error = 258;
 		if (all->head)
 			exec = creat_exec_loop_commands(all, all->env_array);
-		// printf("Seg fault post exec prior to clean\n");
 		clean_up_post_exec(exec, all, input);
 	}
 	if (input)

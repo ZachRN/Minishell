@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 15:14:29 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/16 15:34:55 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/17 15:56:06 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ int	main(int argc, char *argv[], char *env[])
 	signal_director(1);
 	minishell(&all);
 	free_lines(all.env_array);
-	exit(1);
+	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:35:00 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/16 16:33:42 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/17 15:33:12 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ t_together	*parser(char *input, t_together *all)
 		all->lex_head = expand_lex_quotes(all->lex_head, input);
 		pack.to_search = all->lex_head;
 		pack = handle_redirections(pack);
+		if (pack.no_file == 2)
+			return (clean_ambigious_file(all, pack));
 		pack = cmd_args(pack);
 		add_to_back(all, pack.to_add);
 		if (pack.to_search)
