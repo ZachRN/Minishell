@@ -19,7 +19,12 @@ int	check_assess_to_file(const char *path)
 	if (path == NULL)
 		return (0);
 	if (access(path, F_OK) < 0) ///	R_OK, W_OK, and X_OK test whether the file exists and grants read, write, and execute permissions, respectively.
+	{
+		write_str_fd("minishell: ", STDERR_FILENO);
+		write_str_fd(path, STDERR_FILENO);
+		write_str_fd(": No such file or directory\n", STDERR_FILENO);
 		return (-1);
+	}	
 	return (0);
 }
 
@@ -61,6 +66,25 @@ int	not_exeption_do_pipe(int i, int comm_n, t_type type)
 	return (TRU);
 }
 
+char	*find_command_path(t_cmd cmd, char **envp)
+{
+	char **possible_path;
+
+	if (cmd.command == NULL)
+		return (NULL);
+	possible_path = find_possible_path_options_from_envp(envp);
+	cmd.cmd_path = find_path(cmd.command, possible_path);
+	if (!cmd.cmd_path)
+	{
+		write_str_fd("minishell: ", STDERR_FILENO);
+		write_str_fd(cmd.command, STDERR_FILENO);
+		write_str_fd(": command not found\n", STDERR_FILENO);
+		exit(127);
+	}
+	free_my_lines(possible_path);
+	return (cmd.cmd_path);
+}
+
 void	fork_and_manage_child(t_exec *exec, t_param *param)
 {
 	param->child_pid = fork();
@@ -72,6 +96,7 @@ void	fork_and_manage_child(t_exec *exec, t_param *param)
 			exit(1);
 		pick_a_child(exec->index, exec->comm_number, param); ///pick_fd_for_child_function
 		signal_director(DEFAULT_SIG);
+		exec->params[exec->index].cmd.cmd_path = find_command_path(exec->params[exec->index].cmd, exec->envp);
 		if (param->cmd.type == BUILTIN)
 			enviromental_variable_function(exec, param->cmd.cmd_args, param->fd);
 		else
