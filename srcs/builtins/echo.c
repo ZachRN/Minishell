@@ -11,20 +11,45 @@
 
 #include <stdio.h>
 
+int	find_nnnnn(char *str)
+{
+	while (str)
+	{
+		if (str[0] == '-' && str[1] == 'n')
+		{
+			str += 2;
+			while (*str != '\0' && *str == 'n')
+				str++;
+		}
+		if (*str == '\0')
+			return (TRU);
+		else
+			return (FLS);
+	}
+	return (FLS);
+}
+
 int	check_synopsis_alter_array(char **argc)
 {
 	int i;
 
-	i = 1;
+	i = 0;
 	if (argc == NULL)
 		return (0);
-	if (compare_str(argc[1], "-n") == FLS)
-		return (0);
-	else if (argc[i] == NULL)
-		return (0);
-	while (argc[i] != NULL && compare_str(argc[i], "-n") == TRU)
+//	if (compare_str(argc[0], "-n") == FLS)
+//		return (0);
+//	else if (argc[i] == NULL)
+//		return (0);
+//	while (argc[i] != NULL && compare_str(argc[i], "-n") == TRU)
+//		i++;
+	
+	while (argc[i] != NULL && (compare_str(argc[i], "-n") == TRU || find_nnnnn(argc[i]) == TRU))
+	{
 		i++;
-	return (i - 1);
+	}
+	
+	
+	return (i);
 }
 
 int	echo_builtin(char **argc, int fd)
@@ -32,7 +57,7 @@ int	echo_builtin(char **argc, int fd)
 	int i;
 	int skip_n;
 
-	i = 1;
+	i = 0;
 	skip_n = check_synopsis_alter_array(argc);
 	i += skip_n;
 	if (argc == NULL)
