@@ -55,7 +55,6 @@ int	linked_list_size(t_parse *head)
 t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
 {
 	t_cmd cmd;
-	char **possible_path;
 
 	cmd.cmd_args = args;
 	cmd.command = comm_name;

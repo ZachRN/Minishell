@@ -8,25 +8,14 @@
 #include "cmd_loop.h"
 #include "fd_management.h"
 #include "built_in_set.h"
+
+#include "path_search.h"
+#include "signal_handles.h"
 # include <unistd.h>
 #include <stdlib.h>
-#include "signal_handles.h"
+
 
 #include <stdio.h>
-
-int	check_assess_to_file(const char *path)
-{
-	if (path == NULL)
-		return (0);
-	if (access(path, F_OK) < 0) ///	R_OK, W_OK, and X_OK test whether the file exists and grants read, write, and execute permissions, respectively.
-	{
-		write_str_fd("minishell: ", STDERR_FILENO);
-		write_str_fd(path, STDERR_FILENO);
-		write_str_fd(": No such file or directory\n", STDERR_FILENO);
-		return (-1);
-	}	
-	return (0);
-}
 
 int	loop_through_waitpid(int comm_num, t_param *params, int last_pid)
 {
@@ -42,47 +31,6 @@ int	loop_through_waitpid(int comm_num, t_param *params, int last_pid)
 	while (wait(NULL) > 0)
 		continue;
 	return (ex);
-}
-
-void	free_exec_params(t_exec *exec)
-{
-	int i;
-
-	i = 0;
-	while (i < exec->comm_number)
-	{
-		free(exec->params[i].cmd.cmd_path);
-		i++;
-	}
-	free(exec->params);
-}
-
-int	not_exeption_do_pipe(int i, int comm_n, t_type type)
-{
-	if (type == BUILTIN && comm_n == 1) ///first and builtin - I do not pipe
-		return (FLS);
-	else if (i == comm_n - 1)///last - I do not pipe, got rid of i == 0
-		return (FLS);
-	return (TRU);
-}
-
-char	*find_command_path(t_cmd cmd, char **envp)
-{
-	char **possible_path;
-
-	if (cmd.command == NULL)
-		return (NULL);
-	possible_path = find_possible_path_options_from_envp(envp);
-	cmd.cmd_path = find_path(cmd.command, possible_path);
-	if (!cmd.cmd_path)
-	{
-		write_str_fd("minishell: ", STDERR_FILENO);
-		write_str_fd(cmd.command, STDERR_FILENO);
-		write_str_fd(": command not found\n", STDERR_FILENO);
-		exit(127);
-	}
-	free_my_lines(possible_path);
-	return (cmd.cmd_path);
 }
 
 void	fork_and_manage_child(t_exec *exec, t_param *param)
@@ -125,31 +73,19 @@ char	**handle_one_param_set(t_exec *exec, t_param *param, int i)
 	return (new_envp);
 }
 
-int	go_through_commands(t_exec *exec)
-{
-	int i;
-
-	i = 0;
-	while (exec->index < exec->comm_number)
-	{
-		exec->upd_envp = handle_one_param_set(exec, exec->params, i); //xec[exec->index].params
-		exec->index++;
-		i++;
-	}
-	return (exec->params[exec->index - 1].child_pid);
-}
-///	at the end I expect to receive sequence of pod_t in every t_param
-
 t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 {
 	t_exec exec;
 	int ch_pid;
 
 	exec = form_input_for_execution(envp, input);
-	// printf("Seg fault prior go through commands\n");
 	signal_director(PAUSE_SIG);
-	ch_pid = go_through_commands(&exec);
-	exec.last_error = loop_through_waitpid(exec.comm_number, exec.params, ch_pid);
+	while (exec.index < exec.comm_number)
+	{
+		exec.upd_envp = handle_one_param_set(&exec, exec.params, exec.index); //xec[exec->index].params
+		exec.index++;
+	}
+	exec.last_error = loop_through_waitpid(exec.comm_number, exec.params, exec.params[exec.index - 1].child_pid);
 	signal_director(MAIN_SIG);
 	free_exec_params(&exec);
 	exec.params = NULL;
