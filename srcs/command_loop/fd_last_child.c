@@ -15,6 +15,10 @@
 void	close_for_last_child(t_fd *fd)
 {
 	close_if_infile_if_heredoc_if_outfile(fd);
+//	if (close(fd->pipe[0]) < 0)
+//		exit(1);
+//	if (close(fd->pipe[1]) < 0)
+//		exit(1);
 }
 
 void	fd_last_child(t_param *param)
@@ -27,9 +31,11 @@ void	fd_last_child(t_param *param)
 	{
 		if (dup2(param->fd.temp_file, STDIN_FILENO) < 0) //pipe into temp so I can manage temp-pipe in parent process
 			exit(1);
+		close(param->fd.temp_file);
 	}
 	if (param->path_outfile != NULL)
 	{
 		param->fd.outfile = open_outfile_with_without_append(param->in_flag, param->path_infile);
 	}
+	close_for_last_child(&param->fd);
 }

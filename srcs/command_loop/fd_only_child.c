@@ -12,16 +12,20 @@
 
 void	close_for_only_child(t_fd *fd)
 {
-	if (fd->pipe[0] >= 0)
-	{
-		if (close(fd->pipe[0]) < 0)
-			exit(1);
-	}
-	if (fd->pipe[1] >= 0)
-	{
-		if (close(fd->pipe[1]) < 0)
-			exit(1);
-	}
+//	if (fd->pipe[0] >= 0)
+//	{
+//		if (close(fd->pipe[0]) < 0)
+//			exit(1);
+//	}
+//	if (fd->pipe[1] >= 0)
+//	{
+//		if (close(fd->pipe[1]) < 0)
+//			exit(1);
+//	}
+	if (close(fd->pipe[0]) < 0)
+		exit(1);
+	if (close(fd->pipe[1]) < 0)
+		exit(1);
 	close_if_infile_if_heredoc_if_outfile(fd);
 }
 

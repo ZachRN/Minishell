@@ -31,19 +31,28 @@ void	cleaning_heredocs_if_open(int current_index, int comm_number, t_fd *fd)
 	}
 }
 
-void	pick_a_child(int index, int comm_number, t_param *param)
+void	pick_a_child(int i, int comm_number, t_param *params)
 {
-	cleaning_heredocs_if_open(index, comm_number, &param->fd);
+	cleaning_heredocs_if_open(i, comm_number, &params[i].fd);
+	
+	if (comm_number > 1 && i > 0)
+	{
+		params[i].fd.temp_file = params[i - 1].fd.temp_file;
+//		dup2(params[i].fd.temp_file, params[i - 1].fd.temp_file);
+//		close(params[i - 1].fd.temp_file);
+	}
+	
+	
 	if (comm_number == 1)
-		fd_only_child(param);
+		fd_only_child(&params[i]);
 	else
 	{
-		if (index == 0)
-			fd_first_child(param);
-		else if (index == comm_number - 1)
-			fd_last_child(param);
+		if (i == 0)
+			fd_first_child(&params[i]);
+		else if (i == comm_number - 1)
+			fd_last_child(&params[i]);
 		else
-			fd_middle_child(param);
+			fd_middle_child(&params[i]);
 	}
 }
 
