@@ -16,6 +16,8 @@ int	check_synopsis_alter_array(char **argc)
 	int i;
 
 	i = 1;
+	if (argc == NULL)
+		return (0);
 	if (compare_str(argc[1], "-n") == FLS)
 		return (0);
 	else if (argc[i] == NULL)
@@ -33,6 +35,11 @@ int	echo_builtin(char **argc, int fd)
 	i = 1;
 	skip_n = check_synopsis_alter_array(argc);
 	i += skip_n;
+	if (argc == NULL)
+	{
+		write_one_char_fd(fd, '\n');
+		return (0);
+	}
 	while (argc[i] != NULL)
 	{
 		write_str_fd(argc[i], fd);
