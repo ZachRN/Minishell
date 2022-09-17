@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:28:15 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:16:33 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/17 15:45:50 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ t_l_p_pack	output_redirect(t_l_p_pack pack, int append)
 		free(pack.to_add->outfile);
 		pack.to_add->outfile = NULL;
 	}
+	pack.to_add->outfile = ft_strdup(pack.to_search->content);
+	if (pack.to_add->outfile[0] == '\0')
+		pack.no_file = 2;
 	if (append == 0)
 	{
 		pack.to_add->append = 0;
-		pack.to_add->outfile = ft_strdup(pack.to_search->content);
 		fd = open(pack.to_add->outfile, (O_TRUNC | O_CREAT | O_WRONLY), 0644);
-		close(fd);
 	}
-	else if (append == 1)
+	else
 	{
 		pack.to_add->append = 1;
-		pack.to_add->outfile = ft_strdup(pack.to_search->content);
 		fd = open(pack.to_add->outfile, (O_APPEND | O_CREAT | O_WRONLY), 0644);
-		close(fd);
 	}
+	close(fd);
 	pack.to_search = rm_one_from_lexer_list(pack.to_search);
 	return (pack);
 }
@@ -67,6 +67,8 @@ t_l_p_pack	input_redirect(t_l_p_pack pack)
 			search = rm_one_from_lexer_list(search);
 		pack.no_file = 1;
 	}
+	if (pack.to_add->infile[0] == '\0')
+		pack.no_file = 2;
 	pack.to_search = search;
 	return (pack);
 }
@@ -107,6 +109,7 @@ t_l_p_pack	handle_redirections(t_l_p_pack pack)
 	search = pack.to_search;
 	if (!search->prev)
 		search = find_first_none_direct(search);
+	pack.no_file = 0;
 	while (pack.to_search && pack.to_search->token_type != Pipe)
 	{
 		if (pack.to_search->token_type == Greater)
@@ -117,6 +120,8 @@ t_l_p_pack	handle_redirections(t_l_p_pack pack)
 			pack = input_redirect(pack);
 		else if (pack.to_search)
 			pack.to_search = pack.to_search->next;
+		if (pack.no_file == 2)
+			break ;
 	}
 	if (pack.no_file == 0)
 		pack.to_search = search;

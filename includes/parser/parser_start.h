@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/17 14:48:20 by znajda        #+#    #+#                 */
-/*   Updated: 2022/08/31 13:21:45 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/17 15:34:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "structs.h"
 
 t_together	*parser(char *input, t_together *all);
+void		add_to_back(t_together *all, t_parse *to_add);
 
 #endif

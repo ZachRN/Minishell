@@ -6,16 +6,20 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:42:52 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 15:30:30 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/17 16:50:43 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "structs.h"
+#include <utils.h>
 
 static int	print_error_message(char *str)
 {
-	printf("minishell: syntax error near unexpected token '%s'\n", str);
+	write_str_fd("minishell: syntax error near unexpected token '",
+		STDERR_FILENO);
+	write_str_fd(str, STDERR_FILENO);
+	write_str_fd("'\n", STDERR_FILENO);
 	return (0);
 }
 
