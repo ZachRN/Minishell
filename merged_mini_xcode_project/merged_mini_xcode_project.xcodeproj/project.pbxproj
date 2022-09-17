@@ -54,6 +54,7 @@
 		0DED0BB428CCD50B00DEFE27 /* exit.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0BAA28CCD50A00DEFE27 /* exit.c */; };
 		0DED0BB528CCD50B00DEFE27 /* export.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0BAB28CCD50A00DEFE27 /* export.c */; };
 		0DED0BB628CCD50B00DEFE27 /* built_in_set.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0BAC28CCD50A00DEFE27 /* built_in_set.c */; };
+		323133FC28D602D700CB608E /* cmd_loop2.c in Sources */ = {isa = PBXBuildFile; fileRef = 323133FB28D602D700CB608E /* cmd_loop2.c */; };
 		328F246D28CE31660089D776 /* libreadline.8.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 328F246C28CE31660089D776 /* libreadline.8.1.dylib */; };
 		328F247F28CF96B60089D776 /* fd_only_child.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F247E28CF96B60089D776 /* fd_only_child.c */; };
 		328F248228CF96FE0089D776 /* minishell.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248028CF96FE0089D776 /* minishell.c */; };
@@ -177,6 +178,7 @@
 		0DED0BAA28CCD50A00DEFE27 /* exit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = exit.c; path = ../../srcs/builtins/exit.c; sourceTree = "<group>"; };
 		0DED0BAB28CCD50A00DEFE27 /* export.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = export.c; path = ../../srcs/builtins/export.c; sourceTree = "<group>"; };
 		0DED0BAC28CCD50A00DEFE27 /* built_in_set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = built_in_set.c; path = ../../srcs/builtins/built_in_set.c; sourceTree = "<group>"; };
+		323133FB28D602D700CB608E /* cmd_loop2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_loop2.c; path = ../../srcs/command_loop/cmd_loop2.c; sourceTree = "<group>"; };
 		328F246C28CE31660089D776 /* libreadline.8.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libreadline.8.1.dylib; path = ../../../../../opt/homebrew/Cellar/readline/8.1.2/lib/libreadline.8.1.dylib; sourceTree = "<group>"; };
 		328F247628CF6DFF0089D776 /* expand_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = expand_all.h; path = ../../includes/expand/expand_all.h; sourceTree = "<group>"; };
 		328F247728CF6E140089D776 /* parser_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = parser_all.h; path = ../../includes/parser/parser_all.h; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				0DED0B4B28CCD49D00DEFE27 /* fd_management.h */,
 				0DED0B9A28CCD50100DEFE27 /* fd_management.c */,
 				0DED0B4928CCD49D00DEFE27 /* cmd_loop.h */,
+				323133FB28D602D700CB608E /* cmd_loop2.c */,
 				0DED0B9728CCD50100DEFE27 /* cmd_loop.c */,
 			);
 			name = comm_loop;
@@ -505,6 +508,7 @@
 				0DED0BB028CCD50B00DEFE27 /* builtin_utils.c in Sources */,
 				0DED0B5E28CCD4BA00DEFE27 /* utils_strings.c in Sources */,
 				0DED0BB228CCD50B00DEFE27 /* unset.c in Sources */,
+				323133FC28D602D700CB608E /* cmd_loop2.c in Sources */,
 				0DED0B5F28CCD4BA00DEFE27 /* utils_malloc.c in Sources */,
 				0DED0B9528CCD4F900DEFE27 /* env_copy.c in Sources */,
 				0DED0BAE28CCD50B00DEFE27 /* pwd.c in Sources */,
