@@ -75,6 +75,7 @@ char	**handle_one_param_set(t_exec *exec, t_param *array_of_params, int i)
 	}
 	fork_and_manage_child(exec, array_of_params, i);
 	manage_parent_fd(exec->index, exec->comm_number, &array_of_params[i].fd);
+	printf("\nFD: %i %i %i %i %i %i\n", array_of_params[i].fd.temp_file, array_of_params[i].fd.pipe[0], array_of_params[i].fd.pipe[1], array_of_params[i].fd.outfile, array_of_params[i].fd.heredoc, array_of_params[i].fd.infile);
 	return (new_envp);
 }
 
