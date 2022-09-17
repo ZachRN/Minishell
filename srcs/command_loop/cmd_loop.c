@@ -80,23 +80,23 @@ void	fork_and_manage_child(t_exec *exec, t_param *param)
 	}
 }
 
-char	**handle_one_param_set(t_exec *exec, t_param *param)
+char	**handle_one_param_set(t_exec *exec, t_param *param, int i)
 {
 	char **new_envp;
 
 	new_envp = NULL;
-	if (not_exeption_do_pipe(exec->index, exec->comm_number, param->cmd.type) == TRU)
+	if (not_exeption_do_pipe(exec->index, exec->comm_number, param[i].cmd.type) == TRU)
 	{
-		if (pipe(param->fd.pipe) < 0)
+		if (pipe(param[i].fd.pipe) < 0)
 			exit(1);
 	}
 	if (exec->index == 0 && param->cmd.type == BUILTIN && exec->comm_number == 1)
 	{
-		new_envp = enviromental_variable_function(exec, param->cmd.cmd_args, param->fd);
+		new_envp = enviromental_variable_function(exec, param[i].cmd.cmd_args, param[i].fd);
 		return (new_envp);
 	}
 	fork_and_manage_child(exec, param);
-	manage_parent_fd(exec->index, exec->comm_number, &param->fd);
+	manage_parent_fd(exec->index, exec->comm_number, &param[i].fd);
 	return (new_envp);
 }
 
@@ -107,7 +107,7 @@ int	go_through_commands(t_exec *exec)
 	i = 0;
 	while (exec->index < exec->comm_number)
 	{
-		exec->upd_envp = handle_one_param_set(exec, exec[exec->index].params);
+		exec->upd_envp = handle_one_param_set(exec, exec->params, i); //xec[exec->index].params
 		exec->index++;
 		i++;
 	}
