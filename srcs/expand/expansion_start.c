@@ -19,10 +19,15 @@
 
 char	*handle_dollar_sign(char *str, int last_code)
 {
+	char *to_return;
+
+	to_return = NULL;
+	if (str && str[1] == '\0')
+		to_return = ft_strdup("$");
+	else
+		to_return = ft_itoa(last_code);
 	free(str);
-	if (!str[1])
-		return (ft_strdup("$"));
-	return (ft_itoa(last_code));
+	return (to_return);
 }
 
 char	*handle_expand(char **env_array, char *str, int last_code)

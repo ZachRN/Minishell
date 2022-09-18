@@ -39,6 +39,7 @@ int	infile_or_heredoc(t_exec *exec)
 {
 	int	fd;
 
+	fd = 0;
 	if (exec->params[exec->index].in_flag == Infile)
 	{
 		fd = open(exec->params[exec->index].path_infile, O_RDONLY);
