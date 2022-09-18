@@ -17,5 +17,6 @@
 
 t_together	*parser(char *input, t_together *all);
 void		add_to_back(t_together *all, t_parse *to_add);
+void		parse_display(t_parse *head);
 
 #endif

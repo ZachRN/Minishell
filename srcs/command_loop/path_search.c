@@ -100,7 +100,8 @@ char	*find_command_path(t_cmd cmd, char **envp)
 	if (cmd.command == NULL)
 		return (NULL);
 	possible_path = find_possible_path_options_from_envp(envp);
-	cmd.cmd_path = find_path(cmd.command, possible_path);
+	if (cmd.command[0] != '\0')
+		cmd.cmd_path = find_path(cmd.command, possible_path);
 	if (!cmd.cmd_path)
 	{
 		write_str_fd("minishell: ", STDERR_FILENO);
