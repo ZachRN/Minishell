@@ -1,14 +1,19 @@
-//
-//  export.h
-//  minishell_xcd
-//
-//  Created by Julia Demura on 16/08/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:40:53 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:41:16 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef export_h
-#define export_h
+#ifndef EXPORT_H
+# define EXPORT_H
 
-#include "builtin_utils.h"
+# include "builtin_utils.h"
 
 char	**export_builtin(t_env_struct *data);
 

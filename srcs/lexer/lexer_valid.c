@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 #include "structs.h"
-#include <utils.h>
+#include "utils.h"
 
 static int	print_error_message(char *str)
 {

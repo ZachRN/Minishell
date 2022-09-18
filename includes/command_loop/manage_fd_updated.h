@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_set.h                                     :+:      :+:    :+:   */
+/*   manage_fd_updated.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 12:31:54 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 12:35:41 by yuliia           ###   ########.fr       */
+/*   Created: 2022/09/18 12:45:42 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:46:14 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_SET_H
-# define BUILT_IN_SET_H
+#ifndef MANAGE_FD_UPDATED_H
+# define MANAGE_FD_UPDATED_H
 
-# include "builtin_utils.h"
+# include "structs.h"
+# include "form_exec_struct.h"
 
-int		if_is_builtin_command(char *str, char **array_built_in);
-char	**enviromental_variable_function(t_exec *exec, char **arguments,
-			int to_write);
+char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd);
+void	zach_stuff(t_exec *exec, int i, t_fd_two *fd);
+void	handle_child_fd(t_exec *exec, int i, t_fd_two *fd);
+void	parent_pipe(t_exec *exec, int i, t_fd_two *fd);
 
-#endif /* built_in_set_h */
+#endif

@@ -1,9 +1,14 @@
-//
-//  echo.c
-//  minishell_xcd
-//
-//  Created by Julia Demura on 02/08/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 11:15:40 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 11:16:45 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "echo.h"
 #include "builtin_utils.h"
@@ -31,31 +36,23 @@ int	find_nnnnn(char *str)
 
 int	check_synopsis_alter_array(char **argc)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (argc == NULL)
 		return (0);
-//	if (compare_str(argc[0], "-n") == FLS)
-//		return (0);
-//	else if (argc[i] == NULL)
-//		return (0);
-//	while (argc[i] != NULL && compare_str(argc[i], "-n") == TRU)
-//		i++;
-	
-	while (argc[i] != NULL && (compare_str(argc[i], "-n") == TRU || find_nnnnn(argc[i]) == TRU))
+	while (argc[i] != NULL && (compare_str(argc[i], "-n") == TRU
+			|| find_nnnnn(argc[i]) == TRU))
 	{
 		i++;
 	}
-	
-	
 	return (i);
 }
 
 int	echo_builtin(char **argc, int fd)
 {
-	int i;
-	int skip_n;
+	int	i;
+	int	skip_n;
 
 	i = 0;
 	skip_n = check_synopsis_alter_array(argc);

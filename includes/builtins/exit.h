@@ -1,14 +1,19 @@
-//
-//  exit.h
-//  minishell_xcd
-//
-//  Created by Julia Demura on 26/08/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:40:25 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:40:47 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef exit_h
-#define exit_h
+#ifndef EXIT_H
+# define EXIT_H
 
-#include "builtin_utils.h"
+# include "builtin_utils.h"
 
 void	exit_builtin(t_env_struct *data, int status);
 
