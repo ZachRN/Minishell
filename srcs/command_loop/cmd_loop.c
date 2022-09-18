@@ -63,9 +63,6 @@ void	fork_handle_fd_execve(t_exec *exec, int i, t_fd_two *fd)
 	//IF IT IS A BUILT IN
 char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 {
-	char	**new_envp;
-
-	new_envp = NULL;
 	if (exec->index == 0 && exec->params[i].cmd.type == BUILTIN
 		&& exec->comm_number == 1)
 	{
