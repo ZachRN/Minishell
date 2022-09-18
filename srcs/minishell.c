@@ -76,13 +76,8 @@ int	minishell(t_together *all)
 		else if (input[0] != '\0')
 			all->last_error = 258;
 		if (all->head)
-		{
-			if (exec.builtin_error != 1)
-				exec.builtin_error = 0;
-			exec = creat_exec_loop_commands(all, all->env_array, exec.builtin_error);
-				clean_up_post_exec(exec, all, input);
-		}
-			
+			exec = creat_exec_loop_commands(all, all->env_array);
+		clean_up_post_exec(exec, all, input);
 	}
 	if (input)
 		free(input);

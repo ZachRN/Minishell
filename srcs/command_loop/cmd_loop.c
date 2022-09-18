@@ -19,17 +19,30 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int	loop_through_waitpid(int last_pid)
+
+int	loop_through_waitpid(int last_pid,int error_code)
 {
 	int	status;
-	int	p_id;
 	int	ex;
 
 	ex = 0;
-	p_id = last_pid;
-	waitpid(p_id, &status, 0);
+	if (last_pid == -1)
+		return (error_code);
+	waitpid(last_pid, &status, 0);
 	if (WIFEXITED(status))
 		ex = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		ex = WTERMSIG(status);
+		if (ex == 2)
+			ex = 130;
+		else if (ex == 3)
+		{
+			ex = 131;
+			write_str_fd("Quit: 3", STDERR_FILENO);
+		}
+		write_str_fd("\n", STDERR_FILENO);
+	}
 	while (wait(NULL) > 0)
 		continue ;
 	return (ex);
@@ -46,8 +59,9 @@ void	fork_handle_fd_execve(t_exec *exec, int i, t_fd_two *fd)
 			exit(1);
 		signal_director(DEFAULT_SIG);
 		handle_child_fd(exec, i, fd);
-		exec->params[i].cmd.cmd_path
-			= find_command_path(exec->params[i].cmd, exec->envp);
+		if (exec->params[i].cmd.type != BUILTIN)
+			exec->params[i].cmd.cmd_path
+				= find_command_path(exec->params[i].cmd, exec->envp);
 		if (exec->params[i].cmd.type == BUILTIN)
 			enviromental_variable_function(exec,
 				exec->params[i].cmd.cmd_args, STDOUT_FILENO);
@@ -94,7 +108,6 @@ t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 {
 	t_exec		exec;
 	t_fd_two	fd;
-	int			flag_err;
 
 	exec = form_input_for_execution(envp, input);
 	signal_director(PAUSE_SIG);
@@ -105,13 +118,11 @@ t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 	{
 		parent_pipe(&exec, exec.index, &fd);
 		exec.upd_envp = handle_one_param_set_two(&exec, exec.index, &fd);
-		if (exec.last_error == 1)
-			flag_err = 1;
 		exec.index++;
 	}
 	close(fd.pipe[0]);
-	flag_err
-		= loop_through_waitpid(exec.params[exec.index - 1].child_pid);
+	exec.last_error
+		= loop_through_waitpid(exec.params[exec.index - 1].child_pid, exec.last_error);
 	signal_director(MAIN_SIG);
 	free_exec_params(&exec);
 	exec.params = NULL;
