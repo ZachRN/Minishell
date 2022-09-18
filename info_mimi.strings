@@ -48,10 +48,6 @@ exit 1 2 3
 exit -3
 exit -3 7
 
-
-
-
-
 #BUILTIN env
 //env | grep --invert-match | sort
 //env
@@ -86,37 +82,26 @@ exit -3 7
 //echo '$PWD'
 //echo 'I am a pipe | and I am a redirect > < << >>'
 
-
-
 #QUOTES double quote
-echo "hello there"
-echo "'hello there'"
-echo ""hello""
-echo "$PWD"
-echo "I am a pipe | and I am a redirect > < << >>"
+//echo "hello there"
+//echo "'hello there'"
+//echo ""hello""
+//echo "$PWD"
+//echo "I am a pipe | and I am a redirect > < << >>"
+
+
 #REDIRECT input
 < Makefile
 cat < Makefile
 cat < LICENSE < Makefile
 cat < Dockerfile < LICENSE < Makefile
+
+
 #REDIRECT output
->OUT;cat OUT;rm OUT
-ls -la > OUT;cat OUT;rm OUT
-cat < Makefile > OUT; cat OUT;rm OUT
-ls -la > OUT1 > OUT2;ls;cat OUT1;cat OUT2;rm OUT1 OUT2
-ls -la > OUT1 > OUT2 > OUT3;ls;cat OUT1;cat OUT2;cat OUT3;rm OUT1 OUT2 OUT3
-
-
-
-
-#REDIRECT append
->>OUT;cat OUT;rm OUT
-ls -la >> OUT;cat OUT;rm OUT
-cat < Makefile >> OUT; cat OUT;rm OUT
-ls -la >> OUT1 >> OUT2;ls;cat OUT1;cat OUT2;rm OUT1 OUT2
-ls -la >> OUT1 >> OUT2 >> OUT3;ls;cat OUT1;cat OUT2;cat OUT3;rm OUT1 OUT2 OUT3
-echo one >> OUT;echo two >> OUT;echo tree >> OUT;cat OUT;rm OUT
-
+ls -la > OUT
+cat < Makefile > OUT
+ls -la > OUT1 > OUT2
+ls -la > OUT1 > OUT2 > OUT3
 
 
 #REDIRECT heredoc
@@ -138,7 +123,9 @@ ls -l | head -n 6 | tail -n 5 | head -n 4 | tail -n 3 | head -n 2 | wc -l
 
 #PARSER spaces
 echo one  two   three    four
-cat<Makefile|grep NAME>OUT;cat OUT;rm OUT
+cat<Makefile|grep NAME>OUT
+
+
 #PARSER word splitting
 cat Make'file'
 cat 'Make'file
@@ -149,13 +136,15 @@ cat 'Make'"file"
 cat $HOME"/.bashrc"
 ls "$HOME"'/../'$USER
 echo $USER$PWD
+
 #PARSER normalization / word order
 < Makefile cat
 < LICENSE < Dockerfile < Makefile cat -e
 cat < Dockerfile < LICENSE < Makefile -e
 < LICENSE cat -e < Makefile
-> OUT cat -e < Makefile;cat OUT;rm OUT
-< Makefile grep NAME > OUT;cat OUT;rm OUT
+> OUT cat -e < Makefile
+< Makefile grep NAME > OUT
+
 #PATHRESOLVE
 ls
 /bin/ls
@@ -163,16 +152,17 @@ ls
 /usr/bin/../../bin/ls
 cd /bin;./ls
 cd /;bin/ls
+
 #ENVIRONMENT variables
 echo $
 echo $USER
 echo "$USER"
 echo "$USER $PWD $HOME"
-echo;echo $?
-echo one | grep -q two;echo $?
+echo one | grep -q two
+
+
 #EVAL
 /bin/ls
-touch DANG;chmod u-r DANG;cat DANG;rm DANG
 /bin/ls -l
 echo Hi
 echo -n Hi
@@ -181,9 +171,7 @@ exit 42
 exit -3
 exit bla
 /bin/ls -l
-echo;echo $?
 /bin/ls filethatdoesntexist
-echo;echo $?
 expr $? + $?
 echo "bla bla"
 echo "cat lol.c | cat > lol.c"
@@ -195,11 +183,11 @@ echo 'ls -l | wc -l'
 echo '$USER'
 env | sort
 export NEW_VAR;export | grep "NEW_VAR"
-env | grep USER=;unset USER;env | grep USER=
+env | grep USER=
 cd tests
-cd tests;pwd
-cd .;pwd
-cd ..;pwd
+cd tests
+cd .
+cd ..
 pwd
 unset PATH
 export PATH=directory1:directory2
