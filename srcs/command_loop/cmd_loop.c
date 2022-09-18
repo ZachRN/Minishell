@@ -19,9 +19,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-
-#include <stdio.h>
-
 int	loop_through_waitpid(int last_pid)
 {
 	int	status;
@@ -37,7 +34,6 @@ int	loop_through_waitpid(int last_pid)
 		continue ;
 	return (ex);
 }
-
 
 void	fork_handle_fd_execve(t_exec *exec, int i, t_fd_two *fd)
 {
@@ -70,7 +66,6 @@ char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 	char	**new_envp;
 
 	new_envp = NULL;
-
 	if (exec->index == 0 && exec->params[i].cmd.type == BUILTIN
 		&& exec->comm_number == 1)
 	{

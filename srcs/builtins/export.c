@@ -68,7 +68,7 @@ int	alter_envp_new_list(t_env_struct *data, int i)
 			data->last_error = 1;
 			return (0);
 		}
-		if (n > 0) /// if var already exists I need to rewrite it by index
+		if (n > 0)
 			copy_str_for_data(data, n - 1, i);
 		else
 		{

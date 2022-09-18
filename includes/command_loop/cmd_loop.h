@@ -22,4 +22,3 @@ void	free_exec_params(t_exec *exec);
 int		not_exeption_do_pipe(int i, int comm_n, t_type type);
 
 #endif /* cmd_loop_h */
-

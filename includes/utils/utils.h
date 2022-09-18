@@ -29,7 +29,6 @@
 
 #endif /* utils_h */
 
-
 //==> ./configure --prefix=/Users/ydemura/.brew/Cellar/readline/8.1.2
 //==> make install
 //==> Caveats
