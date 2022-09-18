@@ -52,25 +52,23 @@ exit -3 7
 
 
 #BUILTIN env
-env | grep --invert-match | sort
-env bla
-export a;env | grep --invert-match | sort
+//env | grep --invert-match | sort
+//env
+
 #BUILTIN pwd
-pwd
-pwd bla
-pwd 1
-pwd bla bla
+//pwd
+//pwd bla
+//pwd 1
+//pwd bla bla
 
 
 
 #BUILTIN unset
-unset USER
-env | grep USER=;unset USER;env | grep USER=
-unset BLA
-unset bla
-unset PATH1
-unset 1PATH
-unset PATH*
+//unset USER
+//unset BLA
+//unset bla
+//unset PATH1
+unset 1PATH !!!!!!! err
 unset PATH USER
 unset PATH USER LOGNAME
 unset _PATH
