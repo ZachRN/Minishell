@@ -1,9 +1,14 @@
-//
-//  path_search.c
-//  minishell_xcd
-//
-//  Created by Julia Demura on 06/09/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_search.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 11:50:32 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 11:51:28 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "path_search.h"
 #include "built_in_set.h" //should incl data with envp
@@ -11,11 +16,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+//	R_OK, W_OK, and X_OK test whether the file exists
+//and grants read, write, and execute permissions, respectively.
 int	check_assess_to_file(const char *path)
 {
 	if (path == NULL)
 		return (0);
-	if (access(path, F_OK) < 0) ///	R_OK, W_OK, and X_OK test whether the file exists and grants read, write, and execute permissions, respectively.
+	if (access(path, F_OK) < 0)
 	{
 		write_str_fd("minishell: ", STDERR_FILENO);
 		write_str_fd(path, STDERR_FILENO);
@@ -52,7 +59,7 @@ char	*find_path(char *command, char **possibl_paths)
 	if (access(command, R_OK) == 0)
 	{
 		correct_path = strdup_till_char(command, '\0');
-		return(correct_path);
+		return (correct_path);
 	}
 	joined_command = ft_strjoin("/", command);
 	if (joined_command == NULL)
@@ -70,10 +77,10 @@ char	*find_path(char *command, char **possibl_paths)
 	return (correct_path);
 }
 
-char **find_possible_path_options_from_envp(char **env)
+char	**find_possible_path_options_from_envp(char **env)
 {
-	int	i;
-	char **possible_pathes;
+	int		i;
+	char	**possible_pathes;
 
 	i = 0;
 	possible_pathes = NULL;
@@ -88,7 +95,7 @@ char **find_possible_path_options_from_envp(char **env)
 
 char	*find_command_path(t_cmd cmd, char **envp)
 {
-	char **possible_path;
+	char	**possible_path;
 
 	if (cmd.command == NULL)
 		return (NULL);

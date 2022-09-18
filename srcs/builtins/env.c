@@ -1,21 +1,23 @@
-//
-//  env.c
-//  minishell_xcd
-//
-//  Created by Julia Demura on 12/08/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 11:17:46 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 11:24:48 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "env.h"
 #include "builtin_utils.h"
 
 //https://www.geeksforgeeks.org/c-program-print-environment-variables/
-//char * envp[]
 
-
-
-int	env_builtin(char **env_arg, int fd) /// env with no options or arguments
+int	env_builtin(char **env_arg, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env_arg[i] != NULL)
@@ -26,5 +28,3 @@ int	env_builtin(char **env_arg, int fd) /// env with no options or arguments
 	}
 	return (0);
 }
-
-

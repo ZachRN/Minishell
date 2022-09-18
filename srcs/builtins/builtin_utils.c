@@ -1,14 +1,20 @@
-//
-//  builtin_utils.c
-//  minishell_xcd
-//
-//  Created by Julia Demura on 02/08/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 10:09:58 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 10:10:39 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "builtin_utils.h"
 #include <stdlib.h>
 
-void	write_not_a_valid_identifier(const char *command, const char *argument, int fd)
+void	write_not_a_valid_identifier(const char *command,
+								const char *argument, int fd)
 {
 	write_one_char_fd(fd, '\n');
 	write_str_fd("Minishell : ", fd);
@@ -19,7 +25,7 @@ void	write_not_a_valid_identifier(const char *command, const char *argument, int
 	write_one_char_fd(fd, '\n');
 }
 
-int is_valid_envp_name(const char *name)
+int	is_valid_envp_name(const char *name)
 {
 	if (is_number(name[0]) == TRU)
 		return (FLS);
@@ -39,10 +45,10 @@ char	**fill_nulls(int i, int len, char **m_envp)
 	return (m_envp);
 }
 
-char **allocate_env_array_without_str(char **envp, int len, const char *str)
+char	**allocate_env_array_without_str(char **envp, int len, const char *str)
 {
-	char **m_envp;
-	int i;
+	char	**m_envp;
+	int		i;
 
 	m_envp = malloc(sizeof(char *) * (len + 1));
 	if (m_envp == NULL)
@@ -66,9 +72,9 @@ char **allocate_env_array_without_str(char **envp, int len, const char *str)
 	return (m_envp);
 }
 
-int	number_var_in_list(char **envp, const char *str) /// will ret 0 only in case of no var in the list
+int	number_var_in_list(char **envp, const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (envp[i] != NULL)

@@ -1,9 +1,14 @@
-//
-//  built_in_set.c
-//  minishell_xcd
-//
-//  Created by Julia Demura on 25/07/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   built_in_set.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 10:08:00 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 10:09:46 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "built_in_set.h"
 #include "commands.h"
@@ -11,7 +16,7 @@
 
 int	initiate_data_struct(char *command, t_env_struct *data)
 {
-	char *array_built_in[8];
+	char	*array_built_in[8];
 
 	array_built_in[0] = "echo";
 	array_built_in[1] = "cd";
@@ -34,12 +39,12 @@ int	initiate_data_struct(char *command, t_env_struct *data)
 	return (0);
 }
 
-char **built_in_commands(t_env_struct *data)
+char	**built_in_commands(t_env_struct *data)
 {
 	initiate_data_struct(data->command, data);
 	if (data->comm_n == ECHO)
 		echo_builtin(data->arguments, data->fd_chosen);
-	else if(data->comm_n == PWD)
+	else if (data->comm_n == PWD)
 		data->last_error = pwd_builtin(data->fd_chosen);
 	else if (data->comm_n == ENV)
 		env_builtin(data->envp, data->fd_chosen);
@@ -57,7 +62,8 @@ char **built_in_commands(t_env_struct *data)
 	return (data->new_envp);
 }
 
-int	manage_arg_and_fd_for_data(char **arguments, int to_write, t_env_struct *data)
+int	manage_arg_and_fd_for_data(char **arguments, int to_write,
+											t_env_struct *data)
 {
 	data->command = arguments[0];
 	if (arguments[1] == NULL)
@@ -69,25 +75,19 @@ int	manage_arg_and_fd_for_data(char **arguments, int to_write, t_env_struct *dat
 	}
 	data->n_arguments = find_arr_len(data->arguments);
 	return (to_write);
-	// if (fd.outfile >= 0)
-	// 	return (fd.outfile);
-	// else if (fd.pipe[1] >= 0)
-	// 	return (fd.pipe[1]);
-	// else
-	// 	return (STDOUT_FILENO);
 }
 
-char **enviromental_variable_function(t_exec *exec, char **arguments, int to_write)
+char	**enviromental_variable_function(t_exec *exec, char **arguments,
+													int to_write)
 {
-	t_env_struct data;
-	int len;
+	t_env_struct	data;
+	int				len;
 
 	data.fd_chosen = manage_arg_and_fd_for_data(arguments, to_write, &data);
 	data.last_error = 0;
 	len = find_arr_len(exec->envp);
-	data.envp = allocate_env_array_without_str(exec->envp, len, NULL); //malloced envp
-	data.envp = built_in_commands(&data); /// malloced new_envp in export, free envp, reassighn envp
-	/// need to manage memory at this point as I am rewriting data.envp and leaking memory.  need to free in in a function before.
+	data.envp = allocate_env_array_without_str(exec->envp, len, NULL);
+	data.envp = built_in_commands(&data);
 	exec->last_error = data.last_error;
 	return (data.envp);
 }

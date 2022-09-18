@@ -1,9 +1,14 @@
-//
-//  utils_strings.c
-//  x_mini
-//
-//  Created by Julia Demura on 06/09/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_strings.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:08:05 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:08:38 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "utils_strings.h"
 #include "utils_basics.h"
@@ -21,9 +26,9 @@ int	compare_str(const char *str1, const char *str2)
 			str2++;
 		}
 		else
-			return (FLS); //false, not eqial str
+			return (FLS);
 	}
-	return (TRU); //true, eqial str
+	return (TRU);
 }
 
 int	check_word(const char *word, int word_len, const char *str)
@@ -52,17 +57,17 @@ int	compare_str_till_char(const char *env_name, const char *argument, char c)
 			argument++;
 		}
 		else
-			return (FLS); //false, not eqial str
+			return (FLS);
 	}
 	if (*env_name == c && (*argument == c || *argument == '\0'))
 		return (TRU);
 	else
-		return (FLS); //true, eqial str
+		return (FLS);
 }
 
-int find_char_in_str(char c, const char *str)
+int	find_char_in_str(char c, const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')

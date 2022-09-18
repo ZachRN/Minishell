@@ -1,10 +1,14 @@
-//
-//  form_exec_struct.c
-//  mini_codam
-//
-//  Created by Yuliia Demura on 9/6/22.
-//  Copyright © 2022 Yuliia Demura. All rights reserved.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   form_exec_struct.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 11:31:33 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 11:35:43 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "form_exec_struct.h"
 #include "utils.h"
@@ -14,8 +18,8 @@
 
 int	if_built_in(const char *command)
 {
-	char *array_built_in[8];
-	int i;
+	char	*array_built_in[8];
+	int		i;
 
 	i = 0;
 	array_built_in[0] = "echo";
@@ -37,13 +41,13 @@ int	if_built_in(const char *command)
 
 int	linked_list_size(t_parse *head)
 {
-	int res;
-	t_parse *false_head;
+	int		res;
+	t_parse	*false_head;
 
 	res = 0;
 	false_head = head;
 	if (head == NULL)
-		return (-1); //no list wtf
+		return (-1);
 	while (false_head != NULL)
 	{
 		res++;
@@ -54,7 +58,7 @@ int	linked_list_size(t_parse *head)
 
 t_cmd	initiate_cmd_struct(char **args, char *comm_name)
 {
-	t_cmd cmd;
+	t_cmd	cmd;
 
 	cmd.cmd_args = args;
 	cmd.command = comm_name;
@@ -65,9 +69,9 @@ t_cmd	initiate_cmd_struct(char **args, char *comm_name)
 	return (cmd);
 }
 
-t_param initiate_each_param(t_parse *current, int i)
+t_param	initiate_each_param(t_parse *current, int i)
 {
-	t_param param;
+	t_param	param;
 
 	param.cmd = initiate_cmd_struct(current->args, current->cmd);
 	param.child_pid = -1;
@@ -83,9 +87,9 @@ t_param initiate_each_param(t_parse *current, int i)
 
 t_param	*fill_exec_struct(t_parse *head, int size)
 {
-	int i;
-	t_param *params;
-	t_parse *temp_head;
+	int		i;
+	t_param	*params;
+	t_parse	*temp_head;
 
 	temp_head = head;
 	params = malloc(sizeof(t_param) * size);
@@ -97,21 +101,6 @@ t_param	*fill_exec_struct(t_parse *head, int size)
 		params[i] = initiate_each_param(temp_head, i);
 		temp_head = temp_head->next;
 		i++;
-		
 	}
 	return (params);
-}
-
-t_exec	form_input_for_execution(char **envp, t_together *input)
-{
-	t_exec exec;
-	int size_exec;
-
-	size_exec = linked_list_size(input->head);
-	exec.params = fill_exec_struct(input->head, size_exec);
-	exec.comm_number = size_exec;
-	exec.envp = envp;
-	exec.index = 0;
-	exec.upd_envp = NULL;
-	return (exec);
 }

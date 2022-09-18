@@ -1,12 +1,17 @@
-//
-//  utils_write.h
-//  x_mini
-//
-//  Created by Julia Demura on 06/09/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_write.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:50:08 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:50:26 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef utils_write_h
-#define utils_write_h
+#ifndef UTILS_WRITE_H
+# define UTILS_WRITE_H
 
 int	write_one_char_fd(int fd, char c);
 int	write_str_fd(const char *str, int fd);

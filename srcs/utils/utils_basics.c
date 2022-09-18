@@ -1,16 +1,21 @@
-//
-//  utils_basics.c
-//  x_mini
-//
-//  Created by Julia Demura on 06/09/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_basics.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:07:38 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:07:40 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "utils_basics.h"
 #include <stdlib.h>
 
 int	string_len(const char *str)
 {
-	int res;
+	int	res;
 
 	if (!str)
 		return (-1);
@@ -36,7 +41,7 @@ int	strlen_till_char(char *str, char c)
 
 int	find_arr_len(char **arr)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	if (arr == NULL)

@@ -1,9 +1,14 @@
-//
-//  export.c
-//  minishell_xcd
-//
-//  Created by Julia Demura on 16/08/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 11:18:00 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 11:20:43 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "export.h"
 #include "builtin_utils.h"
@@ -13,11 +18,11 @@
 
 //arguments have parameters https://man7.org/linux/man-pages/man1/export.1p.html
 
-int new_env_array_size(t_env_struct *data)
+int	new_env_array_size(t_env_struct *data)
 {
-	int i;
-	int equal_sign_index;
-	int minus_malloc_size;
+	int	i;
+	int	equal_sign_index;
+	int	minus_malloc_size;
 
 	i = 0;
 	minus_malloc_size = 0;
@@ -25,8 +30,11 @@ int new_env_array_size(t_env_struct *data)
 	while (i < data->n_arguments)
 	{
 		equal_sign_index = find_char_in_str('=', data->arguments[i]);
-		if (equal_sign_index == 0 || is_valid_envp_name(data->arguments[i]) == FLS)
-			minus_malloc_size++; ///so I know no = sign in variable and it wont make it in list
+		if (equal_sign_index == 0
+			|| is_valid_envp_name(data->arguments[i]) == FLS)
+		{
+				minus_malloc_size++;
+		}
 		if (number_var_in_list(data->envp, data->arguments[i]) > 0)
 			minus_malloc_size++;
 		i++;
@@ -43,9 +51,11 @@ void	copy_str_for_data(t_env_struct *data, int i_dst, int i_src)
 		exit(-1);
 }
 
-int	alter_envp_new_list(t_env_struct *data, int i) /// here I need to check if var is new, if new, I add in end of arr or rewrite one exsisted
+// here I need to check if var is new, if new, I add in end of arr 
+//or rewrite one exsisted
+int	alter_envp_new_list(t_env_struct *data, int i)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	if (find_char_in_str('=', data->arguments[i]) > 0)
@@ -53,11 +63,12 @@ int	alter_envp_new_list(t_env_struct *data, int i) /// here I need to check if v
 		n = number_var_in_list(data->envp, data->arguments[i]);
 		if (is_valid_envp_name(data->arguments[i]) == FLS)
 		{
-			write_not_a_valid_identifier(data->command, data->arguments[i], data->fd_chosen);
+			write_not_a_valid_identifier(data->command, data->arguments[i],
+				data->fd_chosen);
 			data->last_error = 1;
 			return (0);
 		}
-		if (n > 0) /// if var already exists I need to rewrite it by index
+		if (n > 0)
 			copy_str_for_data(data, n - 1, i);
 		else
 		{
@@ -70,8 +81,8 @@ int	alter_envp_new_list(t_env_struct *data, int i) /// here I need to check if v
 
 char	**export_builtin(t_env_struct *data)
 {
-	int i;
-	int sum;
+	int	i;
+	int	sum;
 
 	i = 0;
 	sum = new_env_array_size(data);

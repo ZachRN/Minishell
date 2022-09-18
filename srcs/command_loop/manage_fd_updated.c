@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_fd_updated.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 11:39:01 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 11:50:16 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "manage_fd_updated.h"
 #include "built_in_set.h"
 #include "path_search.h"
 #include "signal_handles.h"
@@ -21,9 +34,10 @@ void	parent_pipe(t_exec *exec, int i, t_fd_two *fd)
 	}
 }
 
-int	check_infile_outfile(t_exec *exec)
+//sepatared 2 if statements in this function, from prev
+int	infile_or_heredoc(t_exec *exec)
 {
-	int fd;
+	int	fd;
 
 	if (exec->params[exec->index].in_flag == Infile)
 	{
@@ -41,6 +55,14 @@ int	check_infile_outfile(t_exec *exec)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
+	return (fd);
+}
+
+int	check_infile_outfile(t_exec *exec)
+{
+	int	fd;
+
+	fd = infile_or_heredoc(exec);
 	if (exec->params[exec->index].append == 0)
 	{
 		fd = open(exec->params[exec->index].path_outfile, (O_TRUNC | O_WRONLY));
@@ -49,7 +71,8 @@ int	check_infile_outfile(t_exec *exec)
 	}
 	else if (exec->params[exec->index].append == 1)
 	{
-		fd = open(exec->params[exec->index].path_outfile, (O_APPEND | O_WRONLY));
+		fd = open(exec->params[exec->index].path_outfile,
+				(O_APPEND | O_WRONLY));
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}
@@ -75,24 +98,8 @@ int	handle_child_fd(t_exec *exec, int i, t_fd_two *fd)
 	return (check_infile_outfile(exec));
 }
 
-void	zach_stuff(t_exec *exec, int i, t_fd_two *fd)
+void	closure(int i, t_exec *exec, t_fd_two *fd)
 {
-	exec->params[i].child_pid = fork();
-	if (exec->params[i].child_pid < 0)
-		exit(1);
-	if (exec->params[i].child_pid == 0)
-	{
-		if (check_assess_to_file(exec->params[i].path_infile) < 0)
-			exit(1);
-		signal_director(DEFAULT_SIG);
-		handle_child_fd(exec, i, fd);
-		exec->params[i].cmd.cmd_path = find_command_path(exec->params[i].cmd, exec->envp);
-		if (exec->params[i].cmd.type == BUILTIN)
-			enviromental_variable_function(exec, exec->params[i].cmd.cmd_args, STDOUT_FILENO);
-		else
-			execve(exec->params[i].cmd.cmd_path, exec->params[i].cmd.cmd_args, exec->envp);
-		exit(1);
-	}
 	if (i != 0)
 	{
 		close(fd->storage);
@@ -105,22 +112,4 @@ void	zach_stuff(t_exec *exec, int i, t_fd_two *fd)
 	}
 	close(fd->pipe[1]);
 	fd->pipe[1] = -1;
-}
-
-char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
-{
-	char	**new_envp;
-
-	new_envp = NULL;
-	//WHEN IT IS ONLY ONE IT DOES NOT WRITE TO THE CORRECT AREA
-	//IF IT IS A BUILT IN
-	if (exec->index == 0 && exec->params[i].cmd.type == BUILTIN && exec->comm_number == 1)
-	{
-		close(fd->pipe[0]);
-		close(fd->pipe[1]);
-		return (enviromental_variable_function(exec, exec->params[i].cmd.cmd_args, STDOUT_FILENO));
-	}
-	else
-		zach_stuff(exec, i, fd);
-	return (NULL);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   heredoc_line_parse.c                               :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: znajda <znajda@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/08/31 13:45:02 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:18:38 by znajda        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   heredoc_line_parse.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/31 13:45:02 by znajda            #+#    #+#             */
+/*   Updated: 2022/09/18 11:52:46 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	write_input_to_pipe(char *pipe_eof, int has_quote,
 			t_parse *to_add, t_together *all)
 {
 	char	*input;
-	int fd;
+	int		fd;
 
 	fd = open(to_add->heredoc, (O_WRONLY | O_TRUNC | O_CREAT), 0644);
 	if (fd < 0)
@@ -97,10 +97,10 @@ void	write_input_to_pipe(char *pipe_eof, int has_quote,
 
 char	*heredoc_str(t_together *all)
 {
-	int counter;
-	char *str;
-	char *itoa;
-	t_parse *search;
+	int		counter;
+	char	*str;
+	char	*itoa;
+	t_parse	*search;
 
 	search = all->head;
 	counter = 0;

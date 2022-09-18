@@ -1,14 +1,19 @@
-//
-//  path_search.h
-//  minishell_xcd
-//
-//  Created by Julia Demura on 06/09/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_search.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:46:23 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:46:48 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef path_search_h
-#define path_search_h
+#ifndef PATH_SEARCH_H
+# define PATH_SEARCH_H
 
-#include "form_exec_struct.h"
+# include "form_exec_struct.h"
 
 int		check_assess_to_file(const char *path);
 char	**find_possible_path_options_from_envp(char **env);

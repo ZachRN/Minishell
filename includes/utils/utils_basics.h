@@ -1,12 +1,17 @@
-//
-//  utils_basics.h
-//  x_mini
-//
-//  Created by Julia Demura on 06/09/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_basics.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:48:34 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:49:04 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef utils_basics_h
-#define utils_basics_h
+#ifndef UTILS_BASICS_H
+# define UTILS_BASICS_H
 
 typedef enum e_status
 {

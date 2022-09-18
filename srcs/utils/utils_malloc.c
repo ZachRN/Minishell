@@ -1,9 +1,14 @@
-//
-//  utils_malloc.c
-//  x_mini
-//
-//  Created by Julia Demura on 06/09/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_malloc.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:07:48 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:07:58 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "utils_malloc.h"
 #include "utils_basics.h"
@@ -30,9 +35,9 @@ char	*strdup_till_char(char *str, char c)
 	return (s2);
 }
 
-void free_array_of_str(char **array)
+void	free_array_of_str(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i] != NULL)

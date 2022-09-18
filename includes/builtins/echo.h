@@ -1,12 +1,17 @@
-//
-//  echo.h
-//  minishell_xcd
-//
-//  Created by Julia Demura on 02/08/2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 12:39:32 by yuliia            #+#    #+#             */
+/*   Updated: 2022/09/18 12:39:50 by yuliia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef echo_h
-#define echo_h
+#ifndef ECHO_H
+# define ECHO_H
 
 int	echo_builtin(char **str, int fd);
 
