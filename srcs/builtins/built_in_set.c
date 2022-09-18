@@ -85,9 +85,11 @@ char	**enviromental_variable_function(t_exec *exec, char **arguments,
 
 	data.fd_chosen = manage_arg_and_fd_for_data(arguments, to_write, &data);
 	data.last_error = 0;
+	data.prev_builtin_err = exec->builtin_error;
 	len = find_arr_len(exec->envp);
 	data.envp = allocate_env_array_without_str(exec->envp, len, NULL);
 	data.envp = built_in_commands(&data);
-	exec->last_error = data.last_error;
+	if (exec->last_error != 1)
+		exec->last_error = data.last_error;
 	return (data.envp);
 }

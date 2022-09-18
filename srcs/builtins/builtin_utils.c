@@ -16,7 +16,6 @@
 void	write_not_a_valid_identifier(const char *command,
 								const char *argument, int fd)
 {
-	write_one_char_fd(fd, '\n');
 	write_str_fd("Minishell : ", fd);
 	write_str_fd(command, fd);
 	write_str_fd(" : ", fd);

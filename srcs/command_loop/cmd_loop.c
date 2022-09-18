@@ -94,6 +94,7 @@ t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 {
 	t_exec		exec;
 	t_fd_two	fd;
+	int			flag_err;
 
 	exec = form_input_for_execution(envp, input);
 	signal_director(PAUSE_SIG);
@@ -104,10 +105,12 @@ t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 	{
 		parent_pipe(&exec, exec.index, &fd);
 		exec.upd_envp = handle_one_param_set_two(&exec, exec.index, &fd);
+		if (exec.last_error == 1)
+			flag_err = 1;
 		exec.index++;
 	}
 	close(fd.pipe[0]);
-	exec.last_error
+	flag_err
 		= loop_through_waitpid(exec.params[exec.index - 1].child_pid);
 	signal_director(MAIN_SIG);
 	free_exec_params(&exec);

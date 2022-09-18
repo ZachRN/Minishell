@@ -39,6 +39,7 @@ typedef struct s_env_struct
 	int			envvar_repeat;
 	int			fd_chosen;
 	int			last_error;
+	int			prev_builtin_err;
 }				t_env_struct;
 
 void	write_not_a_valid_identifier(const char *command,

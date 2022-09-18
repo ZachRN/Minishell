@@ -178,6 +178,7 @@
 		32AF0B7228D70B260071B697 /* cd2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cd2.c; path = ../../srcs/builtins/cd2.c; sourceTree = "<group>"; };
 		32AF0B7428D7311E0071B697 /* manage_fd_updated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = manage_fd_updated.h; path = ../../includes/command_loop/manage_fd_updated.h; sourceTree = "<group>"; };
 		32AF0B7528D7312C0071B697 /* manage_fd_updated.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = manage_fd_updated.c; path = ../../srcs/command_loop/manage_fd_updated.c; sourceTree = "<group>"; };
+		32AF0B7828D7646D0071B697 /* en.subject.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en.subject.pdf; path = ../../en.subject.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +213,7 @@
 		0DED0B0E28CCCBD700DEFE27 /* merged_mini_xcode_project */ = {
 			isa = PBXGroup;
 			children = (
+				32AF0B7828D7646D0071B697 /* en.subject.pdf */,
 				328F248028CF96FE0089D776 /* minishell.c */,
 				328F248128CF96FE0089D776 /* main.c */,
 				0DED0B2128CCD3F800DEFE27 /* utils */,
@@ -313,11 +315,11 @@
 		0DED0B2028CCD3F100DEFE27 /* comm_loop */ = {
 			isa = PBXGroup;
 			children = (
+				328F247C28CF96520089D776 /* fd_system_headers.h */,
 				32AF0B7428D7311E0071B697 /* manage_fd_updated.h */,
 				32AF0B7528D7312C0071B697 /* manage_fd_updated.c */,
 				0DED0B4828CCD49D00DEFE27 /* path_search.h */,
 				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
-				328F247C28CF96520089D776 /* fd_system_headers.h */,
 				0DED0B4728CCD49D00DEFE27 /* form_exec_struct.h */,
 				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
 				0DED0B4928CCD49D00DEFE27 /* cmd_loop.h */,
