@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <readline/readline.h>
+#include <fcntl.h>
 #include "structs.h"
 #include "utils.h"
 #include "signal_handles.h"
@@ -69,10 +70,14 @@ char	*check_for_expansion(char *input, int has_quote, t_together *all)
 }
 
 void	write_input_to_pipe(char *pipe_eof, int has_quote,
-			int pipe_hold[2], t_together *all)
+			t_parse *to_add, t_together *all)
 {
 	char	*input;
+	int fd;
 
+	fd = open(to_add->heredoc, (O_WRONLY | O_TRUNC | O_CREAT), 0644);
+	if (fd < 0)
+		exit(EXIT_INT);
 	signal_director(HEREDOC_SIG);
 	while (1)
 	{
@@ -82,46 +87,57 @@ void	write_input_to_pipe(char *pipe_eof, int has_quote,
 		if (ft_strncmp(input, pipe_eof, ft_strlen(input) + 1) == 0)
 			break ;
 		input = check_for_expansion(input, has_quote, all);
-		write(pipe_hold[1], input, ft_strlen(input));
+		write(fd, input, ft_strlen(input));
+		write(fd, "\n", 1);
 		free(input);
 	}
 	free(input);
-	close(pipe_hold[1]);
-	close(pipe_hold[0]);
 	exit(EXIT_SUCCESS);
 }
 
-int	clean_up(int pipe_hold[2])
+char	*heredoc_str(t_together *all)
 {
-	close(pipe_hold[1]);
-	close(pipe_hold[0]);
-	return (-2);
+	int counter;
+	char *str;
+	char *itoa;
+	t_parse *search;
+
+	search = all->head;
+	counter = 0;
+	if (search)
+	{
+		while (search)
+		{
+			search = search->next;
+			counter++;
+		}
+	}
+	itoa = ft_itoa(counter);
+	str = ft_strjoin(".heredoc", itoa);
+	free(itoa);
+	return (str);
 }
 
 int	parse_line_heredoc(t_together *all, t_heredoc *heredoc, t_parse *to_add)
 {
-	int	pipe_hold[2];
 	int	status;
 	int	p_id;
 	int	ex;
 
-	if (to_add->hd_pipe >= 0)
-		close(to_add->hd_pipe);
 	ex = -2;
-	if (pipe(pipe_hold) == -1)
-		return (-2);
+	to_add->heredoc = heredoc_str(all);
 	signal_director(PAUSE_SIG);
 	p_id = fork();
 	if (p_id == -1)
 		return (-2);
 	else if (p_id == 0)
-		write_input_to_pipe(heredoc->end, heredoc->has_quote, pipe_hold, all);
+		write_input_to_pipe(heredoc->end, heredoc->has_quote, to_add, all);
 	waitpid(p_id, &status, 0);
 	free(heredoc->end);
 	heredoc->end = NULL;
 	if (WIFEXITED(status))
 		ex = WEXITSTATUS(status);
 	if (ex == EXIT_INT)
-		return (clean_up(pipe_hold));
-	return (pipe_hold[0]);
+		return (ex);
+	return (0);
 }

@@ -57,7 +57,7 @@ char **built_in_commands(t_env_struct *data)
 	return (data->new_envp);
 }
 
-int	manage_arg_and_fd_for_data(char **arguments, t_fd fd, t_env_struct *data)
+int	manage_arg_and_fd_for_data(char **arguments, int to_write, t_env_struct *data)
 {
 	data->command = arguments[0];
 	if (arguments[1] == NULL)
@@ -68,20 +68,21 @@ int	manage_arg_and_fd_for_data(char **arguments, t_fd fd, t_env_struct *data)
 		data->arguments = arguments;
 	}
 	data->n_arguments = find_arr_len(data->arguments);
-	if (fd.outfile >= 0)
-		return (fd.outfile);
-	else if (fd.pipe[1] >= 0)
-		return (fd.pipe[1]);
-	else
-		return (STDOUT_FILENO);
+	return (to_write);
+	// if (fd.outfile >= 0)
+	// 	return (fd.outfile);
+	// else if (fd.pipe[1] >= 0)
+	// 	return (fd.pipe[1]);
+	// else
+	// 	return (STDOUT_FILENO);
 }
 
-char **enviromental_variable_function(t_exec *exec, char **arguments, t_fd fd)
+char **enviromental_variable_function(t_exec *exec, char **arguments, int to_write)
 {
 	t_env_struct data;
 	int len;
 
-	data.fd_chosen = manage_arg_and_fd_for_data(arguments, fd, &data);
+	data.fd_chosen = manage_arg_and_fd_for_data(arguments, to_write, &data);
 	data.last_error = 0;
 	len = find_arr_len(exec->envp);
 	data.envp = allocate_env_array_without_str(exec->envp, len, NULL); //malloced envp
