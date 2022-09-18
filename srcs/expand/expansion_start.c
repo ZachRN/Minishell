@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   expansion_start.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: znajda <znajda@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/08/18 15:41:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:18:42 by znajda        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   expansion_start.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 15:41:45 by znajda            #+#    #+#             */
+/*   Updated: 2022/09/18 21:29:27 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 char	*handle_dollar_sign(char *str, int last_code)
 {
-	char *to_return;
+	char	*to_return;
 
 	to_return = NULL;
 	if (str && str[1] == '\0')

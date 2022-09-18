@@ -6,12 +6,12 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:50:32 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 11:51:28 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:28:46 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "path_search.h"
-#include "built_in_set.h" //should incl data with envp
+#include "built_in_set.h"
 #include "utils.h"
 #include <stdlib.h>
 #include <unistd.h>

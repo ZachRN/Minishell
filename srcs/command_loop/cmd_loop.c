@@ -6,7 +6,7 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:23:36 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 11:50:13 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:32:11 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-
-int	loop_through_waitpid(int last_pid,int error_code)
+int	loop_through_waitpid(int last_pid, int error_code)
 {
 	int	status;
 	int	ex;
@@ -73,11 +72,9 @@ void	fork_handle_fd_execve(t_exec *exec, int i, t_fd_two *fd)
 	closure(i, exec, fd);
 }
 
-	//WHEN IT IS ONLY ONE IT DOES NOT WRITE TO THE CORRECT AREA
-	//IF IT IS A BUILT IN
 char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 {
-	char **new_envp;
+	char	**new_envp;
 
 	new_envp = NULL;
 	if (exec->index == 0 && exec->params[i].cmd.type == BUILTIN
@@ -86,7 +83,7 @@ char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 		close(fd->pipe[0]);
 		close(fd->pipe[1]);
 		new_envp = enviromental_variable_function(exec,
-			exec->params[i].cmd.cmd_args, STDOUT_FILENO);
+				exec->params[i].cmd.cmd_args, STDOUT_FILENO);
 		exec->builtin_error = exec->last_error;
 		return (new_envp);
 	}
@@ -127,7 +124,8 @@ t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 	}
 	close(fd.pipe[0]);
 	exec.last_error
-		= loop_through_waitpid(exec.params[exec.index - 1].child_pid, exec.last_error);
+		= loop_through_waitpid(exec.params[exec.index - 1].child_pid,
+			exec.last_error);
 	signal_director(MAIN_SIG);
 	free_exec_params(&exec);
 	exec.params = NULL;

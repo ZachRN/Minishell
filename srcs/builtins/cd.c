@@ -6,15 +6,13 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 10:10:51 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 11:15:24 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:24:55 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-#include <stdio.h>
 
 char	**handle_enviromntl(t_env_indexes index, t_env_struct *data)
 {
@@ -40,7 +38,7 @@ char	**handle_enviromntl(t_env_indexes index, t_env_struct *data)
 		change_var_value_based_on_indexes(j, index.pwd, data);
 		j++;
 	}
-	data->new_envp[data->num_var] = NULL; //fsanitize complaint
+	data->new_envp[data->num_var] = NULL;
 	return (data->new_envp);
 }
 

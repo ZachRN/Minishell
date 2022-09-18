@@ -6,15 +6,13 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:15:40 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 11:16:45 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:25:28 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "echo.h"
 #include "builtin_utils.h"
 #include <stdlib.h>
-
-#include <stdio.h>
 
 int	find_nnnnn(char *str)
 {

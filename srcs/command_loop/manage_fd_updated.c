@@ -6,7 +6,7 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:39:01 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 11:50:16 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:28:19 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	parent_pipe(t_exec *exec, int i, t_fd_two *fd)
 	}
 }
 
-//sepatared 2 if statements in this function, from prev
 int	infile_or_heredoc(t_exec *exec)
 {
 	int	fd;
