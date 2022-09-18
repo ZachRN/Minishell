@@ -6,7 +6,7 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 10:14:14 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 10:14:58 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:25:21 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	go_to_other_folder(const char *path, int fd)
 	return (res);
 }
 
-//	int len_str = string_len(value) + string_len(name);
-//	return (len_str);
 int	get_new_len(char *name, char *value)
 {
 	int	len_str;
@@ -44,7 +42,6 @@ int	get_new_len(char *name, char *value)
 	return (len_str + len_2);
 }
 
-///	int len_str = string_len(value) + string_len(name);
 char	*join_varname_value_malloc(char *name, char *value)
 {
 	char	*str;

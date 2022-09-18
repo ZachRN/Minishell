@@ -6,7 +6,7 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 10:08:00 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 10:09:46 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:24:46 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	manage_arg_and_fd_for_data(char **arguments, int to_write,
 		data->arguments = arguments;
 	}
 	data->n_arguments = find_arr_len(data->arguments);
-	data->fd_chosen = STDOUT_FILENO; //IF i am correct
+	data->fd_chosen = STDOUT_FILENO;
 	return (to_write);
 }
 

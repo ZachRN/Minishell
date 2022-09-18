@@ -6,7 +6,7 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:29:59 by znajda            #+#    #+#             */
-/*   Updated: 2022/09/18 11:56:40 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:30:41 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "parser_all.h"
 #include "lexer_all.h"
 
-//split rm_one_from_parse_list function
 void	free_cmd_args_outfile_infile(t_parse *to_remove)
 {
 	if (to_remove->cmd)

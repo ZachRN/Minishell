@@ -6,7 +6,7 @@
 /*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:17:53 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 11:24:50 by yuliia           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:25:50 by yuliia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 int	is_num_neg(char *str)
 {
-	int i;
+	int	i;
 	int	negative;
 
 	i = 0;
@@ -40,7 +40,7 @@ int	is_num_neg(char *str)
 	return (1);
 }
 
-int		write_error(char *str)
+int	write_error(char *str)
 {
 	write_str_fd("minishell: exit: ", STDERR_FILENO);
 	write_str_fd(str, STDERR_FILENO);
