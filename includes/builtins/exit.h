@@ -15,6 +15,6 @@
 
 # include "builtin_utils.h"
 
-void	exit_builtin(t_env_struct *data);
+void	exit_builtin(t_env_struct *data, int pid);
 
 #endif /* exit_h */

@@ -48,13 +48,14 @@ int		write_error(char *str)
 	return (255);
 }
 
-void	exit_builtin(t_env_struct *data)
+void	exit_builtin(t_env_struct *data, int pid)
 {
 	int				number;
 	char			*str;
 	unsigned char	status;
 
-	write_str_fd("exit\n", data->fd_chosen);
+	if (pid != 0)
+		write_str_fd("exit\n", data->fd_chosen);
 	str = "0";
 	if (data->arguments)
 		str = data->arguments[0];

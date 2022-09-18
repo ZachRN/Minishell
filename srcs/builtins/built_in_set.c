@@ -39,7 +39,7 @@ int	initiate_data_struct(char *command, t_env_struct *data)
 	return (0);
 }
 
-char	**built_in_commands(t_env_struct *data)
+char	**built_in_commands(t_env_struct *data, int pid)
 {
 	initiate_data_struct(data->command, data);
 	if (data->comm_n == ECHO)
@@ -49,7 +49,7 @@ char	**built_in_commands(t_env_struct *data)
 	else if (data->comm_n == ENV)
 		env_builtin(data->envp, data->fd_chosen);
 	else if (data->comm_n == EXIT)
-		exit_builtin(data);
+		exit_builtin(data, pid);
 	else if (data->comm_n == UNSET)
 		unset_builtin(data);
 	else if (data->comm_n == EXPORT)
@@ -89,7 +89,7 @@ char	**enviromental_variable_function(t_exec *exec, char **arguments,
 	data.prev_builtin_err = exec->builtin_error;
 	len = find_arr_len(exec->envp);
 	data.envp = allocate_env_array_without_str(exec->envp, len, NULL);
-	data.envp = built_in_commands(&data);
+	data.envp = built_in_commands(&data, exec->params[exec->index].child_pid);
 	if (exec->last_error != 1)
 		exec->last_error = data.last_error;
 	return (data.envp);
