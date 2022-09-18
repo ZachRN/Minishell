@@ -23,6 +23,7 @@ TEST
 //echo testOne testTwo testThree
 //echo $PWD
 //echo $OLDPWD
+echo ''
 
 
 #BUILTIN cd
@@ -69,35 +70,21 @@ exit -3 7
 //unset bla
 //unset PATH1
 //unset 1PATH !!!!!!! err
-unset PATH USER
-unset PATH USER LOGNAME
-unset _PATH
-unset PATH_
-
-
+//unset PATH USER
+//unset PATH USER LOGNAME
+//unset _PATH
+//unset PATH_
 
 
 #BUILTIN export
-export | grep --invert-match 'declare -x _='
-export NEW_VAR;export | grep "NEW_VAR"
-export NEW_VAR;export NEW_VAR=t;export | grep "NEW_VAR"
-export NEW_VAR=t;export NEW_VAR=test;export | grep "NEW_VAR"
-export NEW_VAR=t;export NEW_VAR+=e;export NEW_VAR+=s;export NEW_VAR+=t;export | grep "NEW_VAR"
-export NEW_VAR=a;export NEW_VAR=a=b;export NEW_VAR+==c=d;export | grep "NEW_VAR"
-export NEW_VAR=a;export NEW_VAR;export | grep "NEW_VAR"
-export _NEW_VAR;export | grep "_NEW_VAR"
-export ___NEW_VAR;export | grep "___NEW_VAR"
-export _NEW_VAR1;export | grep "_NEW_VAR1"
-
-
-
+//export | grep --invert-match 'declare -x _='
 
 #QUOTES single quote
-echo 'hello there'
-echo '"hello there"'
-echo ''hello''
-echo '$PWD'
-echo 'I am a pipe | and I am a redirect > < << >>'
+//echo 'hello there'
+//echo '"hello there"'
+//echo ''hello''
+//echo '$PWD'
+//echo 'I am a pipe | and I am a redirect > < << >>'
 
 
 

@@ -32,7 +32,7 @@ char	**unset_builtin(t_env_struct *data)
 	int	i;
 
 	i = 0;
-	while (data->arguments[i] != NULL)
+	while (data->arguments != NULL && data->arguments[i] != NULL)
 	{
 		if (is_valid_envp_name(data->arguments[i]) == FLS)
 		{
