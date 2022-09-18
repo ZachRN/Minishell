@@ -15,7 +15,7 @@
 
 # include "form_exec_struct.h"
 
-t_exec	creat_exec_loop_commands(t_together *input, char **envp, int last_builtin_err);
+t_exec	creat_exec_loop_commands(t_together *input, char **envp);
 
 //in loop2
 void	free_exec_params(t_exec *exec);
