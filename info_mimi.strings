@@ -69,12 +69,19 @@ exit -3 7
 //unset bla
 //unset PATH1
 //unset 1PATH !!!!!!! err
+<<<<<<< HEAD
 unset PATH USER
 unset PATH USER LOGNAME
 unset _PATH
 unset PATH_
 
 
+=======
+//unset PATH USER
+//unset PATH USER LOGNAME
+//unset _PATH
+//unset PATH_
+>>>>>>> test&fix
 
 
 #BUILTIN export

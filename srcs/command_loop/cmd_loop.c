@@ -46,8 +46,11 @@ void	fork_handle_fd_execve(t_exec *exec, int i, t_fd_two *fd)
 			exit(1);
 		signal_director(DEFAULT_SIG);
 		handle_child_fd(exec, i, fd);
-		exec->params[i].cmd.cmd_path
-			= find_command_path(exec->params[i].cmd, exec->envp);
+		if (exec->params[i].cmd.type != BUILTIN)
+			exec->params[i].cmd.cmd_path
+				= find_command_path(exec->params[i].cmd, exec->envp);
+//		exec->params[i].cmd.cmd_path
+//			= find_command_path(exec->params[i].cmd, exec->envp);
 		if (exec->params[i].cmd.type == BUILTIN)
 			enviromental_variable_function(exec,
 				exec->params[i].cmd.cmd_args, STDOUT_FILENO);
@@ -63,20 +66,25 @@ void	fork_handle_fd_execve(t_exec *exec, int i, t_fd_two *fd)
 	//IF IT IS A BUILT IN
 char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 {
+	char **new_envp;
+
+	new_envp = NULL;
 	if (exec->index == 0 && exec->params[i].cmd.type == BUILTIN
 		&& exec->comm_number == 1)
 	{
 		close(fd->pipe[0]);
 		close(fd->pipe[1]);
-		return (enviromental_variable_function(exec,
-				exec->params[i].cmd.cmd_args, STDOUT_FILENO));
+		new_envp = enviromental_variable_function(exec,
+			exec->params[i].cmd.cmd_args, STDOUT_FILENO);
+		exec->builtin_error = exec->last_error;
+		return (new_envp);
 	}
 	else
 		fork_handle_fd_execve(exec, i, fd);
-	return (NULL);
+	return (new_envp);
 }
 
-t_exec	form_input_for_execution(char **envp, t_together *input)
+t_exec	form_input_for_execution(char **envp, t_together *input, int last_builtin_err)
 {
 	t_exec	exec;
 	int		size_exec;
@@ -87,16 +95,17 @@ t_exec	form_input_for_execution(char **envp, t_together *input)
 	exec.envp = envp;
 	exec.index = 0;
 	exec.upd_envp = NULL;
+	exec.builtin_error = last_builtin_err;
 	return (exec);
 }
 
-t_exec	creat_exec_loop_commands(t_together *input, char **envp)
+t_exec	creat_exec_loop_commands(t_together *input, char **envp, int last_builtin_err)
 {
 	t_exec		exec;
 	t_fd_two	fd;
 	int			flag_err;
 
-	exec = form_input_for_execution(envp, input);
+	exec = form_input_for_execution(envp, input, last_builtin_err);
 	signal_director(PAUSE_SIG);
 	fd.storage = -1;
 	fd.pipe[0] = -1;
@@ -110,8 +119,13 @@ t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 		exec.index++;
 	}
 	close(fd.pipe[0]);
+<<<<<<< HEAD
 	flag_err
 		= loop_through_waitpid(exec.params[exec.index - 1].child_pid);
+=======
+	exec.last_error
+		= loop_through_waitpid(exec.params[exec.index - 1].child_pid); //it is rewritten here in case of builtin
+>>>>>>> test&fix
 	signal_director(MAIN_SIG);
 	free_exec_params(&exec);
 	exec.params = NULL;

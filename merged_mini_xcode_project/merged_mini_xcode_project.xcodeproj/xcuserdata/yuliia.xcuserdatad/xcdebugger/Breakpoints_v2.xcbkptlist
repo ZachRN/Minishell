@@ -174,7 +174,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "101"
             endingLineNumber = "101"
-            landmarkName = "creat_exec_loop_commands(input, envp, last_builtin_err)"
+            landmarkName = "creat_exec_loop_commands(input, envp)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -190,7 +190,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
             endingLineNumber = "86"
-            landmarkName = "form_input_for_execution(envp, input, last_builtin_err)"
+            landmarkName = "form_input_for_execution(envp, input)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
