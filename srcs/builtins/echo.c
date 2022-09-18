@@ -18,7 +18,7 @@
 
 int	find_nnnnn(char *str)
 {
-	while (str)
+	while (str && str[0] != '\0')
 	{
 		if (str[0] == '-' && str[1] == 'n')
 		{
