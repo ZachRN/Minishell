@@ -119,13 +119,8 @@ t_exec	creat_exec_loop_commands(t_together *input, char **envp, int last_builtin
 		exec.index++;
 	}
 	close(fd.pipe[0]);
-<<<<<<< HEAD
-	flag_err
-		= loop_through_waitpid(exec.params[exec.index - 1].child_pid);
-=======
 	exec.last_error
 		= loop_through_waitpid(exec.params[exec.index - 1].child_pid); //it is rewritten here in case of builtin
->>>>>>> test&fix
 	signal_director(MAIN_SIG);
 	free_exec_params(&exec);
 	exec.params = NULL;

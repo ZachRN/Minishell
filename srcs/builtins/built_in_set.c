@@ -74,6 +74,7 @@ int	manage_arg_and_fd_for_data(char **arguments, int to_write,
 		data->arguments = arguments;
 	}
 	data->n_arguments = find_arr_len(data->arguments);
+	data->fd_chosen = STDOUT_FILENO; //IF i am correct
 	return (to_write);
 }
 

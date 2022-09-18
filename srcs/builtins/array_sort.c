@@ -26,9 +26,13 @@ int	write_export_no_arguments(char **array, int fd)
 		write_str_fd("declare -x ", fd);
 		while (array[i][j] != '\0')
 		{
-			if (array[i][j - 1] == '=')
+			if (array[i][j] == '=')
+			{
+				write_one_char_fd(fd, array[i][j]);
 				write_one_char_fd(fd, '"');
-			write_one_char_fd(fd, array[i][j]);
+			}
+			else
+				write_one_char_fd(fd, array[i][j]);
 			j++;
 		}
 		if (array[i][j] == '\0')
