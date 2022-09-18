@@ -49,7 +49,7 @@ char	**built_in_commands(t_env_struct *data)
 	else if (data->comm_n == ENV)
 		env_builtin(data->envp, data->fd_chosen);
 	else if (data->comm_n == EXIT)
-		exit_builtin(data, data->last_error);
+		exit_builtin(data);
 	else if (data->comm_n == UNSET)
 		unset_builtin(data);
 	else if (data->comm_n == EXPORT)
