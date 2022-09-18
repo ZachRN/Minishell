@@ -57,6 +57,7 @@ typedef struct s_parse
 	char			*outfile;
 	int				append;
 	char			*infile;
+	char			*heredoc;
 	int				hd_pipe;
 	int				rd_in;
 	struct s_parse	*next;

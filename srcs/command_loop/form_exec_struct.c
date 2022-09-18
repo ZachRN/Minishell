@@ -52,7 +52,7 @@ int	linked_list_size(t_parse *head)
 	return (res);
 }
 
-t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
+t_cmd	initiate_cmd_struct(char **args, char *comm_name)
 {
 	t_cmd cmd;
 
@@ -65,36 +65,23 @@ t_cmd	initiate_cmd_struct(char **args, char *comm_name, char **envp)
 	return (cmd);
 }
 
-t_fd	initiate_fd_struct(int heredoc)
-{
-	t_fd fd;
-
-	fd.infile = -1;
-	fd.outfile = -1;
-	fd.temp_file = -1;
-	fd.pipe[0] = -1;
-	fd.pipe[1] = -1;
-	fd.heredoc = heredoc;
-	return (fd);
-}
-
-t_param initiate_each_param(t_parse *current, int i, char **envp)
+t_param initiate_each_param(t_parse *current, int i)
 {
 	t_param param;
 
-	param.cmd = initiate_cmd_struct(current->args, current->cmd, envp);
-	param.fd = initiate_fd_struct(current->hd_pipe);
+	param.cmd = initiate_cmd_struct(current->args, current->cmd);
 	param.child_pid = -1;
 	param.path_infile = current->infile;
 	param.path_outfile = current->outfile;
 	param.param_index = i;
+	param.heredoc = current->heredoc;
 	param.append = current->append;
 	param.in_flag = current->rd_in;
 	param.last_error = 0;
 	return (param);
 }
 
-t_param	*fill_exec_struct(t_parse *head, int size, char **envp)
+t_param	*fill_exec_struct(t_parse *head, int size)
 {
 	int i;
 	t_param *params;
@@ -107,7 +94,7 @@ t_param	*fill_exec_struct(t_parse *head, int size, char **envp)
 	i = 0;
 	while (i < size && temp_head != NULL)
 	{
-		params[i] = initiate_each_param(temp_head, i, envp);
+		params[i] = initiate_each_param(temp_head, i);
 		temp_head = temp_head->next;
 		i++;
 		
@@ -121,7 +108,7 @@ t_exec	form_input_for_execution(char **envp, t_together *input)
 	int size_exec;
 
 	size_exec = linked_list_size(input->head);
-	exec.params = fill_exec_struct(input->head, size_exec, envp);
+	exec.params = fill_exec_struct(input->head, size_exec);
 	exec.comm_number = size_exec;
 	exec.envp = envp;
 	exec.index = 0;

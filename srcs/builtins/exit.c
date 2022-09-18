@@ -9,8 +9,8 @@
 #include "builtin_utils.h"
 #include <stdlib.h>
 
-//noreturn void exit(int status); \
-The exit() function causes normal process termination and the least significant byte of status (i.e., status & 0xFF) is returned to the parent (see wait(2)).
+//noreturn void exit(int status); 
+//The exit() function causes normal process termination and the least significant byte of status (i.e., status & 0xFF) is returned to the parent (see wait(2)).
 //https://man7.org/linux/man-pages/man3/exit.3.html
 
 

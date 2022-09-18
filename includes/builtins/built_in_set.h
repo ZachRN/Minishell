@@ -11,6 +11,6 @@
 #include "builtin_utils.h"
 
 int		if_is_builtin_command(char *str, char **array_built_in);
-char	**enviromental_variable_function(t_exec *exec, char **arguments, t_fd fd);
+char	**enviromental_variable_function(t_exec *exec, char **arguments, int to_write);
 
 #endif /* built_in_set_h */

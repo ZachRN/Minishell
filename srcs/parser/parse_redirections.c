@@ -69,6 +69,7 @@ t_l_p_pack	input_redirect(t_l_p_pack pack)
 	}
 	if (pack.to_add->infile[0] == '\0')
 		pack.no_file = 2;
+	close(fd);
 	pack.to_search = search;
 	return (pack);
 }

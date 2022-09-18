@@ -26,14 +26,11 @@ typedef enum	e_type
 	NORMAL = 1
 }				t_type;
 
-typedef struct s_fd
+typedef struct s_fd_two
 {
-	int	infile;
-	int	outfile;
-	int heredoc;
-	int	temp_file;
-	int	pipe[2];
-}	t_fd;
+	int storage;
+	int pipe[2];
+}			t_fd_two;
 
 typedef struct t_cmd
 {
@@ -46,7 +43,6 @@ typedef struct t_cmd
 typedef struct	s_param
 {
 	t_cmd	cmd;
-	t_fd	fd;
 	int		wait_status;
 	int		res_wait_status;
 	pid_t	child_pid;
@@ -54,6 +50,7 @@ typedef struct	s_param
 	char	*path_outfile;
 	int		param_index;
 	int		append;
+	char	*heredoc;
 	int		inlile_heredoc_flag;
 	t_infile_src in_flag;
 	int		last_error;

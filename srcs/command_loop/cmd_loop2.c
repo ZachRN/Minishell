@@ -6,7 +6,6 @@
 //
 
 #include "cmd_loop.h"
-#include "fd_management.h"
 #include "built_in_set.h"
 #include "path_search.h"
 # include <unistd.h>
@@ -18,11 +17,11 @@ void	free_exec_params(t_exec *exec)
 	int i;
 
 	i = 0;
-	while (i < exec->comm_number)
-	{
-		free(exec->params[i].cmd.cmd_path);
-		i++;
-	}
+	// while (i < exec->comm_number)
+	// {
+	// 	free(exec->params[i].cmd.cmd_path);
+	// 	i++;
+	// }
 	free(exec->params);
 }
 
