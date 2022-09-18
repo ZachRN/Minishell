@@ -95,7 +95,7 @@ char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 	return (new_envp);
 }
 
-t_exec	form_input_for_execution(char **envp, t_together *input, int last_builtin_err)
+t_exec	form_input_for_execution(char **envp, t_together *input)
 {
 	t_exec	exec;
 	int		size_exec;
@@ -106,16 +106,15 @@ t_exec	form_input_for_execution(char **envp, t_together *input, int last_builtin
 	exec.envp = envp;
 	exec.index = 0;
 	exec.upd_envp = NULL;
-	exec.builtin_error = last_builtin_err;
 	return (exec);
 }
 
-t_exec	creat_exec_loop_commands(t_together *input, char **envp, int last_builtin_err)
+t_exec	creat_exec_loop_commands(t_together *input, char **envp)
 {
 	t_exec		exec;
 	t_fd_two	fd;
 
-	exec = form_input_for_execution(envp, input, last_builtin_err);
+	exec = form_input_for_execution(envp, input);
 	signal_director(PAUSE_SIG);
 	fd.storage = -1;
 	fd.pipe[0] = -1;
