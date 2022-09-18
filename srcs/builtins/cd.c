@@ -40,7 +40,7 @@ char	**handle_enviromntl(t_env_indexes index, t_env_struct *data)
 		change_var_value_based_on_indexes(j, index.pwd, data);
 		j++;
 	}
-	data->new_envp[data->num_var] = NULL;
+	data->new_envp[data->num_var] = NULL; //fsanitize complaint
 	return (data->new_envp);
 }
 
@@ -74,7 +74,7 @@ char	**change_enviromental_variable_after_cd(t_env_indexes i,
 	len = data->num_var + 1;
 	if (i.oldpwd < 0)
 		len++;
-	data->new_envp = malloc(sizeof(char *) * len);
+	data->new_envp = malloc(sizeof(char *) * (len + 1));
 	if (data->new_envp == NULL)
 		exit(1);
 	data->new_envp = fill_nulls(0, data->num_var, data->new_envp);
