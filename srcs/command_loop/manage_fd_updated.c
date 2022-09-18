@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "manage_fd_updated.h"
 #include "built_in_set.h"
 #include "path_search.h"
 #include "signal_handles.h"

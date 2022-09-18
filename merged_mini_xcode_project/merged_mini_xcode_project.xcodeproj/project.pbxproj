@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0DED0B5C28CCD4BA00DEFE27 /* utils_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5728CCD4BA00DEFE27 /* utils_write.c */; };
-		0DED0B5D28CCD4BA00DEFE27 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5828CCD4BA00DEFE27 /* utils.c */; };
 		0DED0B5E28CCD4BA00DEFE27 /* utils_strings.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5928CCD4BA00DEFE27 /* utils_strings.c */; };
 		0DED0B5F28CCD4BA00DEFE27 /* utils_malloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5A28CCD4BA00DEFE27 /* utils_malloc.c */; };
 		0DED0B6028CCD4BA00DEFE27 /* utils_basics.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DED0B5B28CCD4BA00DEFE27 /* utils_basics.c */; };
@@ -56,9 +55,8 @@
 		328F246D28CE31660089D776 /* libreadline.8.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 328F246C28CE31660089D776 /* libreadline.8.1.dylib */; };
 		328F248228CF96FE0089D776 /* minishell.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248028CF96FE0089D776 /* minishell.c */; };
 		328F248328CF96FE0089D776 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248128CF96FE0089D776 /* main.c */; };
-		328F248528CF979B0089D776 /* starting_point_after_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 328F248428CF979B0089D776 /* starting_point_after_main.c */; };
-		32AF0B7128D703A70071B697 /* messy.c in Sources */ = {isa = PBXBuildFile; fileRef = 32AF0B7028D703A70071B697 /* messy.c */; };
 		32AF0B7328D70B260071B697 /* cd2.c in Sources */ = {isa = PBXBuildFile; fileRef = 32AF0B7228D70B260071B697 /* cd2.c */; };
+		32AF0B7628D7312C0071B697 /* manage_fd_updated.c in Sources */ = {isa = PBXBuildFile; fileRef = 32AF0B7528D7312C0071B697 /* manage_fd_updated.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,7 +73,6 @@
 
 /* Begin PBXFileReference section */
 		0DED0B0C28CCCBD700DEFE27 /* merged_mini_xcode_project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = merged_mini_xcode_project; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DED0B2228CCD41E00DEFE27 /* starting_point_after_main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = starting_point_after_main.h; path = ../../includes/starting_point_after_main.h; sourceTree = "<group>"; };
 		0DED0B2328CCD43100DEFE27 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../../includes/main.h; sourceTree = "<group>"; };
 		0DED0B2428CCD43100DEFE27 /* minishell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = minishell.h; path = ../../includes/minishell.h; sourceTree = "<group>"; };
 		0DED0B2528CCD43800DEFE27 /* structs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = structs.h; path = ../../includes/structs.h; sourceTree = "<group>"; };
@@ -126,7 +123,6 @@
 		0DED0B5528CCD4AA00DEFE27 /* env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = env.h; path = ../../includes/builtins/env.h; sourceTree = "<group>"; };
 		0DED0B5628CCD4AA00DEFE27 /* built_in_set.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = built_in_set.h; path = ../../includes/builtins/built_in_set.h; sourceTree = "<group>"; };
 		0DED0B5728CCD4BA00DEFE27 /* utils_write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils_write.c; path = ../../srcs/utils/utils_write.c; sourceTree = "<group>"; };
-		0DED0B5828CCD4BA00DEFE27 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = ../../srcs/utils/utils.c; sourceTree = "<group>"; };
 		0DED0B5928CCD4BA00DEFE27 /* utils_strings.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils_strings.c; path = ../../srcs/utils/utils_strings.c; sourceTree = "<group>"; };
 		0DED0B5A28CCD4BA00DEFE27 /* utils_malloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils_malloc.c; path = ../../srcs/utils/utils_malloc.c; sourceTree = "<group>"; };
 		0DED0B5B28CCD4BA00DEFE27 /* utils_basics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils_basics.c; path = ../../srcs/utils/utils_basics.c; sourceTree = "<group>"; };
@@ -178,11 +174,10 @@
 		328F247C28CF96520089D776 /* fd_system_headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fd_system_headers.h; path = ../../includes/command_loop/fd_system_headers.h; sourceTree = "<group>"; };
 		328F248028CF96FE0089D776 /* minishell.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = minishell.c; path = ../../srcs/minishell.c; sourceTree = "<group>"; };
 		328F248128CF96FE0089D776 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../srcs/main.c; sourceTree = "<group>"; };
-		328F248428CF979B0089D776 /* starting_point_after_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = starting_point_after_main.c; path = ../../srcs/starting_point_after_main.c; sourceTree = "<group>"; };
 		328F248628CF97BC0089D776 /* lexer_display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lexer_display.h; path = ../../includes/lexer/lexer_display.h; sourceTree = "<group>"; };
-		32AF0B6F28D703950071B697 /* messy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = messy.h; path = ../../includes/command_loop/messy.h; sourceTree = "<group>"; };
-		32AF0B7028D703A70071B697 /* messy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = messy.c; path = ../../srcs/command_loop/messy.c; sourceTree = "<group>"; };
 		32AF0B7228D70B260071B697 /* cd2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cd2.c; path = ../../srcs/builtins/cd2.c; sourceTree = "<group>"; };
+		32AF0B7428D7311E0071B697 /* manage_fd_updated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = manage_fd_updated.h; path = ../../includes/command_loop/manage_fd_updated.h; sourceTree = "<group>"; };
+		32AF0B7528D7312C0071B697 /* manage_fd_updated.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = manage_fd_updated.c; path = ../../srcs/command_loop/manage_fd_updated.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,8 +212,6 @@
 		0DED0B0E28CCCBD700DEFE27 /* merged_mini_xcode_project */ = {
 			isa = PBXGroup;
 			children = (
-				0DED0B2228CCD41E00DEFE27 /* starting_point_after_main.h */,
-				328F248428CF979B0089D776 /* starting_point_after_main.c */,
 				328F248028CF96FE0089D776 /* minishell.c */,
 				328F248128CF96FE0089D776 /* main.c */,
 				0DED0B2128CCD3F800DEFE27 /* utils */,
@@ -320,11 +313,13 @@
 		0DED0B2028CCD3F100DEFE27 /* comm_loop */ = {
 			isa = PBXGroup;
 			children = (
-				328F248728CFA8D20089D776 /* fd_children */,
-				328F247428CF6A070089D776 /* exec_struct_creation */,
+				32AF0B7428D7311E0071B697 /* manage_fd_updated.h */,
+				32AF0B7528D7312C0071B697 /* manage_fd_updated.c */,
+				0DED0B4828CCD49D00DEFE27 /* path_search.h */,
+				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
 				328F247C28CF96520089D776 /* fd_system_headers.h */,
-				32AF0B6F28D703950071B697 /* messy.h */,
-				32AF0B7028D703A70071B697 /* messy.c */,
+				0DED0B4728CCD49D00DEFE27 /* form_exec_struct.h */,
+				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
 				0DED0B4928CCD49D00DEFE27 /* cmd_loop.h */,
 				323133FB28D602D700CB608E /* cmd_loop2.c */,
 				0DED0B9728CCD50100DEFE27 /* cmd_loop.c */,
@@ -343,7 +338,6 @@
 				0DED0B2828CCD44A00DEFE27 /* utils_strings.h */,
 				0DED0B5728CCD4BA00DEFE27 /* utils_write.c */,
 				0DED0B2728CCD44A00DEFE27 /* utils_write.h */,
-				0DED0B5828CCD4BA00DEFE27 /* utils.c */,
 				0DED0B2628CCD44A00DEFE27 /* utils.h */,
 			);
 			name = utils;
@@ -355,24 +349,6 @@
 				328F246C28CE31660089D776 /* libreadline.8.1.dylib */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		328F247428CF6A070089D776 /* exec_struct_creation */ = {
-			isa = PBXGroup;
-			children = (
-				0DED0B4828CCD49D00DEFE27 /* path_search.h */,
-				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
-				0DED0B4728CCD49D00DEFE27 /* form_exec_struct.h */,
-				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
-			);
-			name = exec_struct_creation;
-			sourceTree = "<group>";
-		};
-		328F248728CFA8D20089D776 /* fd_children */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = fd_children;
 			sourceTree = "<group>";
 		};
 		3296FE2928D1E76D002B8C78 /* commands */ = {
@@ -458,7 +434,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DED0B7228CCD4CA00DEFE27 /* ft_split.c in Sources */,
-				0DED0B5D28CCD4BA00DEFE27 /* utils.c in Sources */,
 				0DED0B8C28CCD4E300DEFE27 /* heredoc_line_parse.c in Sources */,
 				0DED0B8028CCD4D800DEFE27 /* parser_clear.c in Sources */,
 				0DED0BB128CCD50B00DEFE27 /* echo.c in Sources */,
@@ -473,6 +448,7 @@
 				0DED0B6F28CCD4CA00DEFE27 /* ft_calloc.c in Sources */,
 				0DED0B9D28CCD50100DEFE27 /* cmd_loop.c in Sources */,
 				0DED0B7D28CCD4D800DEFE27 /* parse_redirections.c in Sources */,
+				32AF0B7628D7312C0071B697 /* manage_fd_updated.c in Sources */,
 				0DED0B9028CCD4F300DEFE27 /* expansion_start.c in Sources */,
 				0DED0B6A28CCD4CA00DEFE27 /* ft_strdup.c in Sources */,
 				0DED0BB428CCD50B00DEFE27 /* exit.c in Sources */,
@@ -484,7 +460,6 @@
 				0DED0B7028CCD4CA00DEFE27 /* ft_atoi.c in Sources */,
 				0DED0BB028CCD50B00DEFE27 /* builtin_utils.c in Sources */,
 				0DED0B5E28CCD4BA00DEFE27 /* utils_strings.c in Sources */,
-				32AF0B7128D703A70071B697 /* messy.c in Sources */,
 				0DED0BB228CCD50B00DEFE27 /* unset.c in Sources */,
 				323133FC28D602D700CB608E /* cmd_loop2.c in Sources */,
 				0DED0B5F28CCD4BA00DEFE27 /* utils_malloc.c in Sources */,
@@ -495,7 +470,6 @@
 				0DED0B6B28CCD4CA00DEFE27 /* ft_strlen.c in Sources */,
 				0DED0B9628CCD4F900DEFE27 /* env_shlvl.c in Sources */,
 				0DED0BAD28CCD50B00DEFE27 /* array_sort.c in Sources */,
-				328F248528CF979B0089D776 /* starting_point_after_main.c in Sources */,
 				0DED0B7E28CCD4D800DEFE27 /* parse_cmd_args.c in Sources */,
 				0DED0BA128CCD50100DEFE27 /* form_exec_struct.c in Sources */,
 				0DED0B6E28CCD4CA00DEFE27 /* ft_itoa.c in Sources */,

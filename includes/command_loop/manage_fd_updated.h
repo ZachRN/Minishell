@@ -18,7 +18,8 @@
 
 char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd);
 void	zach_stuff(t_exec *exec, int i, t_fd_two *fd);
-void	handle_child_fd(t_exec *exec, int i, t_fd_two *fd);
+int		handle_child_fd(t_exec *exec, int i, t_fd_two *fd);
 void	parent_pipe(t_exec *exec, int i, t_fd_two *fd);
+void	closure(int i, t_exec *exec, t_fd_two *fd);
 
 #endif
