@@ -40,9 +40,8 @@ int	is_num_neg(char *str)
 	return (1);
 }
 
-int		write_error(char *str, int fd)
+int		write_error(char *str)
 {
-	write_str_fd("exit\n", fd);
 	write_str_fd("minishell: exit: ", STDERR_FILENO);
 	write_str_fd(str, STDERR_FILENO);
 	write_str_fd(": numeric arguement required\n", STDERR_FILENO);
@@ -55,12 +54,13 @@ void	exit_builtin(t_env_struct *data)
 	char			*str;
 	unsigned char	status;
 
+	write_str_fd("exit\n", data->fd_chosen);
 	str = "0";
 	if (data->arguments)
 		str = data->arguments[0];
 	number = is_num_neg(str);
 	if (number == 0)
-		status = (unsigned char)write_error(str, data->fd_chosen);
+		status = (unsigned char)write_error(str);
 	else if (data->n_arguments > 1)
 	{
 		write_str_fd("minishell: exit: too many arguements\n", STDERR_FILENO);
@@ -68,9 +68,6 @@ void	exit_builtin(t_env_struct *data)
 		return ;
 	}
 	else
-	{
 		status = (unsigned char)ft_atoi(str);
-		write_str_fd("exit\n", data->fd_chosen);
-	}
 	exit(status);
 }
