@@ -315,11 +315,11 @@
 		0DED0B2028CCD3F100DEFE27 /* comm_loop */ = {
 			isa = PBXGroup;
 			children = (
+				328F247C28CF96520089D776 /* fd_system_headers.h */,
 				32AF0B7428D7311E0071B697 /* manage_fd_updated.h */,
 				32AF0B7528D7312C0071B697 /* manage_fd_updated.c */,
 				0DED0B4828CCD49D00DEFE27 /* path_search.h */,
 				0DED0B9C28CCD50100DEFE27 /* path_search.c */,
-				328F247C28CF96520089D776 /* fd_system_headers.h */,
 				0DED0B4728CCD49D00DEFE27 /* form_exec_struct.h */,
 				0DED0B9B28CCD50100DEFE27 /* form_exec_struct.c */,
 				0DED0B4928CCD49D00DEFE27 /* cmd_loop.h */,

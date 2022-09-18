@@ -68,7 +68,7 @@ exit -3 7
 //unset BLA
 //unset bla
 //unset PATH1
-unset 1PATH !!!!!!! err
+//unset 1PATH !!!!!!! err
 unset PATH USER
 unset PATH USER LOGNAME
 unset _PATH

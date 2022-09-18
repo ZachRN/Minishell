@@ -67,6 +67,7 @@ typedef struct s_exec
 	char	**upd_envp;
 	int		comm_number;
 	int		last_error;
+	int		builtin_error;
 	int		index;
 }				t_exec;
 
