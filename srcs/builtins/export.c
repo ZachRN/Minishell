@@ -68,7 +68,6 @@ int	alter_envp_new_list(t_env_struct *data, int i)
 	else if (find_char_in_str('=', data->arguments[i]) > 0)
 	{
 		n = number_var_in_list(data->envp, data->arguments[i]);
-		
 		if (n > 0)
 			copy_str_for_data(data, n - 1, i);
 		else
