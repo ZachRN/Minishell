@@ -6,7 +6,7 @@
 /*   By: yuliia <yuliia@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:45:02 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/19 14:16:09 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/19 15:45:12 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ int	parse_line_heredoc(t_together *all, t_heredoc *heredoc, t_parse *to_add)
 	if (WIFEXITED(status))
 		ex = WEXITSTATUS(status);
 	if (ex == EXIT_INT)
-		return (ex);
+		return (-2);
 	return (0);
 }
