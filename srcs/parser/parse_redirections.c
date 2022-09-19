@@ -29,20 +29,23 @@ t_l_p_pack	output_redirect(t_l_p_pack pack, int append)
 		pack.to_add->outfile = NULL;
 	}
 	pack.to_add->outfile = ft_strdup(pack.to_search->content);
+	pack.to_search = rm_one_from_lexer_list(pack.to_search);
 	if (pack.to_add->outfile[0] == '\0')
 		pack.no_file = 2;
 	if (append == 0)
-	{
-		pack.to_add->append = 0;
 		fd = open(pack.to_add->outfile, (O_TRUNC | O_CREAT | O_WRONLY), 0644);
-	}
 	else
-	{
-		pack.to_add->append = 1;
 		fd = open(pack.to_add->outfile, (O_APPEND | O_CREAT | O_WRONLY), 0644);
+	if (fd == -1)
+	{
+		while (pack.to_search && pack.to_search->token_type != Pipe)
+			pack.to_search = rm_one_from_lexer_list(pack.to_search);
+		pack.no_file = 1;
 	}
+	if (pack.to_add->outfile[0] == '\0')
+		pack.no_file = 2;
+	pack.to_add->append = append;
 	close(fd);
-	pack.to_search = rm_one_from_lexer_list(pack.to_search);
 	return (pack);
 }
 
@@ -124,7 +127,6 @@ t_l_p_pack	handle_redirections(t_l_p_pack pack)
 		if (pack.no_file == 2)
 			break ;
 	}
-	if (pack.no_file == 0)
-		pack.to_search = search;
+	pack.to_search = search;
 	return (pack);
 }
