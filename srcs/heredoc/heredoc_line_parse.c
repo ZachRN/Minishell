@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   heredoc_line_parse.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 13:45:02 by znajda            #+#    #+#             */
-/*   Updated: 2022/09/18 11:52:46 by yuliia           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   heredoc_line_parse.c                               :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yuliia <yuliia@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/31 13:45:02 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/19 14:16:09 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ int	parse_line_heredoc(t_together *all, t_heredoc *heredoc, t_parse *to_add)
 	int	ex;
 
 	ex = -2;
+	if (to_add->heredoc)
+		free(to_add->heredoc);
 	to_add->heredoc = heredoc_str(all);
 	signal_director(PAUSE_SIG);
 	p_id = fork();
