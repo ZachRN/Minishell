@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:28:15 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/17 15:45:50 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/19 13:40:38 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ t_l_p_pack	handle_redirections(t_l_p_pack pack)
 	search = pack.to_search;
 	if (!search->prev)
 		search = find_first_none_direct(search);
+	else
+		search = search->prev;
 	pack.no_file = 0;
 	while (pack.to_search && pack.to_search->token_type != Pipe)
 	{

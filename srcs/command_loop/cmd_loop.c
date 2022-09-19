@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cmd_loop.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 11:23:36 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 21:32:11 by yuliia           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cmd_loop.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yuliia <yuliia@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/18 11:23:36 by yuliia        #+#    #+#                 */
+/*   Updated: 2022/09/19 12:34:49 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	fork_handle_fd_execve(t_exec *exec, int i, t_fd_two *fd)
 char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 {
 	char	**new_envp;
+	int		built_in_fd;
 
 	new_envp = NULL;
 	if (exec->index == 0 && exec->params[i].cmd.type == BUILTIN
@@ -82,8 +83,11 @@ char	**handle_one_param_set_two(t_exec *exec, int i, t_fd_two *fd)
 	{
 		close(fd->pipe[0]);
 		close(fd->pipe[1]);
+		built_in_fd = get_fd_for_builtin(exec);
 		new_envp = enviromental_variable_function(exec,
-				exec->params[i].cmd.cmd_args, STDOUT_FILENO);
+				exec->params[i].cmd.cmd_args, built_in_fd);
+		if (built_in_fd != STDOUT_FILENO)
+			close(built_in_fd);
 		exec->builtin_error = exec->last_error;
 		return (new_envp);
 	}

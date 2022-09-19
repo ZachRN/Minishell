@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 13:42:52 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/17 16:50:43 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/19 13:07:33 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	lexer_valid_loop(t_lexer *to_search, int previous_token)
 	while (to_search)
 	{
 		check_change_iden(to_search, check.single_quote, check.double_quote);
-		if ((previous_token < Quote) && (to_search->token_type < Quote))
+		if ((previous_token < Pipe) && (to_search->token_type < Quote))
 			return (print_error_message(to_search->content));
 		if (to_search->token_type == Quote && check.double_quote == 1)
 			check.single_quote *= -1;
