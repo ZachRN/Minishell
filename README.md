@@ -1,5 +1,5 @@
 # Minishell
-Minishell for 2022 with ydemura from codam
+Minishell for 2022 with ydemura from codam. 101 / 100
 
 [Step-by-Step set up guide.]
 
