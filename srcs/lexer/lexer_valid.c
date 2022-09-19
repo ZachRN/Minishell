@@ -92,6 +92,8 @@ int	lexer_valid(t_lexer *head)
 	to_search = head;
 	previous_token = to_search->token_type;
 	to_search = to_search->next;
+	if (previous_token == Pipe)
+		return (print_error_message("|"));
 	if (!to_search && (previous_token != Iden && previous_token != Expand))
 		return (print_error_message("newline"));
 	else if (!to_search && (previous_token == Iden || previous_token == Expand))

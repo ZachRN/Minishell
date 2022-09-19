@@ -26,7 +26,7 @@
 //#include <lexer_display.h>
 static void	control_d(void)
 {
-	printf("exit");
+	write(STDOUT_FILENO, "exit\n", ft_strlen("exit\n"));
 	exit(EXIT_SUCCESS);
 }
 
