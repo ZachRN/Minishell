@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   manage_fd_updated.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 11:39:01 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 21:28:19 by yuliia           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   manage_fd_updated.c                                :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yuliia <yuliia@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/18 11:39:01 by yuliia        #+#    #+#                 */
+/*   Updated: 2022/09/19 12:28:16 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "path_search.h"
 #include "signal_handles.h"
 #include "struct.h"
+#include "cmd_loop.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -43,10 +44,7 @@ int	infile_or_heredoc(t_exec *exec)
 	{
 		fd = open(exec->params[exec->index].path_infile, O_RDONLY);
 		if (fd < 0)
-		{
-			perror("minishell");
-			exit(1);
-		}
+			perror_exit();
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
@@ -54,10 +52,7 @@ int	infile_or_heredoc(t_exec *exec)
 	{
 		fd = open(exec->params[exec->index].heredoc, O_RDONLY);
 		if (fd < 0)
-		{
-			perror("minishell");
-			exit(1);
-		}
+			perror_exit();
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
@@ -73,10 +68,7 @@ int	check_infile_outfile(t_exec *exec)
 	{
 		fd = open(exec->params[exec->index].path_outfile, (O_TRUNC | O_WRONLY));
 		if (fd < 0)
-		{
-			perror("minishell");
-			exit(1);
-		}
+			perror_exit();
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}
@@ -85,10 +77,7 @@ int	check_infile_outfile(t_exec *exec)
 		fd = open(exec->params[exec->index].path_outfile,
 				(O_APPEND | O_WRONLY));
 		if (fd < 0)
-		{
-			perror("minishell");
-			exit(1);
-		}
+			perror_exit();
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}

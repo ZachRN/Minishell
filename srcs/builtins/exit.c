@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 11:17:53 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 21:25:50 by yuliia           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   exit.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yuliia <yuliia@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/18 11:17:53 by yuliia        #+#    #+#                 */
+/*   Updated: 2022/09/19 14:09:58 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	write_error(char *str)
 {
 	write_str_fd("minishell: exit: ", STDERR_FILENO);
 	write_str_fd(str, STDERR_FILENO);
-	write_str_fd(": numeric arguement required\n", STDERR_FILENO);
+	write_str_fd(": numeric argument required\n", STDERR_FILENO);
 	return (255);
 }
 
@@ -64,7 +64,7 @@ void	exit_builtin(t_env_struct *data, int pid)
 		status = (unsigned char)write_error(str);
 	else if (data->n_arguments > 1)
 	{
-		write_str_fd("minishell: exit: too many arguements\n", STDERR_FILENO);
+		write_str_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		data->last_error = 1;
 		return ;
 	}

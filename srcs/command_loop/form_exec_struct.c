@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   form_exec_struct.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 11:31:33 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 11:35:43 by yuliia           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   form_exec_struct.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yuliia <yuliia@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/18 11:31:33 by yuliia        #+#    #+#                 */
+/*   Updated: 2022/09/19 13:37:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_cmd	initiate_cmd_struct(char **args, char *comm_name)
 
 	cmd.cmd_args = args;
 	cmd.command = comm_name;
+	cmd.cmd_path = NULL;
 	if (if_built_in(comm_name) == TRU)
 		cmd.type = BUILTIN;
 	else

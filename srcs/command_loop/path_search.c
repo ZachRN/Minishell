@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path_search.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yuliia <yuliia@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 11:50:32 by yuliia            #+#    #+#             */
-/*   Updated: 2022/09/18 21:28:46 by yuliia           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   path_search.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yuliia <yuliia@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/18 11:50:32 by yuliia        #+#    #+#                 */
+/*   Updated: 2022/09/19 14:07:59 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "built_in_set.h"
 #include "utils.h"
 #include <stdlib.h>
+#include "parser_all.h"
 #include <unistd.h>
 
 //	R_OK, W_OK, and X_OK test whether the file exists
@@ -99,8 +100,10 @@ char	*find_command_path(t_cmd cmd, char **envp)
 
 	if (cmd.command == NULL)
 		return (NULL);
+	if (is_rel_abs_path(cmd.command))
+		return (check_absolute_path(cmd.command));
 	possible_path = find_possible_path_options_from_envp(envp);
-	if (cmd.command[0] != '\0')
+	if (cmd.command[0] != '\0' && possible_path)
 		cmd.cmd_path = find_path(cmd.command, possible_path);
 	if (!cmd.cmd_path)
 	{
