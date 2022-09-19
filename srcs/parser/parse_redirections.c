@@ -115,8 +115,7 @@ t_l_p_pack	handle_redirections(t_l_p_pack pack)
 			pack = output_redirect(pack, 1);
 		else if (pack.to_search->token_type == Lesser)
 			pack = input_redirect(pack);
-		else if (!search && pack.to_search && pack.to_search->prev
-			&& pack.to_search->prev->token_type > Lesser)
+		else if (!search && pack.to_search)
 			search = pack.to_search;
 		else if (pack.to_search)
 			pack.to_search = pack.to_search->next;
