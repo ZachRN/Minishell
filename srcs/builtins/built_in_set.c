@@ -57,8 +57,6 @@ char	**built_in_commands(t_env_struct *data, int pid)
 	else if (data->comm_n == CD)
 		cd_builtin(data);
 	free_array_of_str(data->envp);
-	if (data->last_error != 0)
-		return (NULL);
 	return (data->new_envp);
 }
 

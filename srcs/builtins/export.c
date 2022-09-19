@@ -58,16 +58,16 @@ int	alter_envp_new_list(t_env_struct *data, int i)
 	int	n;
 
 	n = 0;
-	if (find_char_in_str('=', data->arguments[i]) > 0)
+	if (is_valid_envp_name(data->arguments[i]) == FLS)
+	{
+		write_not_a_valid_identifier(data->command, data->arguments[i],
+			data->fd_chosen);
+		data->last_error = 1;
+		return (0);
+	}
+	else if (find_char_in_str('=', data->arguments[i]) > 0)
 	{
 		n = number_var_in_list(data->envp, data->arguments[i]);
-		if (is_valid_envp_name(data->arguments[i]) == FLS)
-		{
-			write_not_a_valid_identifier(data->command, data->arguments[i],
-				data->fd_chosen);
-			data->last_error = 1;
-			return (0);
-		}
 		if (n > 0)
 			copy_str_for_data(data, n - 1, i);
 		else
