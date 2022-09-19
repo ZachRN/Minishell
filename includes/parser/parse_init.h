@@ -16,5 +16,6 @@
 # include "structs.h"
 
 t_parse	*parse_initalize(void);
+char	*check_if_need_to_free(t_l_p_pack pack);
 
 #endif

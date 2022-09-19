@@ -5,10 +5,8 @@ SRCS += $(wildcard srcs/*.c srcs/*/*.c)
 OBJ_FILES = $(addprefix $(BUILD_DIR)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 HEADER_FILES := $(addprefix -I,$(shell find includes -type d -print))
 CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
-#  -Werror
 READLINE = -L$(shell brew --prefix readline)/lib -lreadline
 RL_INCLUDE_FLAGS = -I$(shell brew --prefix readline)/include
-# -I /Users/znajda/.brew/opt/readline/include/readline
 CC = gcc
 NAME_NO_FLAGS = minishell
 BUILD_DIR_NO_FLAGS = build

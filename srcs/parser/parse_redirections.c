@@ -17,17 +17,14 @@
 #include "structs.h"
 #include "lexer_all.h"
 #include "utils.h"
+#include "parser_all.h"
 
 t_l_p_pack	output_redirect(t_l_p_pack pack, int append)
 {
 	int	fd;
 
 	pack.to_search = rm_one_from_lexer_list(pack.to_search);
-	if (pack.to_add->outfile)
-	{
-		free(pack.to_add->outfile);
-		pack.to_add->outfile = NULL;
-	}
+	pack.to_add->outfile = check_if_need_to_free(pack);
 	pack.to_add->outfile = ft_strdup(pack.to_search->content);
 	pack.to_search = rm_one_from_lexer_list(pack.to_search);
 	if (pack.to_add->outfile[0] == '\0')
@@ -104,9 +101,9 @@ exist and if not create them, only storing the most recent one. As that
 is the only that bash writes to Though it will overwrite and delete
 non append outfiles if they come earlier..*/
 
-static t_lexer *to_remove_start(t_lexer *pack)
+static	t_lexer	*to_remove_start(t_lexer *pack)
 {
-	t_lexer *search;
+	t_lexer	*search;
 
 	search = pack;
 	if (!search->prev)

@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include "structs.h"
+#include "parser_all.h"
 
 /*
 The Parser is a one way linked list
@@ -43,4 +44,14 @@ t_parse	*parse_initalize(void)
 	head->hd_pipe = -1;
 	head->next = NULL;
 	return (head);
+}
+
+char	*check_if_need_to_free(t_l_p_pack pack)
+{
+	if (pack.to_add->outfile)
+	{
+		free(pack.to_add->outfile);
+		pack.to_add->outfile = NULL;
+	}
+	return (NULL);
 }
